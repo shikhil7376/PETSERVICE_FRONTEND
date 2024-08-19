@@ -15,9 +15,9 @@ const Addkennel = () => {
   const kennelOwnerData = useSelector((state: RootState) => state.kennel.kennelOwnerData);
   const [cages, setCages] = useState<ownersCageData[]>([]);
   const [loading, setLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [page, setPage] = useState(1)
-  const limit = 4
+  const [searchTerm, setSearchTerm] = useState<string>('')
+  const [page, setPage] = useState<number>(1)
+  const limit:number = 4
   const [total, setTotal] = useState(0)
 
   const fetchCages = async () => {

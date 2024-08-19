@@ -22,7 +22,7 @@ const Bookings = () => {
       }
 
     } catch (error) {
-
+       errorHandle(error)
     }
   }
 

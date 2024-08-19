@@ -45,7 +45,7 @@ const Users = () => {
         fetchUsers();
       }, [page, searchTerm]);
 
-      const handleSearch = (e) => {
+      const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
         setPage(1); // Reset to first page on search
       };
@@ -79,7 +79,7 @@ const Users = () => {
     ) : users.length > 0 ? (
       <Table1 users={users} fetchUsers={fetchUsers} />
     ) : (
-      <p className='ml-[400px] text-red-700 font-md'>No Users found</p>
+      <p className='ml-[400px] text-red-700 font-semibold text-small'>No Users found</p>
     )}
     <div className='flex justify-center'>
       <button

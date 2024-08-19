@@ -81,3 +81,28 @@ export interface AddCageError {
   type?: string;
   images?: string;
 }
+
+export interface EditCageError extends AddCageError {
+}
+
+export interface userData{
+  _id?:string,
+  name?:string,
+  email?:string,
+  password?:string,
+  phone?:string,
+  image?:string,
+  isBlocked?:boolean,
+  userimage?: File; 
+}
+
+export interface BookingDetails{
+  details: CageData;
+  userid: string | undefined;
+  email: string | undefined;
+  fromdate: string | undefined;
+  todate: string | undefined;
+  totalAmount: number;
+  totalDays: number;
+}
+

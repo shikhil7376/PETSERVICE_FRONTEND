@@ -8,7 +8,6 @@ interface IErrorResponse {
 }
 
 const errorHandle = (error: Error | AxiosError) => {
-  console.log('checking');
   
   if (axios.isAxiosError(error)) {
     const axiosError = error as AxiosError;

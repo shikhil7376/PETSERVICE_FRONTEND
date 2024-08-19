@@ -9,18 +9,8 @@ import { MdOutlineDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { CageData } from '../../Interface/DatatypeInterface';
-
-
-interface Error {
-  kennelname?: string;
-  location?: string;
-  description?: string;
-  maxCount?: string;
-  phone?: string;
-  PricePerNight?: string;
-  type?: string;
-  images?: string;
-}
+import { EditCageError } from '../../Interface/DatatypeInterface';
+import errorHandle from '../../Api/Error';
 
 const CageDataModal = ({ cageid, fetchCages }) => {
 
@@ -29,11 +19,11 @@ const CageDataModal = ({ cageid, fetchCages }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [cagedata, setCageData] = useState<CageData>()
   const [initialCageData, setInitialCageData] = useState<CageData>()
-  const [errors, setErrors] = useState<Error>({});
+  const [errors, setErrors] = useState<EditCageError>({});
 
 
   const validateForm = () => {
-    const newErrors: Error = {};
+    const newErrors: EditCageError = {};
 
     if (!cagedata?.kennelname?.trim()) newErrors.kennelname = "Kennel name is required";
     if (!cagedata?.location?.trim()) newErrors.location = "Location is required";
@@ -65,11 +55,9 @@ const CageDataModal = ({ cageid, fetchCages }) => {
       setCageData(response?.data.message)
       setInitialCageData(response?.data.message)
     } catch (error) {
-      console.error('Failed to fetch cage details:', error);
-      toast.error('Failed to fetch cage details');
+      errorHandle(error)
     }
   }
-
 
 
   useEffect(() => {
@@ -128,8 +116,8 @@ const CageDataModal = ({ cageid, fetchCages }) => {
         }
 
       } catch (error) {
-        console.error('Error updating cage data:', error);
-      }
+        errorHandle(error)
+       }
 
     }
   }
@@ -193,7 +181,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     onChange={handleChange}
                     className='font-semibold text-gray-500'
                   />
-                  {errors.kennelname && <p className="text-red-600">{errors.kennelname}</p>}
+                  {errors.kennelname && <p className="text-red-600 text-small font-semibold">{errors.kennelname}</p>}
 
                   <Input
                     type="text"
@@ -203,7 +191,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     onChange={handleChange}
                     className='font-semibold text-gray-500'
                   />
-                  {errors.location && <p className="text-red-600">{errors.location}</p>}
+                  {errors.location && <p className="text-red-600 text-small font-semibold">{errors.location}</p>}
 
                   <Input
                     type="text"
@@ -214,7 +202,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     className='font-semibold text-gray-500'
 
                   />
-                  {errors.description && <p className="text-red-600">{errors.description}</p>}
+                  {errors.description && <p className="text-red-600 text-small font-semibold">{errors.description}</p>}
 
                   <Input
                     type="text"
@@ -225,7 +213,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     className='font-semibold text-gray-500'
 
                   />
-                  {errors.maxCount && <p className="text-red-600">{errors.maxCount}</p>}
+                  {errors.maxCount && <p className="text-red-600 text-small font-semibold">{errors.maxCount}</p>}
 
                   <Input
                     type="text"
@@ -236,7 +224,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     className='font-semibold text-gray-500'
 
                   />
-                  {errors.type && <p className="text-red-600">{errors.type}</p>}
+                  {errors.type && <p className="text-red-600 text-small font-semibold">{errors.type}</p>}
 
                   <Input
                     type="text"
@@ -247,7 +235,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     className='font-semibold text-gray-500'
 
                   />
-                  {errors.phone && <p className="text-red-600">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-600 text-small font-semibold">{errors.phone}</p>}
 
                   <Input
                     type="text"
@@ -279,7 +267,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                       multiple
                       onChange={handleFileChange} />
                   )}
-                  {errors.images && <p className="text-red-600">{errors.images}</p>}
+                  {errors.images && <p className="text-red-600 text-small font-semibold">{errors.images}</p>}
 
                 </ModalBody>
                 <ModalFooter>
