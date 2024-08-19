@@ -7,16 +7,16 @@
    return (
     <div className='mt-8  h-screen '>
     <Sidebar aria-label="Default sidebar example" className='w-[230px] rounded-2xl'>
-      <Sidebar.Items className="mt-5 font-serif ">
+      <Sidebar.Items className="mt-5  ">
         <Sidebar.ItemGroup>
           <Sidebar.Item href="/kennel/dashboard" icon={HiChartPie}>
-            Dashboard
+          <p className='text-small font-semibold'> Dashboard</p>
           </Sidebar.Item>
           <Sidebar.Item href="/kennel/profile" icon={HiUser}>
-            Profile
+          <p className='text-small font-semibold'> PROFILE</p>
           </Sidebar.Item>
           <Sidebar.Item href="/kennel/addkennel" icon={HiLibrary} labelColor="dark">
-            Add Kennels
+          <p className='text-small font-semibold'> ADD KENNELS</p>
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

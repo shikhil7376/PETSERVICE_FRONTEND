@@ -46,12 +46,12 @@ const Header = () => {
         </div>
         <div className='section w-2/3'>
           <ul className='flex justify-evenly '>
-            <Link to={'/'} className='font-mono  hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>
+            <Link to={'/'} className=' text-small font-semibold hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>
               Home
             </Link>
-            <li className= 'font-mono  hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</li>
-            <li className='font-mono hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>About</li>
-            <li className='font-mono hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</li>
+            <li className= 'text-small font-semibold hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</li>
+            <li className='text-small font-semibold hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>About</li>
+            <li className='text-small font-semibold hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</li>
           </ul>
         </div>
         <div className='signup w-1/6 flex items-center justify-center mt-1'>
@@ -66,21 +66,21 @@ const Header = () => {
                 />
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem key="profile" onClick={handleProfileView}>
-                  View Profile
+                <DropdownItem key="profile" onClick={handleProfileView} className='text-small font-bold '>
+                <p className='text-small font-semibold text-gray-500'>view profile</p>
                 </DropdownItem>
                 <DropdownItem key="bookings" onClick={handleBookings}>
-                  Bookings
+                <p className='text-small font-semibold text-gray-500'>bookings</p>
                 </DropdownItem>
                 <DropdownItem key="signout" onClick={handleSignOut}>
-                  SignOut
+                <p className='text-small font-semibold text-gray-500'>signout</p>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           ) : (
             <Button
               radius="full"
-              className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg"
+              className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg font-semibold"
               onClick={handleSignup}
             >
               SignIn

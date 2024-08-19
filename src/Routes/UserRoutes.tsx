@@ -11,6 +11,7 @@ const UserRoutes = () => {
     const ViewDetails = lazy(()=>import('../components/User/ViewDetails'))
     const Checkout = lazy(()=>import('../components/User/Checkout'))
     const Bookings = lazy(()=>import('../components/User/Bookings'))
+    const SucessPage = lazy(()=>import('../components/User/SuccessPage'))
   return (
    <Suspense>
     <Routes>
@@ -21,6 +22,8 @@ const UserRoutes = () => {
        <Route path='/booking/:cageid/:fromdate/:todate' element={<Checkout/>}/>
         <Route path='/bookings' element={<Bookings/>}/>
        </Route>
+       <Route path='/success' element={<SucessPage/>}/>
+
        <Route path='register' element={<SignUp/>}/>
        <Route path='Otp' element={<OTP/>}/>
        <Route path='login' element={<Login/> }/>

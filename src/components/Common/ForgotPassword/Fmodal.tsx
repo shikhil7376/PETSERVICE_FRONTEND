@@ -38,7 +38,7 @@ const Fmodal = () => {
       <Button
         onPress={onOpen}
         color="primary"
-        className="bg-white font-medium text-indigo-600 hover:text-indigo-500"
+        className="bg-white font-semibold text-indigo-600 hover:text-indigo-500"
       >
         Forgot Password?
       </Button>

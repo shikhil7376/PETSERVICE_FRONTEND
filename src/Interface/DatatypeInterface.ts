@@ -52,5 +52,32 @@ export interface CageData{
   phone?:string,
   pricepernight?:number,
   type?:string,
-  currentBookings?: Booking[];
+  currentBookings?: Booking[],
+}
+
+ export interface Errors {
+  name?: string;
+  email?: string;
+  password?: string;
+  phone?: string;
+}
+
+export interface profile extends Errors{
+  _id?:string,
+  image?:string
+}
+
+ export interface CageError extends CageData{
+  images?: string | string[];
+}
+
+export interface AddCageError {
+  kennelname?: string;
+  location?: string;
+  description?: string;
+  maxCount?: string;
+  phone?: string;
+  PricePerNight?: string;
+  type?: string;
+  images?: string;
 }

@@ -1,18 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
-import { Button } from "../../components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import { toast } from 'react-toastify';
 import { signup } from '../../Api/Kennel';
 import { motion } from 'framer-motion';
+import { Errors } from '../../Interface/DatatypeInterface';
+import errorHandle from '../../Api/Error';
 
-interface Errors {
-    name?: string;
-    email?: string;
-    password?: string;
-    phone?: string;
-  }
 const Signup = () => {
     const [name,setName] = useState<string>('')
     const[email,setEmail] = useState<string>('')
@@ -68,27 +63,32 @@ const Signup = () => {
               })
             }
         }
-       } catch (error) {}
+       } catch (error) {
+        errorHandle(error)
+       }
     }
   return (
-   <div className='flex'>
+   <div className='flex h-screen'>
     <div className='w-1/2 h-screen'>
-    <div className='flex mt-5 ml-5'>
+    <div className=' h-screen' style={{ backgroundImage: `url('/pics/signup.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className='flex p-5'>
     <img src='/pics/logo.jpg' className='w-10 h-10'  />
-    <p className='mt-3 ml-3 font-serif font-semibold'>PETZONE</p>
+    <p className='mt-3 ml-3 font-serif font-semibold text-white'>PETZONE</p>
+      
     </div>
-    <div className=' h-screen flex flex-col justify-center items-center '>
+    <div className=' flex flex-col justify-center items-center p- '>
     <motion.h1 initial={{x:-100,opacity:0}}
         animate={{x:0,opacity:1}}
-        transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:0.8},ease:"easeIn",duration:3}} className='text-xl font-serif '>"Together, we can create a world where every pet<br></br> feels at home"</motion.h1>
+        transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:0.8},ease:"easeIn",duration:3}} className='text-xl text-white font-semibold'>"Together, we can create a world where every pet<br></br> feels at home"</motion.h1>
     <motion.p initial={{x:-100,opacity:0}}
         animate={{x:0,opacity:1}}
-        transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:0.8},ease:"easeIn",duration:3}} className='text-gray-600 font-medium'>Start your journey with us today..</motion.p>
+        transition={{delay:0.2, x:{type:"spring",stiffness:60},opacity:{duration:0.8},ease:"easeIn",duration:3}} className=' font-medium text-white'>Start your journey with us today..</motion.p>
     </div>
     </div>
-    <div className='w-1/2 h-screen bg-lightwhite flex justify-center items-center'>
-    <div className="bg-white p-4 w-[450px] h-[500px] rounded-lg shadow-lg">
-        <motion.h2 className="text-2xl text-gray-600  mb-6 text-center font-serif"
+    </div>
+    <div className='w-1/2 bg-lightwhite flex justify-center items-center'>
+    <div className="bg-white w-[350px]  rounded-lg shadow-2xl p-3">
+        <motion.h2 className="text-2xl text-gray-600  mb-6 text-center font-semibold "
          initial={{ opacity: 0, y: -20 }}
          animate={{ opacity: 1, y: 0 }}
          transition={{ duration: 0.5 }}
@@ -99,8 +99,8 @@ const Signup = () => {
            transition={{ delay: 0.2, duration: 0.5 }}
         >
         <form onSubmit={submitHandler}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm  mb-2 font-serif" htmlFor="name">
+          <div className="p-2">
+            <label className="block text-gray-700 text-sm  mb-2 font-semibold" htmlFor="name">
               Name
             </label>
             <input
@@ -109,15 +109,15 @@ const Signup = () => {
               id="name"
               value={name}
               onChange={(e)=>setName(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-serif"
+              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-small"
               placeholder="Enter your name"
             />
                 {errors.name && (
-                  <p className="mt-2 text-sm text-red-600">{errors.name}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-600">{errors.name}</p>
                 )}
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm  mb-2 font-serif" htmlFor="email">
+          <div className="p-2">
+            <label className="block text-gray-700 text-sm  mb-2 font-semibold" htmlFor="email">
               Email
             </label>
             <input
@@ -126,15 +126,15 @@ const Signup = () => {
               id="email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline font-serif"
+              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-small"
               placeholder="Enter your email"
             />
              {errors.email && (
-                  <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-600">{errors.email}</p>
                 )}
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm mb-2 font-serif" htmlFor="password">
+          <div className="p-2">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="password">
               Password
             </label>
             <input
@@ -143,15 +143,15 @@ const Signup = () => {
               id="password"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline font-serif"
+              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-small"
               placeholder="Enter your password"
             />
              {errors.password && (
-                  <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-600">{errors.password}</p>
                 )}
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm mb-2 font-serif" htmlFor="password">
+          <div className="p-2">
+            <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="password">
               Mobile no
             </label>
             <input
@@ -160,16 +160,15 @@ const Signup = () => {
               id="phone"
               value={phone}
               onChange={(e)=>setPhone(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline font-serif"
+              className="shadow appearance-none border rounded-full w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline text-small"
               placeholder="Enter your mobile-no"
             />
                {errors.phone && (
-                  <p className="mt-2 text-sm text-red-600">{errors.phone}</p>
+                  <p className="mt-2 text-sm font-semibold text-red-600">{errors.phone}</p>
                 )}
           </div>
           <div className="flex items-center justify-center">
-          <Button className='bg-purplebutton font-serif'>Signup</Button>
-         
+        <button className='bg-purplebutton text-white font-semibold p-2 w-[100px] text-center rounded-lg text-small'>REGISTER</button>         
           </div>
         </form>
         </motion.div>

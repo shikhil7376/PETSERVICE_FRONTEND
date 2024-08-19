@@ -13,14 +13,10 @@ import { useSelector } from "react-redux";
 import OAuth from "../../components/User/OAuth";
 import { Input } from "../../components/ui/input";
 import { RootState } from "../../Redux/Store";
+import { Errors } from "../../Interface/DatatypeInterface";
+import errorHandle from "../../Api/Error";
 
 
-interface Errors {
-    name?: string;
-    email?: string;
-    password?: string;
-    phone?: string;
-  }
   
 const Login = () => {
   const navigate = useNavigate();
@@ -76,7 +72,8 @@ const Login = () => {
           }
         }
     } catch (error) {
-         console.log(error,"error");
+      errorHandle(error)
+      console.log(error,"error");
          
     }
    
@@ -100,19 +97,19 @@ const Login = () => {
         >
           <form onSubmit={submitHandler}>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm mb-2" htmlFor="email">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="email">
                 Email
               </label>
               <Input type="email" name='email' id='email' placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-              {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
+              {errors.email && <p className="mt-2 text-sm font-semibold text-red-600">{errors.email}</p>}
             </div>
             <div className="mb-6">
-              <label className="block text-gray-700 text-sm mb-2" htmlFor="password">
+              <label className="block text-gray-700 text-sm mb-2 font-semibold" htmlFor="password">
                 Password
               </label>
               <Input type="password" name='password' id='password' placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
 
-              {errors.password && <p className="mt-2 text-sm text-red-600">{errors.password}</p>}
+              {errors.password && <p className="mt-2 text-sm font-semibold text-red-600">{errors.password}</p>}
             </div>
             <div className="flex items-center justify-between ">
            <Fmodal />
@@ -120,7 +117,7 @@ const Login = () => {
             <div className="flex items-center justify-center">
               <Button
                 radius="full"
-                className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg"
+                className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg text-small font-semibold"
                 type="submit"
               >
                 SignIn
@@ -134,9 +131,9 @@ const Login = () => {
         </div>
 
         <div className="mt-4 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 font-semibold">
             Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+            <Link to="/register" className="font-semibold text-indigo-600 hover:text-indigo-500">
               Create one
             </Link>
           </p>

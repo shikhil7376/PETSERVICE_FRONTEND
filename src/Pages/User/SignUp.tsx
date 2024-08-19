@@ -7,13 +7,8 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { signup } from '../../Api/User';
 import errorHandle from '../../Api/Error';
+import { Errors } from '../../Interface/DatatypeInterface';
 
-interface Errors {
-    name?: string;
-    email?: string;
-    password?: string;
-    phone?: string;
-  }
 
 const SignUp = () => {
     const [name,setName] = useState<string>('')
@@ -80,7 +75,7 @@ const SignUp = () => {
     <div className="min-h-screen flex items-center justify-center bg-custom-gradient">
      
     <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md">
-      <motion.h2 className="text-2xl text-gray-600  mb-6 text-center"
+      <motion.h2 className="text-2xl text-gray-600  mb-6 text-center font-semibold"
        initial={{ opacity: 0, y: -20 }}
        animate={{ opacity: 1, y: 0 }}
        transition={{ duration: 0.5 }}
@@ -92,7 +87,7 @@ const SignUp = () => {
       >
       <form onSubmit={submitHandler}>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm  mb-2" htmlFor="name">
+          <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="name">
             Name
           </label>
           <input
@@ -101,15 +96,15 @@ const SignUp = () => {
             id="name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 text-sm leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Enter your name"
           />
               {errors.name && (
-                <p className="mt-2 text-sm text-red-600">{errors.name}</p>
+                <p className="mt-2 text-sm font-semibold text-red-600">{errors.name}</p>
               )}
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm  mb-2" htmlFor="email">
+          <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -118,15 +113,15 @@ const SignUp = () => {
             id="email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full text-sm  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Enter your email"
           />
            {errors.email && (
-                <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                <p className="mt-2 text-sm font-semibold text-red-600">{errors.email}</p>
               )}
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="password">
+          <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -135,15 +130,15 @@ const SignUp = () => {
             id="password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none text-sm border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Enter your password"
           />
            {errors.password && (
-                <p className="mt-2 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-2 text-sm font-semibold text-red-600">{errors.password}</p>
               )}
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm mb-2" htmlFor="password">
+          <label className="block text-gray-700 font-semibold text-sm mb-2" htmlFor="password">
             Mobile no
           </label>
           <input
@@ -152,15 +147,15 @@ const SignUp = () => {
             id="phone"
             value={phone}
             onChange={(e)=>setPhone(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border text-small rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Enter your mobile-no"
           />
              {errors.phone && (
-                <p className="mt-2 text-sm text-red-600">{errors.phone}</p>
+                <p className="mt-2 text-sm font-semibold text-red-600">{errors.phone}</p>
               )}
         </div>
         <div className="flex items-center justify-center">
-        <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg" type='submit' >
+        <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg text-small font-semibold" type='submit' >
           SignUp
         </Button>
        

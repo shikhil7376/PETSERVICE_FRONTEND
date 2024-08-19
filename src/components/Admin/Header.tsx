@@ -21,7 +21,7 @@ const Header = () => {
         {/* <span className="text-green-500 text-2xl">Paw</span>
         <FaPaw /> */}
     <img src='/pics/file.png' className='w-10 h-10'  />
-    <p className='mt-3  font-serif  text-black
+    <p className='mt-3  font-semibold  text-black
     '>PETZONE</p>
 
     </div>

@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { RootState } from "../../Redux/Store";
 import PacmanLoader from "react-spinners/PacmanLoader";
+import { AddCageError } from "../../Interface/DatatypeInterface";
+import errorHandle from "../../Api/Error";
 
 export default function AddModal({ fetchCages }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -17,21 +19,11 @@ export default function AddModal({ fetchCages }) {
   const [PricePerNight, setPricePerNight] = useState<string>("");
   const [images, setImages] = useState<File[]>([]);
   const [type, setType] = useState<string>("");
-  const [errors, setErrors] = useState<Error>({});
+  const [errors, setErrors] = useState<AddCageError>({});
   const [loading, setLoading] = useState(false);
 
   const kennelOwnerData = useSelector((state: RootState) => state.kennel.kennelOwnerData);
 
-  interface Error {
-    kennelname?: string;
-    location?: string;
-    description?: string;
-    maxCount?: string;
-    phone?: string;
-    PricePerNight?: string;
-    type?: string;
-    images?: string;
-  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -45,7 +37,7 @@ export default function AddModal({ fetchCages }) {
   };
 
   const validateForm = () => {
-    const newErrors: Error = {};
+    const newErrors: AddCageError = {};
 
     if (!kennelname.trim()) {
       newErrors.kennelname = "Kennel name is required";
@@ -105,7 +97,7 @@ export default function AddModal({ fetchCages }) {
           onOpenChange();
         }
       } catch (error) {
-        console.error("Error adding cages:", error);
+        errorHandle(error)
         setLoading(false);  
       }
     }
@@ -113,7 +105,7 @@ export default function AddModal({ fetchCages }) {
 
   return (
     <>
-      <Button onPress={onOpen} className="font-semibold">Add Kennel</Button>
+      <Button onPress={onOpen} className="font-semibold bg-customPurple text-small  text-white">Add Kennel</Button>
       {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <PacmanLoader size={40} color="#ffffff" />
@@ -143,7 +135,7 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setKenneName(e.target.value)}
                         required
                       />
-                      {errors.kennelname && <p className="text-red-600">{errors.kennelname}</p>}
+                      {errors.kennelname && <p className="text-red-600 font-semibold text-small">{errors.kennelname}</p>}
                       <Input
                         type="text"
                         placeholder="Location"
@@ -151,7 +143,7 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setLocation(e.target.value)}
                         required
                       />
-                      {errors.location && <p className="text-red-600">{errors.location}</p>}
+                      {errors.location && <p className="text-red-600 font-semibold text-small">{errors.location}</p>}
                       <Input
                         type="text"
                         placeholder="Description"
@@ -159,7 +151,7 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setDescription(e.target.value)}
                         required
                       />
-                      {errors.description && <p className="text-red-600">{errors.description}</p>}
+                      {errors.description && <p className="text-red-600 font-semibold text-small">{errors.description}</p>}
                       <Input
                         type="text"
                         placeholder="Phone"
@@ -167,7 +159,7 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setPhone(e.target.value)}
                         required
                       />
-                      {errors.phone && <p className="text-red-600">{errors.phone}</p>}
+                      {errors.phone && <p className="text-red-600 font-semibold text-small">{errors.phone}</p>}
                       <select
                         value={type}
                         onChange={(e) => setType(e.target.value)}
@@ -179,7 +171,7 @@ export default function AddModal({ fetchCages }) {
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
                       </select>
-                      {errors.type && <p className="text-red-600">{errors.type}</p>}
+                      {errors.type && <p className="text-red-600 font-semibold text-small">{errors.type}</p>}
                       <Input
                         type="number"
                         placeholder="Max Count"
@@ -187,7 +179,7 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setMaxCount(e.target.value)}
                         required
                       />
-                      {errors.maxCount && <p className="text-red-600">{errors.maxCount}</p>}
+                      {errors.maxCount && <p className="text-red-600 font-semibold text-small">{errors.maxCount}</p>}
                       <Input
                         type="number"
                         placeholder="Price Per Night"
@@ -195,10 +187,10 @@ export default function AddModal({ fetchCages }) {
                         onChange={(e) => setPricePerNight(e.target.value)}
                         required
                       />
-                      {errors.PricePerNight && <p className="text-red-600">{errors.PricePerNight}</p>}
+                      {errors.PricePerNight && <p className="text-red-600 font-semibold text-small">{errors.PricePerNight}</p>}
                       <label htmlFor="images">Select Images (up to 3):</label>
                       <input type="file" multiple onChange={handleFileChange} accept="image/*" />
-                      {errors.images && <p className="text-red-600">{errors.images}</p>}
+                      {errors.images && <p className="text-red-600 font-semibold text-small">{errors.images}</p>}
                       <div className="grid grid-cols-3 gap-4">
                         {images.map((file, index) => (
                           <div key={index} className="w-25 h-25 border-1 border-black-500 rounded-lg overflow-hidden">
@@ -211,7 +203,7 @@ export default function AddModal({ fetchCages }) {
                       <Button color="danger" variant="light" onPress={onClose}>
                         Close
                       </Button>
-                      <Button color="primary" type="submit">
+                      <Button className="bg-customPurple text-white font-semibold text-small" type="submit">
                         Submit
                       </Button>
                     </ModalFooter>

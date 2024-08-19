@@ -16,7 +16,7 @@ const Home = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 1 }, ease: "easeIn", duration: 1 }}
-            className='text-4xl font mb-4 text-center '>
+            className='text-4xl  mb-4 text-center '>
             Welcome to<br />
             <span className='text-gradient '>Pet Zone</span>
           </motion.h1>
@@ -24,8 +24,8 @@ const Home = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 0.6 }, ease: "easeIn", duration: 1 }}
-            className='text-gray-600 text-center'>"Your Trusted Partner For Pet Boarding And Adoption"</motion.p>
-          <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-3">
+            className='text-gray-400 text-center font-semibold'>"Your Trusted Partner For Pet Boarding And Adoption"</motion.p>
+          <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-3 font-semibold">
             Get Started
           </Button>
         </div>
@@ -51,7 +51,7 @@ const Home = () => {
                 className=""
               />
               <p className='font-semibold mt-2 '>BOARDING</p>
-              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-10" onClick={() => navigate('/get-kennels')}>
+              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white font-semibold shadow-lg mt-10" onClick={() => navigate('/get-kennels')}>
                 Explore
               </Button>
             </div>
@@ -65,7 +65,7 @@ const Home = () => {
                 className=""
               />
               <p className='font-semibold mt-2'>ADOPTION</p>
-              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-10">
+              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] font-semibold text-white shadow-lg mt-10">
                 Explore
               </Button>
             </div>

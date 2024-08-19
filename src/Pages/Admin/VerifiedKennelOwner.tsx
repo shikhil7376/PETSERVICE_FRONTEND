@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import Table3 from '../../components/Admin/Table3';
 import ReactLoading from 'react-loading'; 
 import { getVerifiedkennelOwner } from '../../Api/Admin';
+import { TiArrowBack,TiArrowForward  } from "react-icons/ti";
 
 
 const VerifiedKennelOwner = () => {
@@ -76,14 +77,15 @@ const VerifiedKennelOwner = () => {
         disabled={page === 1}
         className={`w-10 h-10 flex items-center justify-center rounded-full border p-2 ${page === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        &#9664;
+        <TiArrowBack />
       </button>
       <button
         onClick={handleNextPage}
         disabled={page * limit >= total}
         className={`w-10 h-10 flex items-center justify-center rounded-full border p-2 ${page * limit >= total ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
-        &#9654;
+                       <TiArrowForward />
+
       </button>
     </div>
   </div>
