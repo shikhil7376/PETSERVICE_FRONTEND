@@ -49,6 +49,7 @@ export const resendOtp = async (userData: userData) => {
 export const getProfile = async (Id: string) => {
   try {
     const response = await api.post(kennelRoutes.getProfile, { Id: Id });
+    
     return response;
   } catch (error) {
     return errorHandle(error);

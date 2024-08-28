@@ -24,8 +24,16 @@ module.exports = {
       },
     },
     extend: {
+      animation: {
+        'slow-pulse': 'pulse 3.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif'],
+      },
       colors: {
         customPurple: 'rgb(99, 36, 235)',
+          customblack: '#111',
+          contentgray:'#131313',
           customDark: '#111111',
           hoverPurple:'rgb(75, 30, 172)',
           lightwhite:'#faf8ff',

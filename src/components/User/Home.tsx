@@ -16,15 +16,15 @@ const Home = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 1 }, ease: "easeIn", duration: 1 }}
-            className='text-4xl  mb-4 text-center '>
+            className='text-4xl  mb-4 text-center font-roboto '>
             Welcome to<br />
-            <span className='text-gradient '>Pet Zone</span>
+            <span className='text-gradient font-roboto'>Pet Zone</span>
           </motion.h1>
           <motion.p
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 0.6 }, ease: "easeIn", duration: 1 }}
-            className='text-gray-400 text-center font-semibold'>"Your Trusted Partner For Pet Boarding And Adoption"</motion.p>
+            className='text-gray-400 text-center font-semibold font-roboto'>"Your Trusted Partner For Pet Boarding And Adoption"</motion.p>
           <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-3 font-semibold">
             Get Started
           </Button>
@@ -38,7 +38,7 @@ const Home = () => {
         </div>
       </div>
       <div className='display mt-10'>
-        <div className='bg-white flex justify-center p-5 font-semibold text-xl'>OUR SERVICES</div>
+        <div className='bg-white flex justify-center p-5 font-roboto font-semibold text-xl'>OUR SERVICES</div>
         <div className='display flex justify-center'>
           <div className='bg-lightwhite h-[300px] w-[60%] flex justify-evenly items-center rounded-md'>
             <div className='card h-[250px] w-[180px] bg-white flex flex-col justify-center items-center rounded-2xl border-1 drop-shadow-xl'>
@@ -50,8 +50,8 @@ const Home = () => {
                 alt="NextUI Album Cover"
                 className=""
               />
-              <p className='font-semibold mt-2 '>BOARDING</p>
-              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white font-semibold shadow-lg mt-10" onClick={() => navigate('/get-kennels')}>
+              <p className='font-semibold mt-2 font-roboto'>BOARDING</p>
+              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white font-roboto font-semibold shadow-lg mt-10" onClick={() => navigate('/get-kennels')}>
                 Explore
               </Button>
             </div>
@@ -64,8 +64,8 @@ const Home = () => {
                 alt="NextUI Album Cover"
                 className=""
               />
-              <p className='font-semibold mt-2'>ADOPTION</p>
-              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] font-semibold text-white shadow-lg mt-10">
+              <p className='font-semibold font-roboto mt-2'>ADOPTION</p>
+              <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] font-semibold font-roboto text-white shadow-lg mt-10" onClick={()=>navigate('/adoption')}>
                 Explore
               </Button>
             </div>

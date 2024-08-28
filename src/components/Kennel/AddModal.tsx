@@ -190,7 +190,7 @@ export default function AddModal({ fetchCages }) {
                       {errors.PricePerNight && <p className="text-red-600 font-semibold text-small">{errors.PricePerNight}</p>}
                       <label htmlFor="images">Select Images (up to 3):</label>
                       <input type="file" multiple onChange={handleFileChange} accept="image/*" />
-                      {errors.images && <p className="text-red-600 font-semibold text-small">{errors.images}</p>}
+                      {errors.images && <p className="text-red-600 font-semibold ">{errors.images}</p>}
                       <div className="grid grid-cols-3 gap-4">
                         {images.map((file, index) => (
                           <div key={index} className="w-25 h-25 border-1 border-black-500 rounded-lg overflow-hidden">

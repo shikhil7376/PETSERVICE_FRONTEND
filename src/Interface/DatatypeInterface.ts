@@ -7,6 +7,7 @@ export interface AdminData {
 }
 
 export interface AuthData extends AdminData {
+  image:string
 }
 
 export interface KennelData extends AdminData{

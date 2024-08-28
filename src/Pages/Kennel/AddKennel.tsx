@@ -8,22 +8,26 @@ import { RootState } from '../../Redux/Store';
 import { ownersCageData } from '../../Interface/DatatypeInterface';
 import { TiArrowBack, TiArrowForward } from "react-icons/ti";
 import errorHandle from '../../Api/Error';
-
-
+import TableSkelton from '../../components/Common/TableSkelton';
+import { useRef,useCallback } from 'react';
+import { debounce } from '../../lib/utils';
 
 const Addkennel = () => {
   const kennelOwnerData = useSelector((state: RootState) => state.kennel.kennelOwnerData);
   const [cages, setCages] = useState<ownersCageData[]>([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [page, setPage] = useState<number>(1)
   const limit:number = 4
   const [total, setTotal] = useState(0)
 
+  
+  const searchTermRef = useRef(searchTerm);
+
   const fetchCages = async () => {
     try {
       setLoading(true)
-      const response = await ownersCages(kennelOwnerData?._id, page, limit, searchTerm);
+      const response = await ownersCages(kennelOwnerData?._id, page, limit, searchTermRef.current);
       setCages(response?.data.data);
       setTotal(response?.data.total)
     } catch (error) {
@@ -33,14 +37,30 @@ const Addkennel = () => {
     }
   };
 
-  useEffect(() => {
-    fetchCages();
-  }, [page, searchTerm]);
+  const debouncedFetchUsers = useCallback(
+    debounce(fetchCages, 1000), // Debounce delay of 1000ms
+    []
+  );
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-    setPage(1)
-  }
+  useEffect(() => {
+    
+    debouncedFetchUsers(); // Call the debounced function
+
+    // Cleanup function
+    return () => {
+      // No explicit cleanup needed for debounced function
+    };
+  }, [searchTerm, page, debouncedFetchUsers]);
+  
+    useEffect(() => {
+      searchTermRef.current = searchTerm;
+    }, [searchTerm]);
+
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchTerm(e.target.value);
+      setPage(1); // Reset to first page on search
+    };
+  
 
   const handlePreviousPage = () => {
     if (page > 1) {
@@ -69,6 +89,11 @@ const Addkennel = () => {
           />
         </div>
       </div>
+      {loading ? (
+        <div className='flex justify-center items-center h-[300px]'>
+          <TableSkelton />
+        </div>
+      ) : (
       <div className='grid grid-cols-4 gap-4'>
         {cages.map((cage, index) => (
           <div key={index} className='card h-[270px] w-[200px] bg-white flex flex-col justify-between items-center rounded-2xl border-1 drop-shadow-xl'>
@@ -92,6 +117,7 @@ const Addkennel = () => {
           </div>
         ))}
       </div>
+       )}
       <div className='flex justify-center pt-10'>
         <button
           onClick={handlePreviousPage}

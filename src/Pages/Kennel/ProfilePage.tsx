@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { RootState } from '../../Redux/Store';
 import errorHandle from '../../Api/Error';
 import { Errors, profile } from '../../Interface/DatatypeInterface';
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 
 
@@ -17,6 +18,7 @@ const ProfilePage = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [selectedFile, setSelectedFile] = useState<File>();
   const kennelOwnerData = useSelector((state: RootState) => state.kennel.kennelOwnerData);
+  const [loading,setLoading] = useState(false)
 
   const validateForm = () => {
     const newErrors: Errors = {};
@@ -71,6 +73,8 @@ const ProfilePage = () => {
     const isValid = validateForm();
     if (isValid && profile && initialData) {
       if (JSON.stringify(profile) !== JSON.stringify(initialData)) {
+        setLoading(true); // Start loading
+
         try {
           const formData = new FormData();
           if (profile._id) formData.append('id', profile._id);
@@ -88,7 +92,9 @@ const ProfilePage = () => {
         } catch (error) {
           toast.error('Failed to update profile');
           errorHandle(error)
-        }
+        } finally {
+          setLoading(false);
+      }
       }
     }
   }
@@ -110,9 +116,14 @@ const ProfilePage = () => {
           {errors.name && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.name}</p>}
         </div>
         <div className='p-3'>
-          <button onClick={handleChanges} className='bg-purplebutton text-white font-semibold p-2  text-center rounded-lg text-small'>SAVE CHANGES</button>
+          <button onClick={handleChanges} disabled={loading}  className='bg-purplebutton text-white font-semibold p-2  text-center rounded-lg text-small'>{loading ? 'SAVING...' : 'SAVE CHANGES'}</button>
         </div>
       </div>
+      {loading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <PacmanLoader size={40} color="#ffffff" />
+                </div>
+            )}
     </div>
   )
 }

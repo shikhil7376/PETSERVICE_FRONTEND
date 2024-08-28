@@ -6,6 +6,8 @@ import { userData } from "../Interface/DatatypeInterface";
 export const signup = async (userData: userData) => {
   try {
     const response = await api.post(userRoutes.signup, userData);
+    console.log(response);
+    
     return response;
   } catch (error) {
     const err: Error = error as Error;
@@ -100,13 +102,10 @@ export const getProfile = async (Id: string) => {
   }
 };
 
-export const editProfile = async (data: userData) => {
+export const editProfile = async (data:FormData) => {
   try {
-    console.log(data);
-
     const response = await api.post(userRoutes.editProfile, data);
     console.log(response);
-
     return response;
   } catch (error) {
     return errorHandle(error);
