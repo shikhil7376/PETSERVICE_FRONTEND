@@ -5,12 +5,11 @@ import ThirdSection from '../../components/Socialmedia/ThirdSection'
 
 const SocialmediaLayout = () => {
   return (
-    <div className="flex bg-black min-h-screen ">
+    <div className="flex bg-black  min-h-screen ">
     <Sidebar />
-    <div className="flex flex-1 ">
       <Content />
       <ThirdSection />
-    </div>
+   
   </div>
   )
 }

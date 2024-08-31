@@ -146,3 +146,12 @@ export const cancelBooking = async (bookingid: string, cageid: string) => {
     return errorHandle(error);
   }
 };
+
+export const getAllBookings = async()=>{
+   try {
+      const response = await api.get(kennelRoutes.getAllBookings)
+      return response
+   } catch (error) {
+     errorHandle(error)
+   }
+}

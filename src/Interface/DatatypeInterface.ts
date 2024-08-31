@@ -107,3 +107,41 @@ export interface BookingDetails{
   totalDays: number;
 }
 
+
+export interface PostError {
+  description?:string,
+  age?:string,
+  images?:string
+}
+
+
+export type postdetails = {
+  id: string;
+  description: string;
+  images?: string[];
+  likeCount?: number;
+  commentCount?: number;
+  likes?: string[];
+  user?: {
+    name: string;
+    email: string;
+    image: string;
+  };
+};
+
+export interface booking{
+  kennelname:string,
+  cageid:string,
+  userid:string,
+  fromdate:string,
+  todate:string,
+  totalamount:number,
+  totaldays:number,
+  transactionId:string,
+  status:string,
+  ownerid:string,
+  cageImage: string,
+  _id?:string,
+  phone?:string,
+  username?:string
+}

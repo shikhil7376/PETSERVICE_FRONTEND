@@ -10,13 +10,16 @@
       <Sidebar.Items className="mt-5  ">
         <Sidebar.ItemGroup>
           <Sidebar.Item href="/kennel/dashboard" icon={HiChartPie}>
-          <p className='text-small font-semibold'> Dashboard</p>
+          <p className='text-sm font-semibold'> Dashboard</p>
           </Sidebar.Item>
           <Sidebar.Item href="/kennel/profile" icon={HiUser}>
-          <p className='text-small font-semibold'> PROFILE</p>
+          <p className='text-sm font-semibold'> PROFILE</p>
           </Sidebar.Item>
           <Sidebar.Item href="/kennel/addkennel" icon={HiLibrary} labelColor="dark">
-          <p className='text-small font-semibold'> ADD KENNELS</p>
+          <p className='text-sm font-semibold'> ADD KENNELS</p>
+          </Sidebar.Item>
+          <Sidebar.Item href="/kennel/bookings" icon={HiLibrary} labelColor="dark">
+          <p className='text-sm font-semibold'> BOOKINGS</p>
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>

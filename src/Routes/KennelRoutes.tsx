@@ -10,6 +10,7 @@ const KennelSignIn = lazy(()=>import('../Pages/Kennel/SignIn'))
 const KennelOtp = lazy(()=>import('../Pages/Kennel/Otp'))
 const AddKennel = lazy(()=>import('../Pages/Kennel/AddKennel'))
 const KennelProfile = lazy(()=>import('../Pages/Kennel/ProfilePage'))
+const KennelBookings = lazy(()=>import('../components/Kennel/Bookings'))
 
 const KennelRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const KennelRoutes = () => {
          <Route path='/dashboard' element={<KennelDashboard/>}/>
          <Route path='/addkennel' element={<AddKennel/>}/>
          <Route path='/profile' element={<KennelProfile/>}/>
+         <Route path='/bookings' element={<KennelBookings/>}/>
         </Route>
         </Route>
         <Route path='/signup' element={<KennelSignUp/>}/>

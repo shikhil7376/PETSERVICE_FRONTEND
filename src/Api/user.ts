@@ -111,3 +111,49 @@ export const editProfile = async (data:FormData) => {
     return errorHandle(error);
   }
 };
+
+export const addPost = async(data:FormData) => {
+  try{    
+  const response = await api.post(userRoutes.addpost,data)
+  return response
+  }catch(error){
+    errorHandle(error)
+  }
+}
+
+export const getPosts = async()=>{
+  try {
+    const response = await api.get(userRoutes.getPosts)    
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}
+
+export const likePost = async(postId:string,userId:string)=>{
+  try {
+     const response = await api.post(`${userRoutes.likePost}/${postId}`,{userId:userId})
+     return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}
+
+export const commentPost = async (postId:string,userId:string,comment:string)=>{
+  try {
+    const response = await api.post(userRoutes.commentPost,{postId:postId,userId:userId,comment:comment})
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}
+
+export const getAllComments = async(postId:string)=>{
+  try {    
+     const response = await api.post(userRoutes.getAllComments,{postId:postId})
+     return response
+  } catch (error) {
+     errorHandle(error)
+  }
+}
+

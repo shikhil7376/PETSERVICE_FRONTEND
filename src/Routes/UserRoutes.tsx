@@ -4,7 +4,7 @@ import { Route,Routes } from 'react-router-dom'
 import UserLayout from '../Layout/UserLayout/UserLayout'
 import Error404 from '../Pages/User/Error404'
 
-const UserRoutes = () => {
+const UserRoutes = () => { 
     const Home=lazy(()=>import('../components/User/Home'))
     const SignUp = lazy(()=>import('../Pages/User/SignUp'))
     const OTP = lazy(()=>import('../Pages/User/Otp'))

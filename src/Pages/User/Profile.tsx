@@ -9,6 +9,7 @@ import { RootState } from '../../Redux/Store';
 import { Errors, profile } from '../../Interface/DatatypeInterface';
 import errorHandle from '../../Api/Error';
 import PacmanLoader from "react-spinners/PacmanLoader";
+import FocusCardsDemo from '../../components/Socialmedia/FocusCardsDemo';
 
 
 const Profile = () => {
@@ -104,7 +105,7 @@ const Profile = () => {
     };
 
     return (
-        <div className='h-screen'>
+        <div className='h-auto'>
             <div className='display flex'>
                 <div className='w-1/3 bg-slate-3  flex justify-center '>
                     <div className='flex flex-col justify-center items-center gap-3'>
@@ -160,7 +161,9 @@ const Profile = () => {
                 </div>
             )}
             <div className='border-t border-gray-300 mt-10 '></div> {/* This is the line */}
-
+            <div className='mt-5'>
+                <FocusCardsDemo/>
+            </div>
         </div>
     )
 }

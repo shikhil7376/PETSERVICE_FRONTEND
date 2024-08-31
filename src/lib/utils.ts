@@ -18,3 +18,4 @@ export function debounce<Func extends (...args: any[]) => any>(func: Func, wait:
     }, wait);
   };
 }
+

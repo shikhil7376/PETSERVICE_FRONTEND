@@ -72,6 +72,9 @@ const Header = () => {
                 <DropdownItem key="bookings" onClick={handleBookings}>
                 <p className='text-small font-semibold text-gray-500'>bookings</p>
                 </DropdownItem>
+                <DropdownItem key="bookings" >
+                <p className='text-small font-semibold text-gray-500'>Wallet: $0</p>
+                </DropdownItem>
                 <DropdownItem key="signout" onClick={handleSignOut}>
                 <p className='text-small font-semibold text-gray-500'>signout</p>
                 </DropdownItem>

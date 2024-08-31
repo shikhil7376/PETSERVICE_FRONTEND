@@ -14,6 +14,8 @@ const kennelRoutes={
     editProfile:'/kennel/edit-profile',
     getBookings:'/kennel/get-bookings',
     cancelBooking:'/kennel/cancel-booking',
+    getAllBookings:'/kennel/get-all-bookings',
+
 }
 
 export default kennelRoutes
