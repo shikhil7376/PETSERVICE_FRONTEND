@@ -7,12 +7,15 @@ import { clearUserdata } from '../../Redux/Slices/AuthSlice';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../Redux/Store';
+import { HiMenu } from 'react-icons/hi'; // Import the menu icon from react-icons
+
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userdata = useSelector((state:RootState) => state.user.userdata);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
+   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const handleSignup = () => {
     navigate('/login');
@@ -37,6 +40,9 @@ const Header = () => {
     navigate('/bookings');
   };
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
     <div className='p-2 '>
@@ -44,16 +50,32 @@ const Header = () => {
         <div className='logo w-1/6 flex items-center justify-center'>
           <img src='pics/logo.jpg' className='w-10 h-10' alt='Logo' />
         </div>
-        <div className='section w-2/3'>
-          <ul className='flex justify-evenly '>
+        <div className='section w-2/3  hidden sm:flex justify-evenly '>
+          {/* <ul className='flex justify-evenly '> */}
             <Link to={'/'} className=' text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>
               Home
             </Link>
-            <li className= 'text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</li>
-            <li className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>About</li>
-            <li className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</li>
-          </ul>
+            <Link to={''} className= 'text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</Link>
+            <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>About</Link>
+            <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</Link>
+          {/* </ul> */}
         </div>
+        <div className="sm:hidden flex-1 flex justify-end">
+          <HiMenu className="text-2xl cursor-pointer" onClick={toggleMenu} />
+        </div>
+
+        {menuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white shadow-lg sm:hidden">
+            <ul className="flex flex-col items-center space-y-2 py-4">
+              <Link to={'/'} className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>
+                Home
+              </Link>
+              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Services</li>
+              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>About</li>
+              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Contact</li>
+            </ul>
+          </div>
+        )}
         <div className='signup w-1/6 flex items-center justify-center mt-1'>
           {userdata ? (
             <Dropdown isOpen={dropdownVisible} onClose={() => setDropdownVisible(false)}>

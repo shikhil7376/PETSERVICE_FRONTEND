@@ -19,7 +19,6 @@ type ContentCardProps = {
   const ContentCard: React.FC<ContentCardProps> = ({post}) => {
     const userData = useSelector((state: RootState) => state.user.userdata)
       
-    const [isFollowed, setIsFollowed] = React.useState(false);
     const [liked,setLiked] = useState(post.likes?.includes(userData?._id as string)|| false)
     const [likeCount,setLikeCount] = useState(post.likeCount || 0)
     const handleLikeClick = async() => {
@@ -35,7 +34,7 @@ type ContentCardProps = {
         }
       };
   return (
-    <Card className="flex-none w-[320px] h-[400px] bg-black ">
+    <Card className="flex-none z-30 w-full md:w-[420px] md:h-[400px] bg-black p-2">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar isBordered radius="full" size="md" src={post.user?.image} />
@@ -44,26 +43,17 @@ type ContentCardProps = {
             <h5 className="text-small tracking-tight text-default-400"></h5>
           </div>
         </div>
-        <Button
-          className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
-          color="primary"
-          radius="full"
-          size="sm"
-          variant={isFollowed ? "bordered" : "solid"}
-          onPress={() => setIsFollowed(!isFollowed)}
-        >
-          {isFollowed ? "Unfollow" : "Follow"}
-        </Button>
+       <button className='text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg'>follow</button>
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400 flex justify-center items-center ">
       <div>
-      <Carousel>
+      <Carousel >
   {post.images?.map((s, index) => (
     <img
       src={s}
       alt={`Carousel Image ${index}`}
       key={index}
-      className="h-64 w-full object-contain flex justify-center items-center" // Ensures image is centered and fits within the container
+      className=" h-[250px] w-full  object-cover flex justify-center items-center" // Ensures image is centered and fits within the container
     />
   ))}
 </Carousel>

@@ -8,7 +8,7 @@ const AdminLayout = () => {
     <div>
     <Header/>
        <div className='flex'>
-       <div className='w-[16%]'>
+       <div className='w-[18%]'>
        <Sidebar/>
        </div>
        <div className='w-[84%] mt-[72px]  '>

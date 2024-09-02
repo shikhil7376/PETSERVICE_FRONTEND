@@ -5,7 +5,7 @@ import { HiArrowSmRight, HiChartPie, HiUser, HiLibrary  } from "react-icons/hi";
 const AdminSidebar = () => {
   return (
     <div className='mt-8  h-screen '>
-    <Sidebar aria-label="Default sidebar example">
+    <Sidebar aria-label="Default sidebar example" className='w-[230px] rounded-2xl'>
    <Sidebar.Items className="mt-8  ">
      <Sidebar.ItemGroup>
        <Sidebar.Item href="/admin/dashboard" icon={HiChartPie}>

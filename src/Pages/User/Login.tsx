@@ -81,7 +81,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-custom-gradient ">
-      <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md">
+      <div className="bg-white p-8 rounded-3xl shadow-lg w-[95%] sm:w-full max-w-md">
         <motion.h1
           className="text-3xl font-semibold mb-8 md:ml-24 text-left"
           initial={{ opacity: 0, y: -20 }}

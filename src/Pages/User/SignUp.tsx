@@ -74,7 +74,7 @@ const SignUp = () => {
   
     <div className="min-h-screen flex items-center justify-center bg-custom-gradient">
      
-    <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-md">
+    <div className="bg-white p-8 rounded-3xl shadow-lg w-[95%] sm:w-full max-w-md">
       <motion.h2 className="text-2xl text-gray-600  mb-6 text-center font-semibold"
        initial={{ opacity: 0, y: -20 }}
        animate={{ opacity: 1, y: 0 }}

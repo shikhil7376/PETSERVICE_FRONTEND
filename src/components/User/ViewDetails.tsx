@@ -42,19 +42,19 @@ const ViewDetails = () => {
     }, [cageid]);
     return (
         <div className=''>
-            <div className='flex flex-1'>
-                <div className='image1 w-[400px] h-[412px] pl-2  overflow-hidden'>
+            <div className='flex flex-col sm:flex-row pl-1 gap-2'>
+                <div className='image1 w-[308px] sm:w-[400px] sm:h-[412px] pl-2  overflow-hidden'>
                     {details.image && details.image[0] && (
                         <img src={details.image[0]} alt="Kennel Image 1" className='w-full h-full object-cover' />
                     )}
                 </div>
-                <div className='multipleimage  flex flex-col justify-between pl-2'>
-                    <div className='image2 w-[300px] h-[200px]  overflow-hidden'>
+                <div className='multipleimage  flex flex-col justify-between pl-2 gap-2'>
+                    <div className='image2 w-[300px] sm:h-[200px]  overflow-hidden'>
                         {details.image && details.image[1] && (
                             <img src={details.image[1]} alt="Kennel Image 2" className='w-full h-full object-cover' />
                         )}
                     </div>
-                    <div className='image3 w-[300px] h-[200px]  r overflow-hidden'>
+                    <div className='image3 w-[300px] sm:h-[200px]  r overflow-hidden'>
                         {details.image && details.image[2] && (
                             <img src={details.image[2]} alt="Kennel Image 3" className='w-full h-full object-cover' />
                         )}
@@ -63,11 +63,11 @@ const ViewDetails = () => {
             </div>
 
 
-            <div className=' flex justify-between p-5'>
-                <div className='w-[50%]'>
+            <div className=' flex flex-col sm:flex-row justify-between p-5'>
+                <div className='w-full sm:w-[50%]'>
                     <h2 className='font-semibold'>Description:</h2>
                     <p className='text-gray-500 text-small'>{details.description}</p>
-                    <div className="p-2 flex justify-between">
+                    <div className="p-2 flex flex-col sm:flex-row gap-1 justify-between">
                         <div className="flex items-center p-1 drop-shadow-2xl rounded-md bg-gray-400">
                             <h2 className="font-semibold text-white flex items-center gap-1">
                                 contact: <FaPhone />

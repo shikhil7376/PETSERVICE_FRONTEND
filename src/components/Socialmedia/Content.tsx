@@ -22,8 +22,8 @@ const Content = () => {
   },[])
 
   return (
-<div className="w-full ml-0 mt-1 p-5 md:w-3/5 md:ml-[20%] ">
-<div className="bg-contentgray rounded-lg p-5 flex flex-col gap-5 shadow-md overflow-y-auto h-[93vh] scrollbar-hidden">
+<div className=" md:p-5 sm:w-3/5  ">
+<div className="bg-contentgray rounded-lg p-2 md:p-5 flex flex-col items-center gap-5 shadow-md overflow-y-auto h-[93vh] scrollbar-hidden">
       {
         posts.map((post)=>(
      

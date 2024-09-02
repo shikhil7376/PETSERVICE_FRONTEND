@@ -155,3 +155,12 @@ export const getAllBookings = async()=>{
      errorHandle(error)
    }
 }
+
+export const getDashboard = async(id:string)=>{
+  try {
+    const response = await api.post(kennelRoutes.dashboard,{ownerId:id})
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}

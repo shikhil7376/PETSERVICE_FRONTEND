@@ -80,32 +80,32 @@ const Booking = () => {
   }
 
   return (
-    <div className='h-screen p-4'>
+    <div className=' p-4'>
       <div className='p-5'>
         <button className=' bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] p-2 text-white rounded-md font-semibold flex items-center gap-1 text-small'><IoAppsOutline />
           CHECKOUT</button>
       </div>
-      <div className='flex'>
+      <div className='flex flex-col sm:flex-row '>
 
-        <div className='w-3/5  flex flex-col items-center gap-10'>
-          <div className='p-2 border-1 w-[70%]'>
+        <div className='sm:w-3/5  flex flex-col items-center gap-10'>
+          <div className='p-2 border-1  sm:w-[70%]'>
             <p className='text-small font-semibold  text-gray-500'>"Need anything else? Our team is here to help!"</p>
             <p className='text-small font-semibold  text-gray-500'>"Your perfect getaway awaits. Relax, unwind, and enjoy your stay!" </p>
           </div>
           <div>
-            <p className='text-small text-gray-500 font-semibold flex items-center gap-1' >check in:<CiCalendarDate size={20} />{fromdate}</p>
-            <p className='text-small text-gray-500 font-semibold flex items-center gap-1' >check out:<CiCalendarDate size={20} />{todate}</p>
+            <p className='text-small text-gray-500 font-roboto flex items-center gap-1' >check in:<CiCalendarDate size={20} />{fromdate}</p>
+            <p className='text-small text-gray-500 font-roboto flex items-center gap-1' >check out:<CiCalendarDate size={20} />{todate}</p>
           </div>
           <div>
             <h2 className='text-sm font-semibold'>KENNEL DETAILS</h2>
             <div className='border-t border-gray-300 mt-2'></div> {/* This is the line */}
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >Kennel name:<span>{details?.kennelname}</span></p>
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >location:<span>{details?.location}</span></p>
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2 '> contact: <span>{details?.phone}</span></p>
+            <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2' >Kennel name:<span>{details?.kennelname}</span></p>
+            <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2' >location:<span>{details?.location}</span></p>
+            <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2 '> contact: <span>{details?.phone}</span></p>
           </div>
         </div>
-        <div className='w-2/5 flex justify-center '>
-          <div className='w-[70%] bg-lightwhite flex flex-col items-center  border-1'>
+        <div className='w-full sm:w-2/5 flex justify-center '>
+          <div className='w-full sm:w-[70%] bg-lightwhite flex flex-col items-center  border-1'>
             <div className='w-full h-[200px]'>
               {details.image && details.image[0] && (
                 <img src={details.image[0]} alt="Kennel Image 1" className='w-full h-full object-cover ' />
@@ -113,10 +113,10 @@ const Booking = () => {
             </div>
             <h2 className='text-sm font-semibold p-2 '>BOOKING DETAILS</h2>
 
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >Max Count:<span>{details.maxcount}</span></p>
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >Total Days:<span>{totalDays}</span></p>
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >Price Per Day:<span>${details.pricepernight}</span></p>
-            <p className='text-small text-gray-500 font-semibold flex items-center p-1 gap-x-2' >Total Price:<span>${totalAmount}</span></p>
+            <p className='text-sm text-gray-500 font-roboto  flex items-center p-1 gap-x-2' >Max Count:<span>{details.maxcount}</span></p>
+            <p className='text-sm text-gray-500 font-roboto  flex items-center p-1 gap-x-2' >Total Days:<span>{totalDays}</span></p>
+            <p className='text-sm text-gray-500 font-roboto  flex items-center p-1 gap-x-2' >Price Per Day:<span>${details.pricepernight}</span></p>
+            <p className='text-sm text-gray-500 font-roboto  flex items-center p-1 gap-x-2' >Total Price:<span>${totalAmount}</span></p>
             <div className='p-2'>
               <button className=' p-1 bg-customPurple text-white rounded-md text-small font-semibold' onClick={makePayment}>PROCEED TO PAY</button>
 

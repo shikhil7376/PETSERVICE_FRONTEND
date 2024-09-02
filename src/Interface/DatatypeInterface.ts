@@ -145,3 +145,10 @@ export interface booking{
   phone?:string,
   username?:string
 }
+
+export interface dashboard{
+  dailyBookings: number;
+  monthlyBookings:number;
+  dailyProfit: number;
+  monthlyProfit: number;
+}

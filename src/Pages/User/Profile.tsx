@@ -106,8 +106,8 @@ const Profile = () => {
 
     return (
         <div className='h-auto'>
-            <div className='display flex'>
-                <div className='w-1/3 bg-slate-3  flex justify-center '>
+            <div className='display flex '>
+                <div className='w-1/3 bg-slate-3  flex justify-center  '>
                     <div className='flex flex-col justify-center items-center gap-3'>
                         <Avatar isBordered color="default" src={profile?.image || ''}
                             style={{ width: "100px", height: "100px" }}
@@ -115,10 +115,9 @@ const Profile = () => {
                         <FaUpload onClick={() => document.getElementById('fileInput')?.click()} />
                         <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
                     </div>
-
                 </div>
                 <div className='w-2/3  flex flex-col justify-center'>
-                    <div className='w-[35%] p-2 flex flex-col gap-3 '>
+                    <div className='sm:w-[35%] p-2 flex flex-col gap-3 '>
                         <input
                             type="text"
                             name="name"

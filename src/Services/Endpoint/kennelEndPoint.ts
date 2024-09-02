@@ -15,6 +15,7 @@ const kennelRoutes={
     getBookings:'/kennel/get-bookings',
     cancelBooking:'/kennel/cancel-booking',
     getAllBookings:'/kennel/get-all-bookings',
+    dashboard:'/kennel/Dashboard'
 
 }
 

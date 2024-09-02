@@ -27,6 +27,10 @@ const Bookings = () => {
     }
   }
 
+  const parseDate = (dateString: string): Date => {
+    return new Date(dateString.split('-').reverse().join('-'));
+  };
+
   async function CancelBooking(bookingid: string, roomid: string) {
     try {
       const result = await cancelBooking(bookingid, roomid);
@@ -39,31 +43,29 @@ const Bookings = () => {
     }
   }
 
-  const isPastDate = (dateString: string) => {
-    const today = new Date().setHours(0, 0, 0, 0); // Today's date at midnight
-    const checkInDate = new Date(dateString).setHours(0, 0, 0, 0); // Check-in date at midnight
-    return checkInDate < today; // Check if the check-in date is in the past
-  }
+  
+
 
   useEffect(() => {
     bookings()
   }, [])
 
   return (
-    <div className='h-screen'>
+    <div className='h-screen overflow-y-auto scrollbar-hide'>
       <div className='p-2  ml-10'>
         <h1 className='font-semibold text-sm font-roboto'>MY BOOKINGS</h1>
       </div>
-      <div className='p-5'>
+      <div className='flex flex-col gap-y-4 p-5 '>
+      {cageData.map((data, index) => (
+
         <Card
           isBlurred
           className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px] "
           shadow="sm"
         >
-          {cageData.map((data, index) => (
             <CardBody key={index}>
               <div className="grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center  rounded-lg">
-                <div className="relative col-span-6 md:col-span-4">
+                <div className="relative col-span-6 md:col-span-4 ">
                   <Image
                     alt="Album cover"
                     className="object-cover"
@@ -104,22 +106,24 @@ const Bookings = () => {
                     </div>
                   </div>
                   <div className='display flex justify-end mr-5'>
-                  {data.status !== 'cancelled' && isPastDate(data.fromdate) && (
-                    <div className='display flex justify-end mr-5'>
-                      <button
-                        className='text-xs border- rounded-sm p-1 font-semibold bg-red-600 text-white'
-                        onClick={() => { CancelBooking(data._id, data.cageid) }}
-                      >
-                        CANCEL BOOKING
-                      </button>
-                    </div>
-                  )}
+                  {(data.status === 'booked') && 
+                  (parseDate(data.fromdate) > new Date()) &&
+                  (
+                    <button
+                      className='text-xs border- rounded-sm p-1 font-semibold bg-red-600 text-white'
+                      onClick={() => CancelBooking(data._id, data.cageid)}
+                    >
+                      CANCEL BOOKING
+                    </button>
+                  )
+                }
                    </div>
                 </div>
               </div>
             </CardBody>
-          ))}
+        
         </Card>
+      ))}
       </div>
     </div>
   )

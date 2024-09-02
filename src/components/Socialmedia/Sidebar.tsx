@@ -9,6 +9,8 @@ import { FaUser } from "react-icons/fa";
 import AddPost from './AddPost';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LuMessagesSquare } from "react-icons/lu";
+
 
 
 
@@ -20,7 +22,7 @@ const Sidebar = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="fixed top-0 left-0 mt-1 h-full w-64 p-5 md:w-1/5">
+        <div className=" h-full">
             <div className="h-full flex flex-col items-center bg-contentgray  rounded-lg shadow-lg border-">
 
                 <ListboxWrapper >
@@ -50,6 +52,12 @@ const Sidebar = () => {
                             <div className="flex items-center">
                                 <p className="font-semibold font-roboto mr-2">Reels</p>
                                 <TfiVideoClapper size={20} />
+                            </div>
+                        </ListboxItem>
+                        <ListboxItem key="new" className="text-gray-500" color="secondary">
+                            <div className="flex items-center">
+                                <p className="font-semibold font-roboto mr-2">Message</p>
+                                <LuMessagesSquare  size={20} />
                             </div>
                         </ListboxItem>
                         <ListboxItem key="new" className="text-gray-500" color="secondary" onClick={()=>navigate('/profile')} >

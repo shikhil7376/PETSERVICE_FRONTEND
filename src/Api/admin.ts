@@ -85,3 +85,12 @@ export const unblockkennelowner = async (userId:string)=>{
         return errorHandle(error)
     }
 }
+
+export const getDashboard = async()=>{
+    try {
+      const response = await api.get(adminRoutes.dashboard)
+      return response
+    } catch (error) {
+      errorHandle(error)
+    }
+  }

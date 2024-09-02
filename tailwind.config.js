@@ -99,6 +99,7 @@ module.exports = {
       },
       backgroundImage: {
         'custom-gradient': 'linear-gradient(to top, #F7E9F7, #7959F9)',
+        'button-gradient':'linear-gradient(to right, #6a11cb, #2575fc)'
       },
     },
   },
