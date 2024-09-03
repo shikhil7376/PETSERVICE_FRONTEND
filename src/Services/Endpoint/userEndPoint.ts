@@ -15,6 +15,8 @@ const userRoutes={
     likePost:'/user/like-post',
     commentPost:'/user/comment-post',
     getAllComments:'/user/get-comments',
+    follow:'/user/follow',
+    getUserNotFollowed:'/user/user-not-follow'
 }
 
 export default userRoutes

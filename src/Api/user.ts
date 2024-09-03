@@ -157,3 +157,20 @@ export const getAllComments = async(postId:string)=>{
   }
 }
 
+export const follow = async(userId:string,targetId:string)=>{
+    try {
+        const response = await api.post(userRoutes.follow,{userId:userId,targetId:targetId})
+        return response
+    } catch (error) {
+      errorHandle(error)
+    }
+}
+
+export const userNotFollow = async(userId:string)=>{
+  try {
+    const response = await api.post(userRoutes.getUserNotFollowed,{userId:userId})
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}

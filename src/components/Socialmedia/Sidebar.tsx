@@ -11,10 +11,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuMessagesSquare } from "react-icons/lu";
 
+interface sidebarProps {
+  
+    fetchData: () => Promise<void>;
+  }
 
 
-
-const Sidebar = () => {
+const Sidebar:React.FC<sidebarProps> = ({fetchData}) => {
     const [isOpen, setIsOpen] = useState(false);
     const onOpen = () => setIsOpen(true);
     const onClose = () => setIsOpen(false);
@@ -70,7 +73,7 @@ const Sidebar = () => {
                     </Listbox>
                 </ListboxWrapper>
             </div>
-            <AddPost isOpen={isOpen} onClose={onClose} />
+            <AddPost fetchData={fetchData}   isOpen={isOpen} onClose={onClose} />
 
         </div>
     )

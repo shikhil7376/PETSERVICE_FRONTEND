@@ -123,9 +123,11 @@ export type postdetails = {
   commentCount?: number;
   likes?: string[];
   user?: {
+    userid:string
     name: string;
     email: string;
     image: string;
+    followers:string[]
   };
 };
 
@@ -151,4 +153,10 @@ export interface dashboard{
   monthlyBookings:number;
   dailyProfit: number;
   monthlyProfit: number;
+}
+
+export type UserNotFollow = {
+  _id:string,
+  name:string,
+  image:string
 }

@@ -10,14 +10,19 @@ import errorHandle from "../../Api/Error";
 import { PostError } from "../../Interface/DatatypeInterface";
 import { addPost } from "../../Api/User";
 
-const AddPost = ({ isOpen, onClose }) => {
+
+type addPostProps = {
+  fetchData: () => Promise<void>;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
     const [loading, setLoading] = useState(false);
     const [description,setDescription] = useState<string>("")
     const [images, setImages] = useState<File[]>([]);
     const [errors, setErrors] = useState<PostError>({});
 
-   console.log(images);
-   
     const userData = useSelector((state: RootState) => state.user.userdata)
 
    const validateForm = ()=>{
@@ -55,6 +60,8 @@ const AddPost = ({ isOpen, onClose }) => {
        try {
           setLoading(true)
           const response = await addPost(formData);
+            fetchData()
+            onClose()
            if(response){
             toast.success(response.data.message)
             setLoading(false)

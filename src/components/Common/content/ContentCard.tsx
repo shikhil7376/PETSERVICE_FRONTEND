@@ -10,17 +10,27 @@ import { likePost } from '../../../Api/User';
 import errorHandle from '../../../Api/Error';
 import { FaRegComment } from "react-icons/fa";
 import AddComment from '../../Socialmedia/AddComment';
+import { follow } from '../../../Api/User';
 
 
 type ContentCardProps = {
   post: postdetails;
+  fetchData: () => Promise<void>;
+  fetchNotFollowData: (userId: string) => void;
 };
 
-  const ContentCard: React.FC<ContentCardProps> = ({post}) => {
+
+
+  const ContentCard: React.FC<ContentCardProps> = ({post,fetchData,fetchNotFollowData}) => {
+   
+   
+
     const userData = useSelector((state: RootState) => state.user.userdata)
-      
+    const [isFollowing, setIsFollowing] = useState(  post.user?.followers.includes(userData?._id as string) );
+    
     const [liked,setLiked] = useState(post.likes?.includes(userData?._id as string)|| false)
     const [likeCount,setLikeCount] = useState(post.likeCount || 0)
+    
     const handleLikeClick = async() => {
         try {
           
@@ -33,6 +43,29 @@ type ContentCardProps = {
           errorHandle(error)
         }
       };
+      
+      
+      
+    
+   const handleToggleFollow = async()=>{
+        try {
+           const response = await follow(userData?._id as string,post.user?.userid as string)
+           if (response) {
+           fetchData()
+           fetchNotFollowData(userData?._id as string)
+            // if(post.user?.followers.includes(userData?._id as string)) {
+            //   setIsFollowing(false)
+            // }else{
+            //   setIsFollowing(true)
+            // }
+             
+          }
+        } catch (error) {
+          errorHandle(error)
+        }
+   }
+
+
   return (
     <Card className="flex-none z-30 w-full md:w-[420px] md:h-[400px] bg-black p-2">
       <CardHeader className="justify-between">
@@ -43,7 +76,9 @@ type ContentCardProps = {
             <h5 className="text-small tracking-tight text-default-400"></h5>
           </div>
         </div>
-       <button className='text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg'>follow</button>
+        {post?.user?.userid !==userData?._id &&(
+       <button className='text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg' onClick={handleToggleFollow}> {post.user?.followers.includes(userData?._id as string)  ? 'Unfollow' : 'Follow'}</button>
+      )}
       </CardHeader>
       <CardBody className="px-3 py-0 text-small text-default-400 flex justify-center items-center ">
       <div>
@@ -53,7 +88,7 @@ type ContentCardProps = {
       src={s}
       alt={`Carousel Image ${index}`}
       key={index}
-      className=" h-[250px] w-full  object-cover flex justify-center items-center" // Ensures image is centered and fits within the container
+      className=" h-[250px] w-full  object-contain flex justify-center items-center" // Ensures image is centered and fits within the container
     />
   ))}
 </Carousel>
