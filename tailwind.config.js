@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 const { nextui } = require("@nextui-org/react");
 const flowbite = require("flowbite-react/tailwind");
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 module.exports = {
   darkMode: ["class"],
@@ -103,5 +108,16 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),nextui(),flowbite.plugin(),require('tailwind-scrollbar-hide')],
+  plugins: [require("tailwindcss-animate"),nextui(),flowbite.plugin(),require('tailwind-scrollbar-hide'),addVariablesForColors],
+}
+
+function addVariablesForColors({ addBase, theme }) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
 }

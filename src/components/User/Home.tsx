@@ -3,10 +3,75 @@ import { Button } from "@nextui-org/react";
 import { motion } from 'framer-motion';
 import { Image } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
-
+import { StickyScroll } from '../ui/sticky-scroll-reveal';
 
 const Home = () => {
   const navigate = useNavigate()
+
+  const content = [
+    {
+      title: "Dog Boarding Services",
+      description:
+        " Book secure and comfortable cages for your pets with ease! Our trusted kennel owners offer flexible boarding services where you can select dates, view available cages, and make hassle-free online payments.",
+      content: (
+        <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
+           <img
+            src="/pics/signup.jpg"
+            width={300}
+            height={300}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Pet Adoption Platform",
+      description:"Find your perfect furry friend with our adoption platform. Explore adoption posts, like and comment on pet profiles, and connect with potential adopters or pet lovers. Give a dog a new home today!",
+      content: (
+        <div className="h-full w-full  flex items-center justify-center text-white">
+          <img
+            src="https://cdn.pixabay.com/photo/2021/11/22/15/48/dog-6816752_1280.jpg"
+            width={300}
+            height={300}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Connect & Communicate",
+      description:" Stay connected with other pet enthusiasts! Our platform offers chat, video call, and notification features to ensure you can easily communicate with kennel owners and other users. Follow, unfollow, or chat with ease.",
+      content: (
+        <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] flex items-center justify-center text-white">
+         
+          <img
+            src="https://cdn.pixabay.com/photo/2018/03/11/06/14/talk-3216074_1280.jpg"
+            width={300}
+            height={300}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+    {
+      title: "Exclusive Benefits for Pet Owners",
+      description:"Enjoy a seamless experience with PetZone! Easily book pet boarding services, explore adoption opportunities, and stay connected with our vibrant pet-loving community. Get notifications, chat with other users, and enjoy peace of mind with secure payments and trusted services tailored just for you.",
+      content: (
+        <div className="h-full w-full bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] flex items-center justify-center text-white">
+          <img
+            src="https://cdn.pixabay.com/photo/2017/10/07/16/21/dog-2826918_1280.png"
+            width={300}
+            height={300}
+            className="h-full w-full object-cover"
+            alt="linear board demo"
+          />
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className=''>
@@ -76,7 +141,9 @@ const Home = () => {
       </div>
 
       <div className=' display flex flex-wrap mt-10'>
-        <div className=' w-full sm:w-[50%] '></div>
+        <div className=' w-full sm:w-[50%] flex items-center justify-center '>
+          <img src='https://cdn.pixabay.com/photo/2014/04/03/11/38/pet-312041_1280.png'  className='object-contain h-[60%] w-[50%]'/>
+        </div>
         <div className='w-full sm:w-[50%] bg-slate-30  '>
           <div className='flex justify-center '>
             <div className='bg-white h-[100px] w-[100px] sm:h-[150px] sm:w-[150px] rounded-full text-center justify-center items-center overflow-hidden drop-shadow-md'>
@@ -95,9 +162,12 @@ const Home = () => {
               <img src='pics/cane.png' className='h-full w-full object-cover' />
             </div>
           </div>
-
         </div>
       </div>
+      <div className="p-10 ">
+        <h2 className='text-center font-roboto font-semibold text-xl p-5 '>FEATURES</h2>
+      <StickyScroll content={content} />
+    </div>
     </div>
   )
 }
