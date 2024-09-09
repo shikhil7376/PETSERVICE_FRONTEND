@@ -50,6 +50,7 @@
     "recharts": "^2.12.7",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.5",
     "swiper": "^11.1.5",
     "tailwind-merge": "^2.5.2",
     "tailwind-scrollbar-hide": "^1.1.7",

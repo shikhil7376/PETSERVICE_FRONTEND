@@ -17,6 +17,7 @@ const UserRoutes = () => {
     const Profile = lazy(()=>import('../Pages/User/Profile'))
     const ProtectedRoute = lazy(()=>import('../Protected/ProtectedRoute'))
     const SocialMedia = lazy(()=>import('../Layout/SocialmediaLayout/SocialmediaLayout'))
+    const Message = lazy(()=>import('../components/Socialmedia/ChatPage'))
   return (
    <Suspense>
     <Routes>
@@ -37,6 +38,7 @@ const UserRoutes = () => {
        <Route path='login' element={<Login/> }/>
        <Route path='*' element={<Error404/>}/>
        <Route path='/adoption' element={<SocialMedia/>}/>
+       <Route path='/message' element={<Message/>}/>
     </Routes>
    </Suspense>
   )

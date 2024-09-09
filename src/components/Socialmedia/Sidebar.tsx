@@ -57,7 +57,7 @@ const Sidebar:React.FC<sidebarProps> = ({fetchData}) => {
                                 <TfiVideoClapper size={20} />
                             </div>
                         </ListboxItem>
-                        <ListboxItem key="new" className="text-gray-500" color="secondary">
+                        <ListboxItem key="new" className="text-gray-500" color="secondary" onClick={()=>navigate('/message')}>
                             <div className="flex items-center">
                                 <p className="font-semibold font-roboto mr-2">Message</p>
                                 <LuMessagesSquare  size={20} />

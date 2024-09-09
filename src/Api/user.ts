@@ -174,3 +174,14 @@ export const userNotFollow = async(userId:string)=>{
     errorHandle(error)
   }
 }
+
+export const getchatUser = async(userId:string,searchItem:string)=>{
+  try {
+    const response = await api.post(`${userRoutes.getchatUsers}?search=${searchItem}`,{userId:userId})
+    console.log(response);
+    return response
+  } catch (error) {
+    errorHandle(error)
+
+  }
+}

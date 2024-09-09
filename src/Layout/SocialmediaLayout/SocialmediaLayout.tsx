@@ -54,7 +54,6 @@ const SocialmediaLayout = () => {
       </div>
       <Content posts={posts} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData}  />
       <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} />
-
     </div>
   )
 }
