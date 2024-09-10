@@ -65,7 +65,8 @@ export interface CageData{
 
 export interface profile extends Errors{
   _id?:string,
-  image?:string
+  image?:string,
+  wallet?:number
 }
 
  export interface CageError extends CageData{

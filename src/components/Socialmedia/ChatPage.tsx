@@ -8,7 +8,7 @@ const ChatPage = () => {
     const [activeChat, setActiveChat] = useState(null); // Active chat state
 
 
-    console.log('activechat',activeChat);
+
     
   return (
     <div className=' bg-black h-screen'>

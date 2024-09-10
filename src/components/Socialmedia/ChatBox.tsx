@@ -25,6 +25,20 @@ const ChatBox = ( {activeChat }) => {
     const [newMessage, setNewMessage] = useState('');
     const [socketConnected,setSocketConnected] = useState(false)
 
+    
+    let getusername =''
+   if(activeChat){
+    if(activeChat.users[0]._id ==userData?._id){
+     getusername = activeChat.users[1].name
+   }else{
+    getusername = activeChat.users[0].name
+   }
+}
+
+ console.log('suser',getusername);
+ 
+   
+    
   
     useEffect(()=>{
         socket = io(ENDPOINT)
@@ -55,7 +69,7 @@ const ChatBox = ( {activeChat }) => {
         try {
           const response = await getMessages(activeChat._id);
           setMessages(response?.data);
-          console.log('Fetched Messages:', response?.data); // Log fetched messages for debugging
+        // Log fetched messages for debugging
         socket.emit('joinchat',activeChat._id)
         } catch (error) {
           console.error('Error fetching messages', error);
@@ -68,9 +82,11 @@ const ChatBox = ( {activeChat }) => {
           try {
             if(userData){
                 const response = await sendMessage(userData?._id, newMessage, activeChat._id);
-                socket.emit('newmessage',response?.data.data)
+                console.log('just res',response?.data.data);
                 
-                fetchMessages()
+                socket.emit('newmessage',response?.data.data)
+                setMessages([...messages,response?.data.data])
+                // fetchMessages()
                 setNewMessage(''); 
             }
           } catch (error) {
@@ -82,8 +98,11 @@ const ChatBox = ( {activeChat }) => {
   return (
     <div className='bg-contentgray ml-3 rounded-lg h-[90vh] w-full'>
       {activeChat ? (
-        <div className='p-4'>
-          <div className='h-[80vh] overflow-y-auto scrollbar-hide'>
+        <div className=''>
+            <div className='flex justify-center p-1 '>
+             <h2 className='text-gray-500 font-semibold' >{getusername}</h2>
+                </div>
+          <div className='h-[77vh] overflow-y-auto scrollbar-hide p-2'>
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -103,7 +122,7 @@ const ChatBox = ( {activeChat }) => {
               </div>
             ))}
           </div>
-          <div className=''>
+          <div className='fixed bg-green-300 w-[700px] ml-2 rounded-lg'>
             <form onSubmit={handleSendMessage} className=''>
               <input
                 type='text'
@@ -116,7 +135,7 @@ const ChatBox = ( {activeChat }) => {
           </div>
         </div>
       ) : (
-        <p className='text-center text-gray-500'>Select a chat to start messaging</p>
+        <p className='text-center text-gray-500 font-semibold'>Select a chat to start messaging</p>
       )}
     </div>
   )
