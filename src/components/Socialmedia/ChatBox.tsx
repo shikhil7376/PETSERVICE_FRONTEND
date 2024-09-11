@@ -18,7 +18,7 @@ interface Message {
 
   var socket,selectedChatCompare
 
-const ChatBox = ( {activeChat }) => {
+const ChatBox = ( {activeChat,notification,setNotification }) => {
   
     const userData = useSelector((state: RootState) => state.user.userdata);
     const [messages, setMessages] = useState<Message[]>([]);
@@ -35,7 +35,6 @@ const ChatBox = ( {activeChat }) => {
    }
 }
 
- console.log('suser',getusername);
  
    
     
@@ -57,6 +56,10 @@ const ChatBox = ( {activeChat }) => {
          socket.on("messagerecieved",(newMessageRecieved)=>{
             if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id){
                 //give notification
+                if(!notification.includes(newMessageRecieved)){
+                    setNotification([newMessageRecieved,...notification])
+                    fetchMessages()
+                }
             }else{
                 setMessages([...messages,newMessageRecieved])
             }

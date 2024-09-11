@@ -6,16 +6,15 @@ import { useState } from 'react'
 const ChatPage = () => {
 
     const [activeChat, setActiveChat] = useState(null); // Active chat state
-
-
+    const [notification,setNotification] = useState([])
 
     
   return (
     <div className=' bg-black h-screen'>
       <Header/>
       <div className='flex justify '>
-      <ChatList setActiveChat={setActiveChat}/>
-      <ChatBox activeChat={activeChat}/>
+      <ChatList setActiveChat={setActiveChat} notification ={notification} setNotification={setNotification}/>
+      <ChatBox activeChat={activeChat} notification ={notification} setNotification={setNotification}/>
       </div>
     </div>
   )
