@@ -4,6 +4,10 @@ import { useState,useEffect } from 'react';
 import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
 import io from 'socket.io-client'
+import EmojiPicker from 'emoji-picker-react';
+import { FaPlay } from "react-icons/fa";
+
+
 
 interface Message {
     id: string;
@@ -11,7 +15,7 @@ interface Message {
     sender:{
         _id:string
     } ;
-    timestamp: string; // Adjust properties as needed
+    timestamp: string; 
   }
 
   const ENDPOINT = "http://localhost:8000"
@@ -24,6 +28,7 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState('');
     const [socketConnected,setSocketConnected] = useState(false)
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
     
     let getusername =''
@@ -36,9 +41,6 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
 }
 
  
-   
-    
-  
     useEffect(()=>{
         socket = io(ENDPOINT)
         socket.emit("setup",userData)
@@ -55,7 +57,6 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
       useEffect(()=>{
          socket.on("messagerecieved",(newMessageRecieved)=>{
             if(!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id){
-                //give notification
                 if(!notification.includes(newMessageRecieved)){
                     setNotification([newMessageRecieved,...notification])
                     fetchMessages()
@@ -66,27 +67,22 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
          }) 
       })
 
-    
-
     const fetchMessages = async () => {
         try {
           const response = await getMessages(activeChat._id);
           setMessages(response?.data);
-        // Log fetched messages for debugging
         socket.emit('joinchat',activeChat._id)
         } catch (error) {
           console.error('Error fetching messages', error);
         }
       };
 
-      const handleSendMessage = async (e: React.FormEvent) => {
-        e.preventDefault();
+      const handleSendMessage = async () => {     
+        // e.preventDefault();
         if (newMessage.trim() && activeChat) {
           try {
-            if(userData){
-                const response = await sendMessage(userData?._id, newMessage, activeChat._id);
-                console.log('just res',response?.data.data);
-                
+            if(userData){      
+                const response = await sendMessage(userData?._id, newMessage, activeChat._id);                
                 socket.emit('newmessage',response?.data.data)
                 setMessages([...messages,response?.data.data])
                 // fetchMessages()
@@ -97,7 +93,17 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
           }
         }
       };
+
+      const handleEmojiClick = (emojiData) => {        
+         if(emojiData && emojiData.emoji){
+          setNewMessage((prevMessage) => prevMessage + emojiData.emoji);  
+        }
+         setShowEmojiPicker(false)
+      };
     
+
+   
+
   return (
     <div className='bg-contentgray ml-3 rounded-lg h-[90vh] w-full'>
       {activeChat ? (
@@ -114,9 +120,9 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
                 }`}
               >
                 <div
-                  className={`p-2 rounded-lg ${
+                  className={`p-2 rounded-2xl ${
                     message?.sender._id  === userData?._id
-                      ? 'bg-green-500 text-white max-w-[70%] text-right'
+                      ? 'bg-gray-500 text-white max-w-[70%] text-right  '
                       : 'bg-gray-600 text-white max-w-[70%] text-left'
                   }`}
                 >
@@ -125,8 +131,20 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
               </div>
             ))}
           </div>
-          <div className='fixed bg-green-300 w-[700px] ml-2 rounded-lg'>
-            <form onSubmit={handleSendMessage} className=''>
+          <div className='fixed w-[700px] ml-2 rounded-lg'>
+              <div className='flex gap-2'>
+              <button
+                type='button'
+                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+                className='ml-2 text-white'
+              >
+                😊
+              </button>
+              {showEmojiPicker && (
+                <div className='absolute bottom-[80px]'>
+                  <EmojiPicker onEmojiClick={handleEmojiClick} />
+                </div>
+              )}
               <input
                 type='text'
                 value={newMessage}
@@ -134,11 +152,12 @@ const ChatBox = ( {activeChat,notification,setNotification }) => {
                 className='w-full  rounded bg-gray-700 text-white'
                 placeholder='Type a message...'
               />
-            </form>
+              <button><FaPlay size={20} color='gray' onClick={handleSendMessage}/></button>
+                 </div>
           </div>
         </div>
       ) : (
-        <p className='text-center text-gray-500 font-semibold'>Select a chat to start messaging</p>
+        <p className='text-center p-2 text-gray-500 font-semibold'>Select a chat to start messaging</p>
       )}
     </div>
   )

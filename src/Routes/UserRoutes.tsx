@@ -38,7 +38,9 @@ const UserRoutes = () => {
        <Route path='Otp' element={<OTP/>}/>
        <Route path='login' element={<Login/> }/>
        <Route path='*' element={<Error404/>}/>
+       <Route element={<ProtectedRoute/>}>
        <Route path='/adoption' element={<SocialMedia/>}/>
+       </Route>
        <Route path='/message' element={<Message/>}/>
        <Route path='/room/:roomId' element={<Room/>}/>
     </Routes>

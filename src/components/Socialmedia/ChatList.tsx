@@ -7,21 +7,19 @@ import { getchatUser } from '../../Api/User';
 import { createChat,fetchChat } from '../../Api/chat';
 import { useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
-import { user } from '@nextui-org/theme';
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import errorHandle from '../../Api/Error';
-
+import { userData,chat } from '../../Interface/DatatypeInterface';
 
 
 const ChatList = ({ setActiveChat,notification,setNotification }) => {
      
     const userData = useSelector((state: RootState) => state.user.userdata);
-    const [searchItem,setSearchItem] = useState("")
-    const [searchResult, setSearchResult] = useState<any[]>([]);
-    const [chats, setChats] = useState<any[]>([]);
-    const [showDropdown, setShowDropdown] = useState(false); // State to control dropdown visibility
-
+    const [searchItem,setSearchItem] = useState<string>("")
+    const [searchResult, setSearchResult] = useState<userData[]>([]);
+    const [chats, setChats] = useState<chat[]>([]);
+    const [showDropdown, setShowDropdown] = useState(false); 
 
     useEffect(() => {
         if (userData) {
@@ -32,17 +30,16 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
     const fetchUserChats = async () => {
         if (!userData || !userData._id) {
           console.error("User data is not available.");
-          return; // Exit the function if userData is null or doesn't have _id
+          return; 
         }
       
         try {
-          const response = await fetchChat(userData._id as string); // Make sure to check userData before this
-          
+          const response = await fetchChat(userData._id as string); 
           if (response) {
-            setChats(response.data.data); // Store the fetched chats
+            setChats(response.data.data); 
           }
         } catch (error) {
-          console.error("Error fetching chats", error);
+          errorHandle(error)
         }
       };
     
@@ -51,8 +48,8 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
         setSearchItem(e.target.value)
     }
 
-    function getsender(currentUser, users){
-       return users[0]._id === currentUser._id? users[1].name:users[0].name
+    function getsender(currentUser, users){   
+      return users[0]._id === currentUser._id? users[1].name:users[0].name
     }
 
     const handleSubmit = async(e: React.FormEvent<HTMLFormElement>)=>{
@@ -69,17 +66,15 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
          }
     }
 
-    const accessChat = async(userId)=>{
+    const accessChat = async(userId:string)=>{
      try {
-        const response = await createChat(userData?._id as string,userId as string)    
+        const response = await createChat(userData?._id as string,userId as string)  
+        console.log('response',response);
+          
         if(response){
           setSearchItem("")
           fetchUserChats()
-        }    
-        // if (response) {
-        //     setActiveChat(response.data); // Set active chat in parent component
-        //   }
-        
+        }      
      } catch (error) {
         errorHandle(error)
      }
@@ -97,7 +92,7 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
             <div className='flex items-center gap-4'>
           <form onSubmit={handleSubmit}>
             <input
-              className='bg-black border-1 border-gray-400 text-gray-400 rounded-full p-1'
+              className='bg-black border-1 text-sm border-gray-400 text-gray-400 rounded-full p-2'
               placeholder='Search'
               onChange={search}
               value={searchItem}
@@ -107,19 +102,19 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
           <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer" />
           <NotificationBadge count={notification.length} effect ={Effect.SCALE}/>
           {showDropdown && (
-            <div className='absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg p-4 z-10'>
+            <div className='absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg p-2 z-10'>
               {notification.length > 0 ? (
                 notification.map((notif, index) => (
                     <div
                     key={index}
-                    className="p-2 border-b border-gray-300"
+                    className="p-2  border-gray-300"
                     onClick={() => {
-                      setActiveChat(notif.chat); // Set the active chat
-                      setNotification(notification.filter((n) => n !== notif)); // Remove the notification
+                      setActiveChat(notif.chat); 
+                      setNotification(notification.filter((n) => n !== notif)); 
                     }}
                   >
                     <p className="text-sm font-semibold">
-                      New message from {getsender(userData, notif.chat.users)}
+                       message from {getsender(userData, notif.chat.users)}
                     </p>
                   </div>
                   
@@ -134,12 +129,11 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
           <p className='text-gray-500 font-semibold p-2'>CHATS</p>
           
           {searchItem ? (
-            // Show search results when a search term is present
             searchResult.map((user) => (
               <UserList 
                 key={user._id} 
                 user={user} 
-                handlefunction={() => accessChat(user._id)} 
+                handlefunction={() => accessChat(user._id as string)} 
               />
             ))
           ) : (

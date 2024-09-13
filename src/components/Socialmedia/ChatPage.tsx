@@ -5,7 +5,7 @@ import ChatBox from './ChatBox'
 import { useState } from 'react'
 const ChatPage = () => {
 
-    const [activeChat, setActiveChat] = useState(null); // Active chat state
+    const [activeChat, setActiveChat] = useState(null); 
     const [notification,setNotification] = useState([])
 
     

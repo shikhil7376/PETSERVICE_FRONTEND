@@ -66,7 +66,9 @@ export interface CageData{
 export interface profile extends Errors{
   _id?:string,
   image?:string,
-  wallet?:number
+  wallet?:number,
+  followers?:number,
+  following?:number,
 }
 
  export interface CageError extends CageData{
@@ -95,7 +97,12 @@ export interface userData{
   phone?:string,
   image?:string,
   isBlocked?:boolean,
-  userimage?: File; 
+  userimage?: File, 
+  followers?:string[],
+  following?:string[],
+  isAdmin?:boolean,
+  wallet?:number,
+  isGoogle?:boolean
 }
 
 export interface BookingDetails{
@@ -160,4 +167,12 @@ export type UserNotFollow = {
   _id:string,
   name:string,
   image:string
+}
+
+export interface chat{
+  _id:string,
+  chatName:string,
+  createdAt:Date,
+  updatedAt:Date,
+  users:userData[]
 }

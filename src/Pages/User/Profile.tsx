@@ -21,6 +21,9 @@ const Profile = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
 
+console.log('profile',profile);
+
+
     const validateForm = () => {
         const newErrors: Errors = {};
         if (!profile?.name?.trim()) {
@@ -114,7 +117,12 @@ const Profile = () => {
                         />
                         <FaUpload onClick={() => document.getElementById('fileInput')?.click()} />
                         <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
+                        <div className='display flex gap-2'>
+                        <p className='text-sm  text-gray-500'>followers:{profile?.followers}</p>
+                        <p className='text-sm  text-gray-500'>following:{profile?.following}</p>
+                        </div>
                     </div>
+                    
                 </div>
                 <div className='w-2/3  flex flex-col justify-center'>
                     <div className='sm:w-[35%] p-2 flex flex-col gap-3 '>
