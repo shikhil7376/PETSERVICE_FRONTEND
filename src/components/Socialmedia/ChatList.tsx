@@ -13,7 +13,7 @@ import errorHandle from '../../Api/Error';
 import { userData,chat } from '../../Interface/DatatypeInterface';
 
 
-const ChatList = ({ setActiveChat,notification,setNotification }) => {
+const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOpen, toggleOpen  }) => {
      
     const userData = useSelector((state: RootState) => state.user.userdata);
     const [searchItem,setSearchItem] = useState<string>("")
@@ -81,26 +81,30 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
       
     }
 
-    const toggleDropdown = () => {
+    const toggleDropdown = () => {   
         setShowDropdown(!showDropdown);
       };
     
 
      
     return (
-        <div className='w-[30%] bg-contentgray p-4 ml-3 rounded-lg h-[90vh]'>
+      <div
+      className={`bg-contentgray p-4 ml-3 rounded-lg h-[90vh] sm:w-[30%] transition-transform duration-300 ease-in-out ${
+        isOpen ? 'translate-x-0' : '-translate-x-[-200%]'
+      } fixed sm:relative sm:translate-x-0 sm:block z-50 sm:z-auto border-1 border-gray-500 `}
+    >
             <div className='flex items-center gap-4'>
           <form onSubmit={handleSubmit}>
             <input
-              className='bg-black border-1 text-sm border-gray-400 text-gray-400 rounded-full p-2'
+              className='bg-black border-1 text-sm  text-gray-400 rounded-full p-2'
               placeholder='Search'
               onChange={search}
               value={searchItem}
             />
           </form>
           <div className='relative'>
-          <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer" />
-          <NotificationBadge count={notification.length} effect ={Effect.SCALE}/>
+          {/* <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer" /> */}
+          {/* <NotificationBadge count={notification.length} effect ={Effect.SCALE}/> */}
           {showDropdown && (
             <div className='absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg p-2 z-10'>
               {notification.length > 0 ? (
@@ -134,16 +138,18 @@ const ChatList = ({ setActiveChat,notification,setNotification }) => {
                 key={user._id} 
                 user={user} 
                 handlefunction={() => accessChat(user._id as string)} 
+                onlineUsers={onlineUsers}
               />
             ))
           ) : (
             chats.map((chat) => {
-              const otherUser = chat.users.find((u) => u._id !== userData?._id);
+              const otherUser = chat.users.find((u) => u._id !== userData?._id);              
               return (
                 <UserList 
                   key={chat._id} 
                   user={otherUser} 
                   handlefunction={() => setActiveChat(chat)} 
+                  onlineUsers={onlineUsers}
                 />
               );
             })

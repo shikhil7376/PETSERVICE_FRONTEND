@@ -1,13 +1,21 @@
-import React from 'react';
-import { CiVideoOn } from "react-icons/ci";
+import React, { useEffect } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { Input } from "../../components/ui/input";
 import { useState,useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoIosNotifications } from "react-icons/io";
+import NotificationBadge from "react-notification-badge";
+import { Effect } from "react-notification-badge";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/Store';
 
-const Header = () => {
+
+const Header = ({notification,setNotification,setActiveChat}) => {
   const { isOpen, onOpen, onClose } = useDisclosure(); // Use onOpen to open and onClose to close the modal
   const [value,setValue] = useState("")
+  const [showDropdown, setShowDropdown] = useState(false); 
+  const userData = useSelector((state: RootState) => state.user.userdata);
+
   const navigate = useNavigate()
   function openModal() {
     onOpen();  // Explicitly open the modal
@@ -17,9 +25,50 @@ const Header = () => {
       navigate(`/room/${value}`)
   },[navigate,value])
 
+  const handleNotificationClick = (notif) => {
+    navigate(`/room/${notif.roomId}`)
+  }
+ 
+
+  const toggleDropdown = () => {   
+    setShowDropdown(!showDropdown);
+  };
+
+  function getsender(currentUser, users){   
+    return users[0]._id === currentUser._id? users[1].name:users[0].name
+  }
+
   return (
     <div className='p-3 flex justify-end'>
-      <CiVideoOn color='white' size={20} onClick={openModal} />
+      <div className='relative'>
+   <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer" />
+    <NotificationBadge count={notification.length}  effect ={Effect.SCALE}/>
+   {showDropdown && (
+            <div className='absolute right-0 mt-6 w-64 bg-white rounded-md shadow-lg p-2 z-10'>
+              {notification.length > 0 ? (
+                notification.map((notif, index) => (
+                    <div
+                    key={index}
+                    className="p-2  border-gray-300"
+                    onClick={() => {
+                      setActiveChat(notif.chat); 
+                      setNotification(notification.filter((n) => n !== notif)); 
+                    }}
+                  >
+                    <p className="text-sm font-semibold" onClick={() => handleNotificationClick(notif)}>
+                       {/* message from {getsender(userData, notif.chat.users)} */}
+                       video call from {notif.fromUserName}
+                    </p>
+                  </div>
+                  
+                ))
+              ) : (
+                <p className='text-gray-500 text-sm'>No new messages</p>
+              )}
+            </div>
+          )}
+          </div>
+      {/* <CiVideoOn color='white' size={20} onClick={openModal} /> */}
       <Modal
         backdrop="opaque"
         isOpen={isOpen}

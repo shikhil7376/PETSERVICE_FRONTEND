@@ -75,7 +75,9 @@ const Home = () => {
 
   return (
     <div className=''>
+      
       <div className='mt-5 flex sm:flex-nowrap flex-wrap'>
+        
         <div className='w-full sm:w-[50%] flex flex-col justify-center items-center '>
           <motion.h1
             initial={{ x: -100, opacity: 0 }}
@@ -96,6 +98,7 @@ const Home = () => {
             Get Started
           </Button>
         </div>
+    
         <div className='w-full sm:w-[50%] flex items-start justify-center '>
           <motion.img
             initial={{ x: 100, opacity: 0 }}

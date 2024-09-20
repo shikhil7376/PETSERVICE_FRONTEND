@@ -4,7 +4,7 @@ import { Button, Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem }
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearUserdata } from '../../Redux/Slices/AuthSlice';
-import { toast } from 'react-toastify';
+import { toast,Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../Redux/Store';
 import { HiMenu } from 'react-icons/hi'; // Import the menu icon from react-icons
@@ -64,6 +64,7 @@ const Header = () => {
 
   return (
     <div className='p-2 '>
+      <Toaster position='top-center'/>
       <nav className='navbar flex justify-between items-center '>
         <div className='logo w-1/6 flex items-center justify-center'>
           <img src='pics/logo.jpg' className='w-10 h-10' alt='Logo' />

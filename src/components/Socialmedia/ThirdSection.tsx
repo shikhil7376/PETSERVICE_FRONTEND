@@ -21,7 +21,7 @@ const ThirdSection: React.FC<ThirdSectionProps>  = ({ fetchNotFollowData, data }
  
     return (
         <div className="p-5 w-full md:w-2/5 hidden md:block">
-            <div className="bg-contentgray rounded-lg h-full w-full shadow-md p-5">
+            <div className="bg-contentgray rounded-lg h-full w-full shadow-md p-5 ">
                 <div className="flex flex-wrap gap-4"> {/* Flexbox container for cards */}
                     {data.map((user) => (
                         <div key={user._id} className='flex-1 min-w-[130px] max-w-[130px] flex flex-col items-center p-3 rounded-2xl bg-blur border border-gray-500 shadow-xl'>

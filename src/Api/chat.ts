@@ -30,11 +30,25 @@ export const getMessages = async(chatId: string)=>{
      }
 }
 
-export const sendMessage = async(userId: string, content: string, chatId: string)=>{
-    try {
-        const response = await api.post(chatRoutes.sendMessage,{userId: userId, content: content, chatId: chatId})
+export const sendMessage = async(data:FormData)=>{
+    try {      
+        const response = await api.post(chatRoutes.sendMessage,data)
         return response
+        
+        // const response = await api.post(chatRoutes.sendMessage,{userId: userId, content: content, chatId: chatId})
+        // return response
+
+        // const response = await api.post(chatRoutes.sendMessage,{data})
     } catch (error) {
       errorHandle(error)   
+    }
+}
+
+export const deleteMessage = async(msgId)=>{
+    try {
+        const response = await api.post(chatRoutes.deleteMessage,{msgId}) 
+        return response
+    } catch (error) {
+       errorHandle(error) 
     }
 }

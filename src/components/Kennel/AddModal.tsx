@@ -9,7 +9,7 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import { AddCageError } from "../../Interface/DatatypeInterface";
 import errorHandle from "../../Api/Error";
 
-export default function AddModal({ fetchCages }) {
+export default function  AddModal({ fetchCages }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [kennelname, setKenneName] = useState<string>("");
   const [location, setLocation] = useState<string>("");

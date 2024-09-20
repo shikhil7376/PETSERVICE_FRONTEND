@@ -26,7 +26,7 @@ const Sidebar:React.FC<sidebarProps> = ({fetchData}) => {
 
     return (
         <div className=" h-full">
-            <div className="h-full flex flex-col items-center bg-contentgray  rounded-lg shadow-lg border-">
+            <div className="h-full flex flex-col items-center bg-contentgray  rounded-lg shadow-lg ">
 
                 <ListboxWrapper >
                     <Listbox

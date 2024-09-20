@@ -12,11 +12,15 @@ import { getPosts ,userNotFollow} from '../../Api/User';
 import { useState,useEffect } from 'react';
 import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 const SocialmediaLayout = () => {
   const [posts, setPosts] = useState([]);
   const [data, setData] = useState([]);
 
+
+const navigate = useNavigate()
   const userData = useSelector((state: RootState) => state.user.userdata);
 
   const fetchNotFollowData = async () => {
@@ -48,7 +52,7 @@ const SocialmediaLayout = () => {
           <IoMdHome size={20} className='text-gray-500'/>
           <IoSearchOutline size={20} className='text-gray-500' />
           <PiSquaresFourBold size={20} className='text-gray-500'/>
-          <TfiVideoClapper size={20} className='text-gray-500'/>
+          < LuMessagesSquare size={20} className='text-gray-500'  onClick={()=>navigate('/message')}/>
           <FaUser size={20} className='text-gray-500'/>
         </div>
       </div>
