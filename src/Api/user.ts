@@ -95,7 +95,7 @@ export const resetpassword = async (data: userData) => {
 
 export const getProfile = async (Id: string) => {
   try {
-    const response = await api.post(userRoutes.getProfile, { Id: Id });
+    const response = await api.get(`${userRoutes.getProfile}/${Id}`);
     return response;
   } catch (error) {
     return errorHandle(error);
@@ -105,7 +105,6 @@ export const getProfile = async (Id: string) => {
 export const editProfile = async (data:FormData) => {
   try {
     const response = await api.post(userRoutes.editProfile, data);
-    console.log(response);
     return response;
   } catch (error) {
     return errorHandle(error);

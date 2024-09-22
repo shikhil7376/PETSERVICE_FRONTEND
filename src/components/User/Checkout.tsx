@@ -80,12 +80,12 @@ const Booking = () => {
   }
 
   return (
-    <div className=' p-4'>
-      <div className='p-5'>
+    <div className='p-5'>
+      <div className='p-2'>
         <button className=' bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] p-2 text-white rounded-md font-semibold flex items-center gap-1 text-small'><IoAppsOutline />
           CHECKOUT</button>
       </div>
-      <div className='flex flex-col sm:flex-row '>
+      <div className='flex flex-col sm:flex-row p-2'>
 
         <div className='sm:w-3/5  flex flex-col items-center gap-10'>
           <div className='p-2 border-1  sm:w-[70%]'>

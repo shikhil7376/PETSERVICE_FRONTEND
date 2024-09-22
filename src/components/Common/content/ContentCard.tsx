@@ -21,7 +21,7 @@ type ContentCardProps = {
 
 
 
-  const ContentCard: React.FC<ContentCardProps> = ({post,fetchData,fetchNotFollowData}) => {
+  const  ContentCard: React.FC<ContentCardProps> = ({post,fetchData,fetchNotFollowData}) => {
    
    
 
@@ -67,7 +67,7 @@ type ContentCardProps = {
 
 
   return (
-    <Card className="flex-none z-30 w-full md:w-[420px] md:h-[400px] bg-black p-2">
+    <Card className="flex-none z-30 w-full md:w-[420px] md:h-[400px] bg-black p-2 ">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
           <Avatar isBordered radius="full" size="md" src={post.user?.image} />

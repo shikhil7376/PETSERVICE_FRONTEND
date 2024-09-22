@@ -8,6 +8,7 @@ export interface AdminData {
 
 export interface AuthData extends AdminData {
   image:string
+  wallet:number
 }
 
 export interface KennelData extends AdminData{
@@ -69,6 +70,16 @@ export interface profile extends Errors{
   wallet?:number,
   followers?:number,
   following?:number,
+  posts?: Post[];
+}
+
+export interface Post {
+  _id: string;
+  description: string;
+  likes: number;
+  comments: number;
+  images: string[];  // Array of image URLs
+  createdAt: string; // ISO date string
 }
 
  export interface CageError extends CageData{

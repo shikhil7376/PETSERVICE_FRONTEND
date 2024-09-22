@@ -83,15 +83,15 @@ const Home = () => {
             initial={{ x: -100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 1 }, ease: "easeIn", duration: 1 }}
-            className=' text-2xl sm:text-2xl md:text-4xl font-semibold  mb-4 text-center font-roboto '>
+            className=' text-xl sm:text-2xl md:text-4xl font-semibold  mb-4 text-center font-roboto '>
             Welcome to<br />
-            <span className='text-2xl sm:text-2xl md:text-4xl text-gradient font-roboto'>Pet Zone</span>
+            <span className='text-xl sm:text-2xl md:text-4xl text-gradient font-roboto'>Pet Zone</span>
           </motion.h1>
           <motion.p
   initial={{ x: -100, opacity: 0 }}
   animate={{ x: 0, opacity: 1 }}
   transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 0.6 }, ease: "easeIn", duration: 1 }}
-  className='text-sm sm:text-base md:text-md lg:text-md xl:text-md text-gray-400 text-center  font-roboto '>
+  className='text-sm sm:text-base md:text-md lg:text-md xl:text-md text-gray-400 text-center  font-roboto p-2 md:p-0'>
   "Your Trusted Partner For Pet Boarding And Adoption"
 </motion.p>
           <Button radius="full" className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg mt-3 font-semibold hidden sm:block">
@@ -104,11 +104,11 @@ const Home = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 1 }, ease: "easeIn", duration: 1 }}
-            src='pics/fffff-min.jpg ' className='rounded-3xl w-[90%] sm:w-[90%] mx-auto' />
+            src='pics/fffff-min.jpg ' className='md:rounded-3xl w-[95%] sm:w-[90%] mx-auto' />
         </div>
       </div>
       <div className='display mt-10'>
-        <div className='flex justify-center p-5 font-roboto font-semibold text-xl'>OUR SERVICES</div>
+        <div className='flex justify-center p-5 font-roboto font-semibold  md:text-xl'>OUR SERVICES</div>
         <div className='display flex justify-center'>
         <div className='bg-lightwhite p-5 w-full sm:w-[60%] flex flex-col sm:flex-row justify-evenly items-center rounded-md'>
         <div className='card h-[250px] w-[70%] sm:w-[180px] bg-white flex flex-col justify-center items-center rounded-2xl border-1 drop-shadow-xl mb-4 sm:mb-0'>
@@ -120,7 +120,7 @@ const Home = () => {
                 alt="NextUI Album Cover"
                 className=""
               />
-              <p className='font-semibold mt-2 font-roboto'>BOARDING</p>
+              <p className='font-semibold mt-2 font-roboto '>BOARDING</p>
               <Button className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white font-roboto font-semibold shadow-lg mt-10" onClick={() => navigate('/get-kennels')}>
                 Explore
               </Button>
@@ -144,8 +144,8 @@ const Home = () => {
       </div>
 
       <div className=' display flex flex-wrap mt-10'>
-        <div className=' w-full sm:w-[50%] flex items-center justify-center '>
-          <img src='https://cdn.pixabay.com/photo/2014/04/03/11/38/pet-312041_1280.png'  className='object-contain h-[60%] w-[50%]'/>
+        <div className=' w-full sm:w-[50%] flex items-center justify-center p-5 md:p-0 '>
+          <img src='https://cdn.pixabay.com/photo/2014/04/03/11/38/pet-312041_1280.png'  className='object-contain md:h-[60%] md:w-[50%]'/>
         </div>
         <div className='w-full sm:w-[50%] bg-slate-30  '>
           <div className='flex justify-center '>
@@ -167,7 +167,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="p-10 ">
+      <div className="md:p-10 ">
         <h2 className='text-center font-roboto font-semibold text-xl p-5 '>FEATURES</h2>
       <StickyScroll content={content} />
     </div>

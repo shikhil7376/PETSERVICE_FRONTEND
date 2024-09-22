@@ -18,13 +18,13 @@ export const Card = React.memo(
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
+        "rounded relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}
     >
       <img
-        src={card.src}
-        alt={card.title}
+      src={card.images?.[0]} // Use the first image if available
+      alt={card.description}
         className="object-cover absolute inset-0 w-full h-full"
       />
       <div
@@ -34,7 +34,7 @@ export const Card = React.memo(
         )}
       >
         <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
-          {card.title}
+        {card.description}
         </div>
       </div>
     </div>
@@ -44,18 +44,32 @@ export const Card = React.memo(
 Card.displayName = "Card";
 
 type Card = {
-  title: string;
-  src: string;
+_id:string;
+comments:number;
+createdAt:string;
+descriptipn:string;
+image:string[];
+likes:number
 };
 
 export function FocusCards({ cards }: { cards: Card[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
+  console.log('cards',cards);
+  
+  if (!cards || !Array.isArray(cards)) {
+    return <div>No cards available</div>;
+  }
+
+  if (cards.length === 0) {
+    return <div>No cards to display</div>;
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
-      {cards.map((card, index) => (
+     {cards.map((card, index) => (
         <Card
-          key={card.title}
+          key={card._id}
           card={card}
           index={index}
           hovered={hovered}

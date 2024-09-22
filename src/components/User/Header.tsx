@@ -8,8 +8,6 @@ import { toast,Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../Redux/Store';
 import { HiMenu } from 'react-icons/hi'; // Import the menu icon from react-icons
-import { getProfile } from '../../Api/User';
-import { profile } from '../../Interface/DatatypeInterface';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -17,8 +15,6 @@ const Header = () => {
   const userdata = useSelector((state:RootState) => state.user.userdata);
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
    const [menuOpen, setMenuOpen] = useState<boolean>(false);
-   const [profile, setProfile] = useState<profile>()
-
 
   const handleSignup = () => {
     navigate('/login');
@@ -36,7 +32,7 @@ const Header = () => {
   };
 
   const handleProfileView = () => {
-    navigate('/profile');
+    navigate(`/profile`);;
   };
 
   const handleBookings = () => {
@@ -46,21 +42,6 @@ const Header = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
-
-  const fetchData =async()=>{
-    if(userdata){
-      const response = await getProfile(userdata._id)
-      setProfile(response?.data.message);
-    }
-  }
-
-  useEffect(()=>{
-  fetchData()
-  },[])
-
-  console.log(profile);
-  
 
   return (
     <div className='p-2 '>
@@ -101,7 +82,7 @@ const Header = () => {
               <DropdownTrigger>
                 <Avatar
                   isBordered
-                  src={profile?.image}
+                  src={userdata.image}
                   onClick={handleDropdownToggle}
                   className="cursor-pointer"
                 />
@@ -114,7 +95,7 @@ const Header = () => {
                 <p className='text-small font-semibold text-gray-500'>bookings</p>
                 </DropdownItem>
                 <DropdownItem key="bookings" >
-                <p className='text-small font-semibold text-gray-500'>Wallet: ${profile?.wallet}</p>
+                <p className='text-small font-semibold text-gray-500'>Wallet: ${userdata.wallet}</p>
                 </DropdownItem>
                 <DropdownItem key="signout" onClick={handleSignOut}>
                 <p className='text-small font-semibold text-gray-500'>signout</p>

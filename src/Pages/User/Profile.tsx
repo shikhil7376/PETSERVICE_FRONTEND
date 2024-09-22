@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar } from "@nextui-org/react";
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { FaUpload } from 'react-icons/fa';
 import { getProfile, editProfile } from '../../Api/User';
 import { toast } from 'react-toastify';
@@ -10,6 +10,7 @@ import { Errors, profile } from '../../Interface/DatatypeInterface';
 import errorHandle from '../../Api/Error';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import FocusCardsDemo from '../../components/Socialmedia/FocusCardsDemo';
+import { setCredential } from '../../Redux/Slices/AuthSlice';
 
 
 const Profile = () => {
@@ -20,9 +21,8 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const [loading, setLoading] = useState<boolean>(false);
 
-
-console.log('profile',profile);
-
+  
+    const dispatch = useDispatch();
 
     const validateForm = () => {
         const newErrors: Errors = {};
@@ -94,7 +94,8 @@ console.log('profile',profile);
                     }
                     const response = await editProfile(formData);
                     if (response) {
-                        fetchData();
+                        setProfile(response.data.data)
+                        dispatch(setCredential(response.data.data))
                         toast.success('Profile updated successfully');
                     }
                 } catch (error) {
@@ -168,8 +169,8 @@ console.log('profile',profile);
                 </div>
             )}
             <div className='border-t border-gray-300 mt-10 '></div> {/* This is the line */}
-            <div className='mt-5'>
-                <FocusCardsDemo/>
+            <div className='mt-5 p-5'>
+                <FocusCardsDemo postData ={profile?.posts}/>
             </div>
         </div>
     )
