@@ -58,6 +58,7 @@ const navigate = useNavigate()
       </div>
       <Content posts={posts} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData}  />
       <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} />
+      
     </div>
   )
 }

@@ -11,17 +11,20 @@ import errorHandle from '../../Api/Error';
 import PacmanLoader from "react-spinners/PacmanLoader";
 import FocusCardsDemo from '../../components/Socialmedia/FocusCardsDemo';
 import { setCredential } from '../../Redux/Slices/AuthSlice';
+import { useParams } from 'react-router-dom';
 
 
 const Profile = () => {
-
+    const { userId } = useParams();
     const [profile, setProfile] = useState<profile>()
     const [initialData, setInitialData] = useState<profile>()
     const [errors, setErrors] = useState<Errors>({});
     const [selectedFile, setSelectedFile] = useState<File>();
     const [loading, setLoading] = useState<boolean>(false);
+    const userData = useSelector((state: RootState) => state.user.userdata)
+    const [postData,setPostData] = useState()
 
-  
+    
     const dispatch = useDispatch();
 
     const validateForm = () => {
@@ -38,14 +41,15 @@ const Profile = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const userData = useSelector((state: RootState) => state.user.userdata)
-
     const fetchData = async () => {
-        if (userData && userData._id) {
+        if (userId) {
             try {
-                const response = await getProfile(userData._id);
-                setProfile(response?.data.message);
-                setInitialData(response?.data.message);
+                const response = await getProfile(userId);
+                if(response){
+                    setProfile(response?.data.message);
+                    setInitialData(response?.data.message);
+                    setPostData(response?.data.message.posts)
+                }
             } catch (error) {
                 toast.error('Failed to fetch profile data');
             }
@@ -56,7 +60,7 @@ const Profile = () => {
 
     useEffect(() => {
         fetchData();
-    }, [userData]);
+    }, [userId]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -170,7 +174,7 @@ const Profile = () => {
             )}
             <div className='border-t border-gray-300 mt-10 '></div> {/* This is the line */}
             <div className='mt-5 p-5'>
-                <FocusCardsDemo postData ={profile?.posts}/>
+                <FocusCardsDemo postData ={postData} userId={userId} setPostData={setPostData}/>
             </div>
         </div>
     )

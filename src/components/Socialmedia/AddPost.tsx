@@ -98,7 +98,7 @@ const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
                 <ModalHeader className="flex flex-col gap-1">ADD POST</ModalHeader>
                 <ModalBody>
                   <form onSubmit={handleSubmit} >
-                    <div className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-3">
                       <Input
                         type="text"
                         placeholder="Description"
@@ -124,7 +124,7 @@ const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
                         Close
                       </Button>
                       <Button className="bg-black text-white font-semibold text-small" type="submit">
-                        Submit
+                        Upload Post
                       </Button>
                     </ModalFooter>
                   </form>

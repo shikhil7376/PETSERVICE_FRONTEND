@@ -1,4 +1,4 @@
-
+import ViewPost from "../Socialmedia/viewPost";
 import React, { useState } from "react";
 import { cn } from "../../lib/utils";
 
@@ -8,17 +8,21 @@ export const Card = React.memo(
     index,
     hovered,
     setHovered,
+    handleCardClick,
   }: {
     card: any;
     index: number;
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
+    handleCardClick: (card: any) => void; // Added click handler for card
+
   }) => (
     <div
       onMouseEnter={() => setHovered(index)}
       onMouseLeave={() => setHovered(null)}
+      onClick={() => handleCardClick(card)}
       className={cn(
-        "rounded relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
+        "rounded relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-[300px] w-full transition-all duration-300 ease-out",
         hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
       )}
     >
@@ -43,7 +47,7 @@ export const Card = React.memo(
 
 Card.displayName = "Card";
 
-type Card = {
+ type Card = {
 _id:string;
 comments:number;
 createdAt:string;
@@ -52,11 +56,21 @@ image:string[];
 likes:number
 };
 
-export function FocusCards({ cards }: { cards: Card[] }) {
+export function FocusCards({ cards,userId,setPostData }: { cards: Card[],userId:string,setPostData}) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null); // State for selected card
+  const [isViewPostOpen, setViewPostOpen] = useState<boolean>(false);  // Modal open state
 
-  console.log('cards',cards);
-  
+  const handleCardClick = (card: Card) => {
+    setSelectedCard(card); // Set the clicked card as selected
+    setViewPostOpen(true); // Open the modal
+  };
+
+  const handleCloseModal = () => {
+    setViewPostOpen(false); // Close the modal
+    setSelectedCard(null); // Clear the selected card
+  };
+
   if (!cards || !Array.isArray(cards)) {
     return <div>No cards available</div>;
   }
@@ -66,16 +80,30 @@ export function FocusCards({ cards }: { cards: Card[] }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
-     {cards.map((card, index) => (
-        <Card
-          key={card._id}
-          card={card}
-          index={index}
-          hovered={hovered}
-          setHovered={setHovered}
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+        {cards.map((card, index) => (
+          <Card
+            key={card._id}
+            card={card}
+            index={index}
+            hovered={hovered}
+            setHovered={setHovered}
+            handleCardClick={handleCardClick} // Pass the handler for card click
+          />
+        ))}
+      </div>
+
+      {selectedCard && (
+        <ViewPost 
+          isOpen={isViewPostOpen} 
+          onClose={handleCloseModal} 
+          card={selectedCard} // Pass selected card details to the modal
+          userId={userId}
+          setSelectedCard={setSelectedCard}
+          setPostData={setPostData}
         />
-      ))}
-    </div>
+      )}
+    </>
   );
 }

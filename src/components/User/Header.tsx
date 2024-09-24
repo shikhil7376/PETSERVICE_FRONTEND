@@ -31,8 +31,8 @@ const Header = () => {
     setDropdownVisible(!dropdownVisible);
   };
 
-  const handleProfileView = () => {
-    navigate(`/profile`);;
+  const handleProfileView = (userId: string) => {
+    navigate(`/profile/${userId}`);;
   };
 
   const handleBookings = () => {
@@ -88,7 +88,7 @@ const Header = () => {
                 />
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem key="profile" onClick={handleProfileView} className='text-small font-bold '>
+                <DropdownItem key="profile" onClick={()=>handleProfileView(userdata._id)} className='text-small font-bold '>
                 <p className='text-small font-semibold text-gray-500'>view profile</p>
                 </DropdownItem>
                 <DropdownItem key="bookings" onClick={handleBookings}>

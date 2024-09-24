@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react';
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Image } from '@nextui-org/react';
 import { Input } from '../../components/ui/input';
 import { viewDetails, editCages } from '../../Api/Kennel';
 import { useSelector } from 'react-redux';
@@ -46,7 +46,6 @@ const CageDataModal = ({ cageid, fetchCages }) => {
     const fileName = url.split('/').pop() || 'editimages';
     return new File([blob], fileName, { type: blob.type });
   };
-
 
 
   const fetchData = async () => {
@@ -99,7 +98,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
 
 
         if (cagedata?.image) {
-          for (const img of cagedata.image) {
+          for (const img of cagedata.image) {     
             const file = await urlToFile(img);
             formData.append('editimages', file);
           }

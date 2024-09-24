@@ -30,7 +30,7 @@ const UserRoutes = () => {
        <Route element={<ProtectedRoute/>}>
        <Route path='/booking/:cageid/:fromdate/:todate' element={<Checkout/>}/>
         <Route path='/bookings' element={<Bookings/>}/>
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile/:userId' element={<Profile/>}/>
        </Route>
        </Route>
        <Route path='/success' element={<SucessPage/>}/>

@@ -177,10 +177,26 @@ export const userNotFollow = async(userId:string)=>{
 export const getchatUser = async(userId:string,searchItem:string)=>{
   try {
     const response = await api.post(`${userRoutes.getchatUsers}?search=${searchItem}`,{userId:userId})
-    console.log(response);
     return response
   } catch (error) {
     errorHandle(error)
-
   }
+}
+
+export const editPost = async(id:string,data:FormData)=>{
+  try { 
+      const response = await api.patch(`${userRoutes.editPost}/${id}`,data)     
+      return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}
+
+export const deletePost = async(id:string)=>{
+   try { 
+    const response = await api.delete(`${userRoutes.deletePost}/${id}`)
+    return response
+   } catch (error) {
+    errorHandle(error)
+   }
 }

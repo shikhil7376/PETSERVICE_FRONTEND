@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 // import '../Socialmedia/Content.css'
 import { postdetails } from '../../Interface/DatatypeInterface'
 
+
 interface ContentProps {
   posts: postdetails[];
   fetchData: () => Promise<void>;

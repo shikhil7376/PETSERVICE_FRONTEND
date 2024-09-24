@@ -10,7 +10,8 @@ import AddPost from './AddPost';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LuMessagesSquare } from "react-icons/lu";
-
+import { RootState } from '../../Redux/Store';
+import { useSelector } from 'react-redux';
 interface sidebarProps {
   
     fetchData: () => Promise<void>;
@@ -21,6 +22,7 @@ const Sidebar:React.FC<sidebarProps> = ({fetchData}) => {
     const [isOpen, setIsOpen] = useState(false);
     const onOpen = () => setIsOpen(true);
     const onClose = () => setIsOpen(false);
+    const userdata = useSelector((state:RootState) => state.user.userdata);
 
     const navigate = useNavigate();
 
@@ -63,7 +65,7 @@ const Sidebar:React.FC<sidebarProps> = ({fetchData}) => {
                                 <LuMessagesSquare  size={20} />
                             </div>
                         </ListboxItem>
-                        <ListboxItem key="new" className="text-gray-500" color="secondary" onClick={()=>navigate('/profile')} >
+                        <ListboxItem key="new" className="text-gray-500" color="secondary" onClick={()=>navigate(`/profile/${userdata?._id}`)} >
                             <div className="flex items-center">
                                 <p className="font-semibold font-roboto mr-2">Profile</p>
                                 <FaUser size={20} />

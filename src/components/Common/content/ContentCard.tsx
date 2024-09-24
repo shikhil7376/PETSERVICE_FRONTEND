@@ -11,6 +11,7 @@ import errorHandle from '../../../Api/Error';
 import { FaRegComment } from "react-icons/fa";
 import AddComment from '../../Socialmedia/AddComment';
 import { follow } from '../../../Api/User';
+import { useNavigate } from 'react-router-dom';
 
 
 type ContentCardProps = {
@@ -24,7 +25,8 @@ type ContentCardProps = {
   const  ContentCard: React.FC<ContentCardProps> = ({post,fetchData,fetchNotFollowData}) => {
    
    
-
+ 
+  const navigate = useNavigate()
     const userData = useSelector((state: RootState) => state.user.userdata)
     const [isFollowing, setIsFollowing] = useState(  post.user?.followers.includes(userData?._id as string) );
     
@@ -44,6 +46,10 @@ type ContentCardProps = {
         }
       };
       
+      const viewProfile = (id:string)=>{
+      navigate(`/profile/${id}`)
+       
+      }
       
       
     
@@ -70,9 +76,9 @@ type ContentCardProps = {
     <Card className="flex-none z-30 w-full md:w-[420px] md:h-[400px] bg-black p-2 ">
       <CardHeader className="justify-between">
         <div className="flex gap-5">
-          <Avatar isBordered radius="full" size="md" src={post.user?.image} />
+          <Avatar isBordered radius="full" size="md" src={post.user?.image} onClick={()=>viewProfile(post.user?.userid as string)} />
           <div className="flex flex-col gap-1 items-start justify-center">
-            <h4 className="text-sm font-semibold leading-none text-default-600">{post.user?.name}</h4>
+            <h4 className="text-sm font-semibold leading-none text-default-600" onClick={()=>viewProfile(post.user?.userid as string)}>{post.user?.name}</h4>
             <h5 className="text-small tracking-tight text-default-400"></h5>
           </div>
         </div>
