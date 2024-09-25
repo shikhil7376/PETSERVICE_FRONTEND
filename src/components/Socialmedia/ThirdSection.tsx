@@ -3,6 +3,8 @@ import { Image } from "@nextui-org/react";
 import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
 import { UserNotFollow } from '../../Interface/DatatypeInterface';
+import { follow } from '../../Api/User';
+import errorHandle from '../../Api/Error';
 
 
 interface ThirdSectionProps {
@@ -12,6 +14,17 @@ interface ThirdSectionProps {
 
 const ThirdSection: React.FC<ThirdSectionProps>  = ({ fetchNotFollowData, data }) => {
     const userData = useSelector((state: RootState) => state.user.userdata);
+
+    const handleFollow = async(userId:string)=>{
+      try {
+      const response = await follow(userData?._id as string,userId)
+        if(response){
+            fetchNotFollowData(userData?._id as string)
+        }
+      } catch (error) {
+        errorHandle(error)
+      }
+    }
 
     useEffect(() => {
         if (userData?._id) {
@@ -35,7 +48,7 @@ const ThirdSection: React.FC<ThirdSectionProps>  = ({ fetchNotFollowData, data }
                             />
                             <p className='text-white text-sm font-roboto'>{user.name}</p>
                             <div className='p-3'>
-                                <button className='text-white p-1 text-sm bg-button-gradient font-semibold rounded-md'>
+                                <button className='text-white p-1 text-sm bg-button-gradient font-semibold rounded-md' onClick={() => handleFollow(user._id)}>
                                     Follow
                                 </button>
                             </div>

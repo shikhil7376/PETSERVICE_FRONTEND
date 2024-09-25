@@ -24,6 +24,8 @@ const Profile = () => {
     const userData = useSelector((state: RootState) => state.user.userdata)
     const [postData,setPostData] = useState()
 
+    console.log('profile',profile);
+    
     
     const dispatch = useDispatch();
 
