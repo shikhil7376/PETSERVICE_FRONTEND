@@ -12,6 +12,7 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import FocusCardsDemo from '../../components/Socialmedia/FocusCardsDemo';
 import { setCredential } from '../../Redux/Slices/AuthSlice';
 import { useParams } from 'react-router-dom';
+import FollowersList from '../../components/Socialmedia/FollowersList';
 
 
 const Profile = () => {
@@ -23,10 +24,9 @@ const Profile = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const userData = useSelector((state: RootState) => state.user.userdata)
     const [postData,setPostData] = useState()
+    const [openModal,setOpenModal] = useState<boolean>(false)
+    const [modalType, setModalType] = useState<string>('');
 
-    console.log('profile',profile);
-    
-    
     const dispatch = useDispatch();
 
     const validateForm = () => {
@@ -114,6 +114,11 @@ const Profile = () => {
         }
     };
 
+    const toggleModal = (type: string) => {
+        setModalType(type); // Set the type of modal (followers/following)
+        setOpenModal(true); // Open modal
+    };
+
     return (
         <div className='h-auto'>
             <div className='display flex '>
@@ -125,8 +130,8 @@ const Profile = () => {
                         <FaUpload onClick={() => document.getElementById('fileInput')?.click()} />
                         <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
                         <div className='display flex gap-2'>
-                        <p className='text-sm  text-gray-500'>followers:{profile?.followers}</p>
-                        <p className='text-sm  text-gray-500'>following:{profile?.following}</p>
+                        <p className='text-sm  text-gray-500' onClick={() => toggleModal('followers')}>followers:{profile?.followers}</p>
+                        <p className='text-sm  text-gray-500' onClick={() => toggleModal('following')}>following:{profile?.following}</p>
                         </div>
                     </div>
                     
@@ -178,6 +183,7 @@ const Profile = () => {
             <div className='mt-5 p-5'>
                 <FocusCardsDemo postData ={postData} userId={userId} setPostData={setPostData}/>
             </div>
+            <FollowersList isOpen={openModal} onClose={() => setOpenModal(false)} modalType={modalType} id={userId}/>
         </div>
     )
 }

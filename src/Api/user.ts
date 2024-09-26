@@ -200,3 +200,21 @@ export const deletePost = async(id:string)=>{
     errorHandle(error)
    }
 }
+
+export const getFollowers = async(id:string)=>{
+  try {
+    const response = await api.get(`${userRoutes.getFollowers}/${id}`)
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}
+
+export const getFollowing = async(id:string)=>{
+  try {
+    const response = await api.get(`${userRoutes.getFollowing}/${id}`)
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+}

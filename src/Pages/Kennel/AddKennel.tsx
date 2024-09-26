@@ -98,7 +98,7 @@ const Addkennel = () => {
                 />
               </div>
               <p className='font-semibold mt-2 text-small'>{cage.kennelname || 'ADOPTION'}</p>
-              <p className='text-sm font-semibold text-gray-500'>{cage.location}</p>
+              <p className='text-sm font-semibold text-gray-500'></p>
               <div className='display flex justify-center items-center'>
                 <div className="mt-auto mb-4 p-2">
                   <CageDataModal cageid={cage._id} fetchCages={fetchCages} />

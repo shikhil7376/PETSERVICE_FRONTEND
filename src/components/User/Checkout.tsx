@@ -100,7 +100,7 @@ const Booking = () => {
             <h2 className='text-sm font-semibold'>KENNEL DETAILS</h2>
             <div className='border-t border-gray-300 mt-2'></div> {/* This is the line */}
             <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2' >Kennel name:<span>{details?.kennelname}</span></p>
-            <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2' >location:<span>{details?.location}</span></p>
+            <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2' >location:<span>{details?.location?.address}</span></p>
             <p className='text-small text-gray-500 font-roboto flex items-center p-1 gap-x-2 '> contact: <span>{details?.phone}</span></p>
           </div>
         </div>

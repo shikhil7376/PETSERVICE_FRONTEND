@@ -2,10 +2,7 @@ import React from 'react'
 import { Avatar} from "@nextui-org/react";
 
 
-const UserList = ({user,handlefunction,onlineUsers}) => {    
-
-  
- 
+const UserList = ({user,handlefunction,onlineUsers,latestMessage}) => {    
     
   return (
     <div className='display flex p-2 items-center' onClick={handlefunction} >
@@ -19,8 +16,8 @@ const UserList = ({user,handlefunction,onlineUsers}) => {
       </div>
       <div className='pl-2 '>
         <p className=' text-gray-400 text-sm '>{user.name}</p>
-        {/* <p className=' text-gray-400 text-sm '>{user.email}</p> */}
-      </div>
+       <p className='text-sm text-gray-500'>{latestMessage ? latestMessage.content : "No recent messages"}</p> 
+        </div>
     </div>
   )
 }

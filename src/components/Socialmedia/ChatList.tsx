@@ -26,6 +26,7 @@ const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOp
           fetchUserChats();
         }
       }, [userData]);
+
     
     const fetchUserChats = async () => {
         if (!userData || !userData._id) {
@@ -68,9 +69,7 @@ const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOp
 
     const accessChat = async(userId:string)=>{
      try {
-        const response = await createChat(userData?._id as string,userId as string)  
-        console.log('response',response);
-          
+        const response = await createChat(userData?._id as string,userId as string)            
         if(response){
           setSearchItem("")
           fetchUserChats()
@@ -136,6 +135,7 @@ const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOp
             searchResult.map((user) => (
               <UserList 
                 key={user._id} 
+                latestMessage=""
                 user={user} 
                 handlefunction={() => accessChat(user._id as string)} 
                 onlineUsers={onlineUsers}
@@ -145,9 +145,10 @@ const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOp
             chats.map((chat) => {
               const otherUser = chat.users.find((u) => u._id !== userData?._id);              
               return (
-                <UserList 
+                <UserList
                   key={chat._id} 
                   user={otherUser} 
+                  latestMessage={chat.latestMessage}
                   handlefunction={() => setActiveChat(chat)} 
                   onlineUsers={onlineUsers}
                 />

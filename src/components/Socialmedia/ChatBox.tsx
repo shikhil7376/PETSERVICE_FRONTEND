@@ -50,8 +50,6 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
   const [loading, setLoading] = useState(false);
   const [selectedAudio, setSelectedAudio] = useState<File | null>(null);
   const [value, setValue] = useState("")
-
-
   
 
   // const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
@@ -84,13 +82,11 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
     socket.emit("setup", userData)
     socket.on("connection", () => setSocketConnected(true))
     socket.on("userOnline", (users) => {
-      const userIds = Object.values(users) as string[]; // Assumes users is an object where keys are arbitrary and values are user IDs
+      const userIds = Object.values(users) as string[]; 
       setOnlineUsers(userIds);
     });
 
-    // socket.on("userOffline", (userId) => {
-    //   setOnlineUsers((prevUsers) => prevUsers.filter((id) => id !== userId));
-    // });
+   
 
     return () => {
       socket.disconnect();
@@ -122,7 +118,7 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
       } else {
         setMessages([...messages, newMessageRecieved])
       }
-    })
+    }) 
   })
 
 
@@ -130,7 +126,7 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
     socket.on("videoCallNotify", (roomId, fromUserName) => {
       setNotification([{ roomId, fromUserName }])
       console.log(roomId, fromUserName);
-    })
+    }) 
   })
 
   const fetchMessages = async () => {
@@ -202,7 +198,8 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
           formData.append('chatId', activeChat._id)
 
           const response = await sendMessage(formData)
-
+            console.log('reponst',response);
+            
           if (response) {
             setLoading(false)
             socket.emit('newmessage', response?.data)

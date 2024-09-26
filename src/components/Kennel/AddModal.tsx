@@ -8,11 +8,12 @@ import { RootState } from "../../Redux/Store";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import { AddCageError } from "../../Interface/DatatypeInterface";
 import errorHandle from "../../Api/Error";
+import LeafletMap from "./LeafletMap";
 
 export default function  AddModal({ fetchCages }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [kennelname, setKenneName] = useState<string>("");
-  const [location, setLocation] = useState<string>("");
+  const [location, setLocation] = useState<{ lat: number; lng: number; address: string } | null>(null);
   const [description, setDescription] = useState<string>("");
   const [maxCount, setMaxCount] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -42,7 +43,7 @@ export default function  AddModal({ fetchCages }) {
     if (!kennelname.trim()) {
       newErrors.kennelname = "Kennel name is required";
     }
-    if (!location.trim()) {
+    if (!location) {
       newErrors.location = "Location is required";
     }
     if (!description.trim()) {
@@ -78,7 +79,9 @@ export default function  AddModal({ fetchCages }) {
     if (isValid) {
       const formData = new FormData();
       formData.append("kennelname", kennelname);
-      formData.append("location", location);
+      if (location) {
+        formData.append("location", JSON.stringify(location)); // Convert location to string
+      }
       formData.append("description", description);
       formData.append("phone", phone)
       formData.append("type", type);
@@ -121,11 +124,11 @@ export default function  AddModal({ fetchCages }) {
             backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
           }}
         >
-          <ModalContent>
+          <ModalContent  className="overflow-y-auto max-h-[100vh] scrollbar-hide">
             {(onClose) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">Add Kennel</ModalHeader>
-                <ModalBody>
+                <ModalBody className=" ">
                   <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-2">
                       <Input
@@ -136,13 +139,16 @@ export default function  AddModal({ fetchCages }) {
                         required
                       />
                       {errors.kennelname && <p className="text-red-600 font-semibold text-small">{errors.kennelname}</p>}
-                      <Input
+                      {/* <Input
                         type="text"
                         placeholder="Location"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         required
                       />
+                      {errors.location && <p className="text-red-600 font-semibold text-small">{errors.location}</p>} */}
+                      <label>Select Location</label>
+                      <LeafletMap setLocation={setLocation} />  {/* Use LeafletMap here to set the location */}
                       {errors.location && <p className="text-red-600 font-semibold text-small">{errors.location}</p>}
                       <Input
                         type="text"

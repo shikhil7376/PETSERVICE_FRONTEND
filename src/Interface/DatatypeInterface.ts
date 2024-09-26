@@ -48,7 +48,11 @@ export interface CageData{
   description?:string,
   image?:string[],
   kennelname?:string,
-  location?:string,
+  location?: {
+    lat: number;          // Latitude
+    lng: number;          // Longitude
+    address: string;      // Address
+};
   maxcount?:number,
   ownerId?:string,
   phone?:string,
@@ -186,4 +190,17 @@ export interface chat{
   createdAt:Date,
   updatedAt:Date,
   users:userData[]
+  latestMessage?:{
+    _id:string,
+    chat:string,
+    content:string,
+    createdAt:string,
+    updatedAt:string,
+    sender:{
+      _id:string,
+      name:string,
+      email:string,
+      image:string,
+    }
+  }
 }

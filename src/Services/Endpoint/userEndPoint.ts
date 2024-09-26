@@ -19,7 +19,9 @@ const userRoutes={
     getUserNotFollowed:'/user/user-not-follow',
     getchatUsers:'/user/getUsers',
     editPost:'/user/edit-post',
-    deletePost:'/user/delete-post'
+    deletePost:'/user/delete-post',
+    getFollowers:'/user/get-followers',
+    getFollowing:'/user/get-following'
 }
 
 export default userRoutes

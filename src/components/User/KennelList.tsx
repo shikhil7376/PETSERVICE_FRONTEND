@@ -19,6 +19,9 @@ const KennelList = () => {
   const [fromdate, setfromdate] = useState<string | null>()
   const [todate, settodate] = useState<string | null>()
   const [duplicatecages, setduplicatecages] = useState<CageData[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredPosts, setFilteredPosts]= useState<CageData[]>([])
+
 
   const fetchCage = async () => {
     try {
@@ -29,6 +32,22 @@ const KennelList = () => {
      errorHandle(error)
     }
   }
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    setSearchQuery(e.target.value); // Update the search query in the parent component
+  };
+
+  useEffect(() => {
+    if (searchQuery === '') {
+      setFilteredPosts(cages); // Show all posts if search query is empty
+    } else {
+      const filtered = cages.filter(post =>
+        post?.kennelname?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.location?.address.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredPosts(filtered);
+    }
+  }, [searchQuery, cages]);
 
   useEffect(() => {
     fetchCage()
@@ -92,26 +111,25 @@ const KennelList = () => {
           className="w-[300px] drop-shadow-lg"
         />
         <div className='pl-5 items-center mt-2'>
-          <Input className='rounded-3xl' placeholder='search' />
+          <Input className='rounded-3xl' placeholder='search'  onChange={handleSearch}
+            value={searchQuery}/>
         </div>
 
       </div>
-      <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5 '>
-        {cages.map((cage, index) => (
-          <div key={index}>
+      <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5  p-3'>
+        {filteredPosts.map((cage, index) => (
+          <div key={index}  onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}>
             <Image
               isZoomed
               alt="NextUI Fruit Image with Zoom"
               src={cage.image?.[2]}
               style={{ height: '235px', width: '200px' }}
             />
-            <div className='display  justify-between'>
-              <h2 className='font-semibold text-small'>{cage.kennelname}</h2>
-              <p className='text-gray-500  text-small font-semibold'>{cage.location}</p>
-
+            <div className='display  justify-between p-1'>
+              <h2 className='font-roboto text-small'>{cage.kennelname}</h2>
             </div>
             <div className='display flex justify-between items-center'>
-              <p className='text-gray-500 mr-5 font-semibold'>${cage.pricepernight}</p>
+              <p className='text-gray-500 font-roboto text-sm'>Price:${cage.pricepernight}</p>
 
               <Button
                 radius="full"
