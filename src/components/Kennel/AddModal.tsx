@@ -108,7 +108,7 @@ export default function  AddModal({ fetchCages }) {
 
   return (
     <>
-      <Button onPress={onOpen} className="font-semibold bg-customPurple text-small  text-white">Add Kennel</Button>
+      <Button onPress={onOpen} className="font-roboto bg-customPurple text-small  text-white">Add Kennel</Button>
       {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <PacmanLoader size={40} color="#ffffff" />
@@ -127,7 +127,7 @@ export default function  AddModal({ fetchCages }) {
           <ModalContent  className="overflow-y-auto max-h-[100vh] scrollbar-hide">
             {(onClose) => (
               <>
-                <ModalHeader className="flex flex-col gap-1">Add Kennel</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1 font-roboto">Add Kennel</ModalHeader>
                 <ModalBody className=" ">
                   <form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-2">
@@ -147,8 +147,8 @@ export default function  AddModal({ fetchCages }) {
                         required
                       />
                       {errors.location && <p className="text-red-600 font-semibold text-small">{errors.location}</p>} */}
-                      <label>Select Location</label>
-                      <LeafletMap setLocation={setLocation} />  {/* Use LeafletMap here to set the location */}
+                      <label className="font-roboto text-sm">Select Location</label>
+                      <LeafletMap setLocation={setLocation}  location={location || { lat: 52, lng: -0.09, address: '' }} />  {/* Use LeafletMap here to set the location */}
                       {errors.location && <p className="text-red-600 font-semibold text-small">{errors.location}</p>}
                       <Input
                         type="text"
@@ -156,6 +156,7 @@ export default function  AddModal({ fetchCages }) {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
+                        className="font-roboto"
                       />
                       {errors.description && <p className="text-red-600 font-semibold text-small">{errors.description}</p>}
                       <Input
@@ -164,15 +165,16 @@ export default function  AddModal({ fetchCages }) {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         required
+                         className="font-roboto"
                       />
                       {errors.phone && <p className="text-red-600 font-semibold text-small">{errors.phone}</p>}
                       <select
                         value={type}
                         onChange={(e) => setType(e.target.value)}
                         required
-                        className="p-2 border rounded"
+                        className="p-2 border rounded font-roboto text-sm"
                       >
-                        <option value="" disabled>Select Type</option>
+                        <option value="" disabled >Select Type</option>
                         <option value="small">Small</option>
                         <option value="medium">Medium</option>
                         <option value="large">Large</option>
@@ -184,6 +186,7 @@ export default function  AddModal({ fetchCages }) {
                         value={maxCount}
                         onChange={(e) => setMaxCount(e.target.value)}
                         required
+                        className="font-roboto"
                       />
                       {errors.maxCount && <p className="text-red-600 font-semibold text-small">{errors.maxCount}</p>}
                       <Input
@@ -192,12 +195,13 @@ export default function  AddModal({ fetchCages }) {
                         value={PricePerNight}
                         onChange={(e) => setPricePerNight(e.target.value)}
                         required
+                        className="font-roboto"
                       />
                       {errors.PricePerNight && <p className="text-red-600 font-semibold text-small">{errors.PricePerNight}</p>}
-                      <label htmlFor="images">Select Images (up to 3):</label>
-                      <input type="file" multiple onChange={handleFileChange} accept="image/*" />
+                      <label htmlFor="images" className="font-roboto text-sm">Select Images (up to 3):</label>
+                      <input type="file" multiple onChange={handleFileChange} accept="image/*" className="font-roboto text-sm"/>
                       {errors.images && <p className="text-red-600 font-semibold ">{errors.images}</p>}
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-3 gap-4 ">
                         {images.map((file, index) => (
                           <div key={index} className="w-25 h-25 border-1 border-black-500 rounded-lg overflow-hidden">
                             <img src={URL.createObjectURL(file)} alt={`profile-pic-${index}`} className="w-full h-full object-cover" />

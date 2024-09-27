@@ -76,7 +76,7 @@ const Addkennel = () => {
             placeholder="Search"
             onChange={handleSearch}
             value={searchTerm}
-            className="w-[250px] h-10 border-1 rounded-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500"
+            className="w-[250px] font-roboto text-sm h-10 border-1 rounded-full p-3 focus:outline-none focus:ring-1 focus:ring-gray-500"
           />
         </div>
       </div>
@@ -97,7 +97,7 @@ const Addkennel = () => {
                   className='object-cover mt-2'
                 />
               </div>
-              <p className='font-semibold mt-2 text-small'>{cage.kennelname || 'ADOPTION'}</p>
+              <p className='font-roboto mt-2 text-small'>{cage.kennelname || 'ADOPTION'}</p>
               <p className='text-sm font-semibold text-gray-500'></p>
               <div className='display flex justify-center items-center'>
                 <div className="mt-auto mb-4 p-2">

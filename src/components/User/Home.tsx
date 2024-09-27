@@ -4,9 +4,24 @@ import { motion } from 'framer-motion';
 import { Image } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { StickyScroll } from '../ui/sticky-scroll-reveal';
+import { useLocation } from 'react-router-dom';
+import { useEffect,useRef } from 'react';
 
 const Home = () => {
   const navigate = useNavigate()
+  const location = useLocation();
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (location.hash === "#services") {
+      servicesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (location.hash === "#features") {
+      featuresRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+  }, [location]);
 
   const content = [
     {
@@ -107,7 +122,7 @@ const Home = () => {
             src='pics/fffff-min.jpg ' className='md:rounded-3xl w-[95%] sm:w-[90%] mx-auto' />
         </div>
       </div>
-      <div className='display mt-10'>
+      <div ref={servicesRef} className='display mt-10'>
         <div className='flex justify-center p-5 font-roboto font-semibold  md:text-xl'>OUR SERVICES</div>
         <div className='display flex justify-center'>
         <div className='bg-lightwhite p-5 w-full sm:w-[60%] flex flex-col sm:flex-row justify-evenly items-center rounded-md'>
@@ -167,7 +182,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="md:p-10 ">
+      <div ref={featuresRef}  className="md:p-10 ">
         <h2 className='text-center font-roboto font-semibold text-xl p-5 '>FEATURES</h2>
       <StickyScroll content={content} />
     </div>

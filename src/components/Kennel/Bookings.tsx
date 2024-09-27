@@ -23,43 +23,64 @@ const Bookings = () => {
     },[])
 
   return (
-    <div className='display flex justify-center'>
-       <Table aria-label="Example static collection table" className='w-[95%]'>
-    <TableHeader>
-      <TableColumn>Kennelname</TableColumn>
-      <TableColumn>username</TableColumn>
-      <TableColumn>Phone</TableColumn>
-      <TableColumn>fromdate</TableColumn>
-      <TableColumn>todate</TableColumn>
-      <TableColumn>total days</TableColumn>
-      <TableColumn>total amount</TableColumn>
-      <TableColumn>status</TableColumn>
-
-    </TableHeader>
-    <TableBody>
-        {
-            booking.map((data,index)=>(           
-      <TableRow key={index} >
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.kennelname}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.username}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.phone}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.fromdate}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.todate}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.totaldays}</p></TableCell>
-        <TableCell><p className='text-xs text-gray-400 font-semibold'>{data.totalamount}</p></TableCell>
-        <TableCell><p
-    className={`text-xs font-semibold ${
-      data.status === 'booked' ? 'text-green-500' : data.status === 'cancelled' ? 'text-red-500' : 'text-gray-400'
-    }`}
-  >
-    {data.status}
-  </p></TableCell>
-
-      </TableRow>
-       )) }
-    </TableBody>
-  </Table>
-    </div>
+    <div className="display flex justify-center">
+    {booking.length === 0 ? (
+      <p className="text-lg font-roboto text-gray-500 p-2">No bookings found!!</p>
+    ) : (
+      <Table aria-label="Example static collection table" className="w-[95%]">
+        <TableHeader>
+          <TableColumn>Kennelname</TableColumn>
+          <TableColumn>Username</TableColumn>
+          <TableColumn>Phone</TableColumn>
+          <TableColumn>From Date</TableColumn>
+          <TableColumn>To Date</TableColumn>
+          <TableColumn>Total Days</TableColumn>
+          <TableColumn>Total Amount</TableColumn>
+          <TableColumn>Status</TableColumn>
+        </TableHeader>
+        <TableBody>
+          {booking.map((data, index) => (
+            <TableRow key={index}>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.kennelname}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.username}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.phone}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.fromdate}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.todate}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.totaldays}</p>
+              </TableCell>
+              <TableCell>
+                <p className="text-xs text-gray-400 font-semibold">{data.totalamount}</p>
+              </TableCell>
+              <TableCell>
+                <p
+                  className={`text-xs font-semibold ${
+                    data.status === 'booked'
+                      ? 'text-green-500'
+                      : data.status === 'cancelled'
+                      ? 'text-red-500'
+                      : 'text-gray-400'
+                  }`}
+                >
+                  {data.status}
+                </p>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    )}
+  </div>
   )
 }
 

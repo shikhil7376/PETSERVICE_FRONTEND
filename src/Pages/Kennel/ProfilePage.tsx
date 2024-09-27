@@ -108,15 +108,15 @@ const ProfilePage = () => {
           <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
         </div>
 
-        <div className='mt-4 flex flex-col items-center gap-3'>
-          <Input type='text' placeholder='Name' value={profile?.name} name='name' onChange={handleInputChange} className='font-semibold text-gray-500' />
-          <Input type='text' placeholder='Email' value={profile?.email} name='email' readOnly className='font-semibold text-gray-500' />
-          <Input type='text' placeholder='Phone' value={profile?.phone} name='phone' onChange={handleInputChange} className='font-semibold text-gray-500' />
-          {errors.phone && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.phone}</p>}
-          {errors.name && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.name}</p>}
+        <div className='mt-4 flex flex-col items-center gap-3 font-roboto'>
+          <Input type='text' placeholder='Name' value={profile?.name} name='name' onChange={handleInputChange} className=' text-gray-500' />
+          <Input type='text' placeholder='Email' value={profile?.email} name='email' readOnly className=' text-gray-500' />
+          <Input type='text' placeholder='Phone' value={profile?.phone} name='phone' onChange={handleInputChange} className=' text-gray-500' />
+          {errors.phone && <p className='mt-2 text-sm font-roboto text-red-600'>{errors.phone}</p>}
+          {errors.name && <p className='mt-2 text-sm font-roboto text-red-600'>{errors.name}</p>}
         </div>
         <div className='p-3'>
-          <button onClick={handleChanges} disabled={loading}  className='bg-purplebutton text-white font-semibold p-2  text-center rounded-lg text-small'>{loading ? 'SAVING...' : 'SAVE CHANGES'}</button>
+          <button onClick={handleChanges} disabled={loading}  className='bg-purplebutton text-white font-roboto p-2  text-center rounded-lg text-small'>{loading ? 'SAVING...' : 'SAVE CHANGES'}</button>
         </div>
       </div>
       {loading && (

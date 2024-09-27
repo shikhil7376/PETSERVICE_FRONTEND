@@ -8,11 +8,15 @@ import { cancelBooking } from '../../Api/Kennel';
 import { Booking } from '../../Interface/DatatypeInterface';
 import errorHandle from '../../Api/Error';
 import { toast } from 'react-toastify';
+import { setCredential } from '../../Redux/Slices/AuthSlice';
+import { useDispatch } from 'react-redux';
 
 const Bookings = () => {
   const userData = useSelector((state: RootState) => state.user.userdata)
   const [cageData, setCageData] = useState<Booking[]>([])
+  const dispatch = useDispatch();
 
+console.log('cage',cageData);
 
 
   const bookings = async () => {
@@ -34,7 +38,8 @@ const Bookings = () => {
   async function CancelBooking(bookingid: string, roomid: string) {
     try {
       const result = await cancelBooking(bookingid, roomid);
-      if(result){
+      if(result){  
+        dispatch(setCredential(result.data.data))
         toast.success("Booking Cancelled")
         bookings()
       }
@@ -56,6 +61,7 @@ const Bookings = () => {
         <h1 className='font-semibold text-sm font-roboto'>MY BOOKINGS</h1>
       </div>
       <div className='flex flex-col gap-y-4 p-5 '>
+    
       {cageData.map((data, index) => (
 
         <Card

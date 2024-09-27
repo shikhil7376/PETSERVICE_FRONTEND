@@ -105,7 +105,7 @@ export const ownersCages = async (Id:string|undefined, page:number, limit:number
 };
 
 export const editCages = async (data: FormData) => {
-  try {
+  try { 
     const response = await api.post(kennelRoutes.editCages, data);
     return response;
   } catch (error) {

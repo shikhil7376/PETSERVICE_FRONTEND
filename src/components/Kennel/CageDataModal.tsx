@@ -11,6 +11,8 @@ import PacmanLoader from "react-spinners/PacmanLoader";
 import { CageData } from '../../Interface/DatatypeInterface';
 import { EditCageError } from '../../Interface/DatatypeInterface';
 import errorHandle from '../../Api/Error';
+import LeafletMap from "./LeafletMap";
+
 
 const CageDataModal = ({ cageid, fetchCages }) => {
 
@@ -20,13 +22,16 @@ const CageDataModal = ({ cageid, fetchCages }) => {
   const [cagedata, setCageData] = useState<CageData>()
   const [initialCageData, setInitialCageData] = useState<CageData>()
   const [errors, setErrors] = useState<EditCageError>({});
+  const [location, setLocation] = useState<{ lat: number; lng: number; address: string } | null>(null);
 
+  
+  
 
   const validateForm = () => {
     const newErrors: EditCageError = {};
 
     if (!cagedata?.kennelname?.trim()) newErrors.kennelname = "Kennel name is required";
-    if (!cagedata?.location?.trim()) newErrors.location = "Location is required";
+    if (!cagedata?.location) newErrors.location = "Location is required";
     if (!cagedata?.description?.trim()) newErrors.description = "Description is required";
     else if (cagedata.description.length > 500) newErrors.description = "Description should not exceed 5 00 characters";
     if (!cagedata?.phone?.trim()) newErrors.phone = "Phone number is required";
@@ -47,12 +52,15 @@ const CageDataModal = ({ cageid, fetchCages }) => {
     return new File([blob], fileName, { type: blob.type });
   };
 
+  
+  
 
   const fetchData = async () => {
     try {
       const response = await viewDetails(cageid)
       setCageData(response?.data.message)
       setInitialCageData(response?.data.message)
+      setLocation(response?.data.message.location);      
     } catch (error) {
       errorHandle(error)
     }
@@ -76,6 +84,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
       console.error("Cagedata is undefined.");
       return;
     }
+    
     if (JSON.stringify(cagedata) == JSON.stringify(initialCageData)) {
       onOpenChange()
     }
@@ -88,7 +97,9 @@ const CageDataModal = ({ cageid, fetchCages }) => {
         const formData = new FormData();
         formData.append('id', cagedata._id || '');
         formData.append('kennelname', cagedata.kennelname || '');
-        formData.append('location', cagedata.location || '');
+        if (location) {
+          formData.append("location", JSON.stringify(location)); // Convert location to string
+        }
         formData.append('description', cagedata.description || '');
         formData.append('phone', cagedata.phone || '');
         formData.append('type', cagedata.type || '');
@@ -159,7 +170,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
 
   return (
     <>
-      <Button className='bg-customPurple text-small font-semibold text-white' onPress={onOpen}>More Details</Button>
+      <Button className='bg-customPurple text-small font-roboto text-white' onPress={onOpen}>More Details</Button>
       {loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <PacmanLoader size={40} color="#ffffff" />
@@ -167,10 +178,10 @@ const CageDataModal = ({ cageid, fetchCages }) => {
       )}
       {!loading && (
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} isDismissable={false} isKeyboardDismissDisabled={true}>
-          <ModalContent >
+          <ModalContent className='overflow-y-auto max-h-[100vh] scrollbar-hide'>
             {(onClose) => (
               <>
-                <ModalHeader className="flex flex-col gap-1  ">Cage Details</ModalHeader>
+                <ModalHeader className="flex flex-col gap-1 font-roboto ">Cage Details</ModalHeader>
                 <ModalBody>
                   <Input
                     type="text"
@@ -178,19 +189,25 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="kennelname"
                     value={cagedata?.kennelname}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
                   />
-                  {errors.kennelname && <p className="text-red-600 text-small font-semibold">{errors.kennelname}</p>}
+                  {errors.kennelname && <p className="text-red-600 text-small font-roboto">{errors.kennelname}</p>}
 
-                  <Input
+                  {/* <Input
                     type="text"
                     placeholder="Location"
                     name="location"
-                    value={cagedata?.location}
+                    value={cagedata?.location?.address}
                     onChange={handleChange}
                     className='font-semibold text-gray-500'
-                  />
-                  {errors.location && <p className="text-red-600 text-small font-semibold">{errors.location}</p>}
+                  /> */}
+                {location && (
+                <LeafletMap
+                 setLocation={setLocation}
+                 location={location}
+                 />
+                 )}
+                  {errors.location && <p className="text-red-600 text-small font-roboto">{errors.location}</p>}
 
                   <Input
                     type="text"
@@ -198,10 +215,10 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="description"
                     value={cagedata?.description}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
 
                   />
-                  {errors.description && <p className="text-red-600 text-small font-semibold">{errors.description}</p>}
+                  {errors.description && <p className="text-red-600 text-small font-roboto">{errors.description}</p>}
 
                   <Input
                     type="text"
@@ -209,10 +226,10 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="maxcount"
                     value={cagedata?.maxcount}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
 
                   />
-                  {errors.maxCount && <p className="text-red-600 text-small font-semibold">{errors.maxCount}</p>}
+                  {errors.maxCount && <p className="text-red-600 text-small font-roboto">{errors.maxCount}</p>}
 
                   <Input
                     type="text"
@@ -220,10 +237,10 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="type"
                     value={cagedata?.type}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
 
                   />
-                  {errors.type && <p className="text-red-600 text-small font-semibold">{errors.type}</p>}
+                  {errors.type && <p className="text-red-600 text-small font-roboto">{errors.type}</p>}
 
                   <Input
                     type="text"
@@ -231,10 +248,10 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="phone"
                     value={cagedata?.phone}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
 
                   />
-                  {errors.phone && <p className="text-red-600 text-small font-semibold">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-600 text-small font-roboto">{errors.phone}</p>}
 
                   <Input
                     type="text"
@@ -242,7 +259,7 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     name="pricepernight"
                     value={cagedata?.pricepernight}
                     onChange={handleChange}
-                    className='font-semibold text-gray-500'
+                    className='font-roboto text-gray-500'
 
                   />
                   <div className="mb-4 flex flex-wrap">
@@ -260,20 +277,23 @@ const CageDataModal = ({ cageid, fetchCages }) => {
                     ))}
                   </div>
                   {cagedata?.image && cagedata.image.length < 3 && (
-                    <Input
+                    <div className=''>
+                    <input
+                     className='text-sm font-roboto'
                       type='file'
                       accept='image/*'
                       multiple
                       onChange={handleFileChange} />
+                      </div>
                   )}
-                  {errors.images && <p className="text-red-600 text-small font-semibold">{errors.images}</p>}
+                  {errors.images && <p className="text-red-600 text-small font-roboto">{errors.images}</p>}
 
                 </ModalBody>
                 <ModalFooter>
                   <Button color="danger" variant="light" onPress={onClose}>
                     Close
                   </Button>
-                  <Button className='text-sm bg-customPurple text-white font-semibold' onPress={() => { handleEdit() }}>
+                  <Button className='text-sm bg-customPurple text-white font-roboto' onPress={() => { handleEdit() }}>
                     Save Changes
                   </Button>
                 </ModalFooter>

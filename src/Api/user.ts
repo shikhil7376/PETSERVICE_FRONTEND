@@ -75,9 +75,8 @@ export const forgotPasswordOtp = async (
 };
 
 export const resentforgototp = async (email: string) => {
-  console.log(email);
   try {
-    const response = await api.post(userRoutes.verifyforgotresendotp, email);
+    const response = await api.post(userRoutes.verifyforgotresendotp, {email});
     return response;
   } catch (error) {
     return errorHandle(error);

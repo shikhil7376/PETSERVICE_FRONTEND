@@ -19,6 +19,9 @@ const UserRoutes = () => {
     const SocialMedia = lazy(()=>import('../Layout/SocialmediaLayout/SocialmediaLayout'))
     const Message = lazy(()=>import('../components/Socialmedia/ChatPage'))
     const Room = lazy(()=>import('../components/Socialmedia/Room'))
+    const Fotp = lazy(()=>import('../Pages/User/ResetPasswordOtp'))
+    const ResetPassword = lazy(()=>import('../Pages/User/ResetPassword'))
+
   return (
    <Suspense>
     <Routes>
@@ -36,6 +39,8 @@ const UserRoutes = () => {
        <Route path='/success' element={<SucessPage/>}/>
        <Route path='register' element={<SignUp/>}/>
        <Route path='Otp' element={<OTP/>}/>
+       <Route path='/fotp' element={<Fotp/>}/>
+       <Route path='/reset-password' element={<ResetPassword/>}/>
        <Route path='login' element={<Login/> }/>
        <Route path='*' element={<Error404/>}/>
        <Route element={<ProtectedRoute/>}>

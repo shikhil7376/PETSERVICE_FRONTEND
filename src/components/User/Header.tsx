@@ -55,9 +55,9 @@ const Header = () => {
             <Link to={'/'} className=' text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>
               Home
             </Link>
-            <Link to={''} className= 'text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</Link>
-            <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>About</Link>
-            <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</Link>
+            <Link to={'/#services'} className= 'text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Services</Link>
+            <Link to={'/#features'} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Features</Link>
+            {/* <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</Link> */}
           {/* </ul> */}
         </div>
         <div className="sm:hidden flex-1 flex justify-end">
@@ -71,7 +71,7 @@ const Header = () => {
                 Home
               </Link>
               <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Services</li>
-              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>About</li>
+              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Feaures</li>
               <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Contact</li>
             </ul>
           </div>

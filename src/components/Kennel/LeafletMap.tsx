@@ -14,11 +14,14 @@ L.Icon.Default.mergeOptions({
 
 // Define prop types for the LeafletMap component
 interface LeafletMapProps {
-  setLocation: (location: { lat: number; lng: number; address: string }) => void;  // Pass selected location to parent component
+  setLocation: (location: { lat: number; lng: number; address: string }) => void;
+  location:{address:string,lat:number,lng:number}  // Pass selected location to parent component
 }
 
-const LeafletMap: React.FC<LeafletMapProps> = ({ setLocation }) => {
-  const [markerPosition, setMarkerPosition] = useState<[number, number]>([52, -0.09]); // Default position
+const LeafletMap: React.FC<LeafletMapProps> = ({ setLocation,location }) => {
+    console.log(location);
+    
+  const [markerPosition, setMarkerPosition] = useState<[number, number]>([location.lat, location.lng]); // Default position
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false); // Loading state
 
@@ -91,7 +94,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ setLocation }) => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for a location"
-          className="rounded-lg"
+          className="rounded-lg text-sm font-roboto"
         />
         <Button 
           className="font-semibold bg-customPurple text-small text-white" 

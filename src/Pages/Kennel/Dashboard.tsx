@@ -32,25 +32,25 @@ const Dashboard = () => {
     <div className='display flex flex-col p-2 pt-3 gap-6'>
       <div className='flex gap-2 justify-evenly'>
         <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl'>
-          <p className='p-5 text-default-400'>Daily Profit</p>
-          <h2 className='pl-5 font-semibold text-3xl'>${data?.dailyProfit}</h2>
+          <p className='p-5 text-default-400 font-roboto'>Daily Profit</p>
+          <h2 className='pl-5 font-semibold text-3xl font-roboto'>${data?.dailyProfit}</h2>
         </div>
-        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl'>
+        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl font-roboto'>
           <p className='p-5 text-default-400'>Monthly Profit</p>
           <h2 className='pl-5 font-semibold text-3xl'>${data?.monthlyProfit}</h2>
         </div>
-        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl'>
+        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl font-roboto'>
           <p className='p-5 text-default-400'>Daily Bookings</p>
           <h2 className='pl-5 font-semibold text-3xl'>{data?.dailyBookings}</h2>
         </div>
-        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl'>
+        <div className='card h-[150px] w-[180px] bg-white flex flex-col rounded-md border-1 drop-shadow-xl font-roboto'>
           <p className='p-5 text-default-400'>Monthly Bookings</p>
           <h2 className='pl-5 font-semibold text-3xl'>{data?.monthlyBookings}</h2>
         </div>
       </div>
 
       {/* Chart Section */}
-      <div className='chart-container bg-white rounded-md p-4 drop-shadow-xl'>
+      <div className='chart-container bg-white rounded-md p-4 drop-shadow-xl font-roboto text-sm'>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
