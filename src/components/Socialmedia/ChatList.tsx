@@ -13,7 +13,7 @@ import errorHandle from '../../Api/Error';
 import { userData,chat } from '../../Interface/DatatypeInterface';
 
 
-const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOpen, toggleOpen  }) => {
+const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOpen, toggleOpen, fetchAgain  }) => {
      
     const userData = useSelector((state: RootState) => state.user.userdata);
     const [searchItem,setSearchItem] = useState<string>("")
@@ -25,7 +25,7 @@ const ChatList = ({ setActiveChat,notification,setNotification,onlineUsers, isOp
         if (userData) {
           fetchUserChats();
         }
-      }, [userData]);
+      }, [ fetchAgain]);
 
     
     const fetchUserChats = async () => {

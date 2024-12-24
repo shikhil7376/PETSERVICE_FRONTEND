@@ -55,7 +55,7 @@ const AddComment = ({ postId }) => {
 
   const handleSubmit = async () => {
     if (!comment.trim()) {
-      alert('Comment cannot be empty');
+     toast.error("comment cannot be empty")
       return;
     }
 
@@ -63,8 +63,8 @@ const AddComment = ({ postId }) => {
       const response = await commentPost(postId, userData?._id as string, comment);
       if (response) {
         toast.success(response.data);
-        getComments(); // Fetch the latest comments after posting
-        setComment(''); // Clear the input field after posting
+        getComments(); 
+        setComment(''); 
       }
     } catch (error) {
       errorHandle(error);
@@ -76,6 +76,7 @@ const AddComment = ({ postId }) => {
       <FaRegComment 
         onClick={onOpen} 
         className="text-customPurple cursor-pointer text-xl"
+        size={17}
       />
   
       <Modal

@@ -11,14 +11,14 @@ import { RootState } from '../../Redux/Store';
 
 
 const Header = ({notification,setNotification,setActiveChat}) => {
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Use onOpen to open and onClose to close the modal
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
   const [value,setValue] = useState("")
   const [showDropdown, setShowDropdown] = useState(false); 
   const userData = useSelector((state: RootState) => state.user.userdata);
 
   const navigate = useNavigate()
   function openModal() {
-    onOpen();  // Explicitly open the modal
+    onOpen();  
   }
 
   const handleJoinRoom = useCallback(()=>{

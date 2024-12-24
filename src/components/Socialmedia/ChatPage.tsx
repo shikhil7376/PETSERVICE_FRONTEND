@@ -18,6 +18,8 @@ const ChatPage = () => {
     const [notification,setNotification] = useState([])
     const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
     const [isChatListOpen, setIsChatListOpen] = useState(false);
+    const [fetchAgain,setFetchAgain] = useState(false)
+
     const navigate = useNavigate()
   return (
     <div className=' bg-black h-screen'>
@@ -38,9 +40,9 @@ const ChatPage = () => {
             >
                 < IoAppsOutline/>
             </button>
-        <ChatList setActiveChat={setActiveChat} notification ={notification} setNotification={setNotification} onlineUsers={onlineUsers} isOpen={isChatListOpen}  toggleOpen={() => setIsChatListOpen(!isChatListOpen)} />
+        <ChatList setActiveChat={setActiveChat} notification ={notification} setNotification={setNotification} onlineUsers={onlineUsers} isOpen={isChatListOpen}  toggleOpen={() => setIsChatListOpen(!isChatListOpen)} fetchAgain={fetchAgain}/>
       
-      <ChatBox activeChat={activeChat} notification ={notification} setNotification={setNotification}  onlineUsers={onlineUsers}  setOnlineUsers={setOnlineUsers}  />
+      <ChatBox activeChat={activeChat} notification ={notification} setNotification={setNotification}  onlineUsers={onlineUsers}  setOnlineUsers={setOnlineUsers} setFetchAgain = {setFetchAgain} />
       </div>
     </div>
   )

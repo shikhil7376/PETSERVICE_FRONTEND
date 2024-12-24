@@ -41,7 +41,7 @@ const navigate = useNavigate()
 
   useEffect(() => {
     if (searchQuery === '') {
-      setFilteredPosts(posts); // Show all posts if search query is empty
+      setFilteredPosts(posts); 
     } else {
       const filtered = posts.filter(post =>
         post.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -75,7 +75,7 @@ const navigate = useNavigate()
         </div>
       </div>
       <Content posts={filteredPosts} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData}  />
-      <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} />    
+      <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} fetchData={fetchData} />    
     </div>
   )
 }

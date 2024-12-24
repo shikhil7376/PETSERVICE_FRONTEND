@@ -21,7 +21,9 @@ const userRoutes={
     editPost:'/user/edit-post',
     deletePost:'/user/delete-post',
     getFollowers:'/user/get-followers',
-    getFollowing:'/user/get-following'
+    getFollowing:'/user/get-following',
+    reportPost:'/user/report-post',
+    checkReportStatus:'/user/check-status',
 }
 
 export default userRoutes

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button } from "@nextui-org/react";
 import ContentCard from '../Common/content/ContentCard';
 import { useState } from 'react';
@@ -24,9 +24,8 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
     const [data, setData] = useState([]);
     const [toggleEdit,setToggleEdit] = useState(false);
     const userData = useSelector((state: RootState) => state.user.userdata);
+    const [showButton,setButton] = useState(false)
 
-    
-     
     const fetchNotFollowData = async () => {
         const response = await userNotFollow(userData?._id as string);
         if (response) {
@@ -34,6 +33,7 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
         }
       };
  
+
       const fetchData = async () => {
         const response = await getPosts();
         if (response) {
@@ -64,7 +64,7 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
             {
               !toggleEdit?(
                 <>
-               <ContentCard key={card.id} post={card} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData} />
+               <ContentCard key={card.id} post={card} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData} showButton={showButton} />
                 </>
               ):(
                 <>

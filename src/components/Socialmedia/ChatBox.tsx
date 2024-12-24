@@ -36,7 +36,7 @@ const ENDPOINT = "http://localhost:8000"
 
 var socket, selectedChatCompare
 
-const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOnlineUsers }) => {
+const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOnlineUsers,setFetchAgain }) => {
 
 
   const userData = useSelector((state: RootState) => state.user.userdata);
@@ -110,13 +110,15 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
 
   useEffect(() => {
     socket.on("messagerecieved", (newMessageRecieved) => {
+      setFetchAgain(prev=>!prev)
       if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
         if (!notification.includes(newMessageRecieved)) {
           // setNotification([newMessageRecieved, ...notification])
           // fetchMessages()
         }
-      } else {
+      } else {  
         setMessages([...messages, newMessageRecieved])
+        setFetchAgain(prev=>!prev)
       }
     }) 
   })
@@ -198,10 +200,10 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
           formData.append('chatId', activeChat._id)
 
           const response = await sendMessage(formData)
-            console.log('reponst',response);
             
           if (response) {
             setLoading(false)
+            setFetchAgain(prev=>!prev)
             socket.emit('newmessage', response?.data)
             setMessages([...messages, response?.data])
             setNewMessage('')
@@ -282,7 +284,7 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
     <div className='bg-contentgray ml-3 rounded-lg h-[90vh] w-full mr-2 border-1 border-gray-500'>
       {activeChat ? (
         <div className=''>
-          <div className='flex justify-center p-1 gap-2 items-center'>
+          <div className='flex justify-center p-1 gap-2 items-center '>
             <Avatar isBordered radius="full" size="md" src={getuserimage} />
             {chatUser && isUserOnline(chatUser?._id) ? (
               <span className="online-indicator "></span>

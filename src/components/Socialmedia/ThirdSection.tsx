@@ -10,15 +10,17 @@ import errorHandle from '../../Api/Error';
 interface ThirdSectionProps {
     fetchNotFollowData: (userId: string) => void;
     data: UserNotFollow[]; 
+    fetchData:()=>void
   }
 
-const ThirdSection: React.FC<ThirdSectionProps>  = ({ fetchNotFollowData, data }) => {
+const ThirdSection: React.FC<ThirdSectionProps>  = ({ fetchNotFollowData, data ,fetchData}) => {
     const userData = useSelector((state: RootState) => state.user.userdata);
 
     const handleFollow = async(userId:string)=>{
       try {
       const response = await follow(userData?._id as string,userId)
         if(response){
+          fetchData()
             fetchNotFollowData(userData?._id as string)
         }
       } catch (error) {

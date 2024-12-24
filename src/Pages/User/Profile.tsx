@@ -13,6 +13,7 @@ import FocusCardsDemo from '../../components/Socialmedia/FocusCardsDemo';
 import { setCredential } from '../../Redux/Slices/AuthSlice';
 import { useParams } from 'react-router-dom';
 import FollowersList from '../../components/Socialmedia/FollowersList';
+import { follow } from '../../Api/User';
 
 
 const Profile = () => {
@@ -23,11 +24,14 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const [loading, setLoading] = useState<boolean>(false);
     const userData = useSelector((state: RootState) => state.user.userdata)
-    const [postData,setPostData] = useState()
+    const [postData,setPostData] = useState([])
     const [openModal,setOpenModal] = useState<boolean>(false)
     const [modalType, setModalType] = useState<string>('');
 
+ 
+    
     const dispatch = useDispatch();
+  
 
     const validateForm = () => {
         const newErrors: Errors = {};
@@ -119,6 +123,17 @@ const Profile = () => {
         setOpenModal(true); // Open modal
     };
 
+    const handleToggleFollow = async()=>{
+        try {
+           const response = await follow(userData?._id as string,userId as string)
+           if (response) {            
+           fetchData()   
+          }
+        } catch (error) {
+          errorHandle(error)
+        }
+   }
+
     return (
         <div className='h-auto'>
             <div className='display flex '>
@@ -167,7 +182,23 @@ const Profile = () => {
                         />
                                   {errors.phone && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.phone}</p>}
                                   {errors.name && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.name}</p>}
-                        <button onClick={handleChanges} disabled={loading}  className='bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] text-white font-semibold p-2  text-center rounded-full text-small'> {loading ? 'SAVING...' : 'SAVE CHANGES'}</button>
+                                  {userId !== userData?._id ? (
+             <button 
+            className='text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg'
+            onClick={handleToggleFollow}
+              // Add the click event handler
+             >
+               {profile?.followerss?.includes(userData?._id as string) ? 'Unfollow' : 'Follow'}
+               </button>
+) : (
+  <button 
+    onClick={handleChanges} 
+    disabled={loading}  
+    className='bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] text-white font-semibold p-2 text-center rounded-full text-small'
+  >
+    {loading ? 'SAVING...' : 'SAVE CHANGES'}
+  </button>
+)}       
 
                     </div>
 

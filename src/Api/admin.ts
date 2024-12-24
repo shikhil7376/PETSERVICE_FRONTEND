@@ -94,3 +94,35 @@ export const getDashboard = async()=>{
       errorHandle(error)
     }
   }
+
+  export const getReports = async(page:number,limit:number,searchTerm:string)=>{
+    try {        
+       const response  = await api.get(`${adminRoutes.getReports}?page=${page}&limit=${limit}&search=${searchTerm}`) 
+       return response
+    } catch (error) {
+       errorHandle(error)
+    }
+}
+
+export const blockPost = async (postId:string)=>{
+    try {
+      const response = await api.post(adminRoutes.blockPost,{postId:postId})
+      console.log('blockresonse',response);
+      
+      return response
+    } catch (error) {
+      errorHandle(error)
+    }
+  }
+
+  export const unblockPost = async(postId:string)=>{
+    try {
+        const response = await api.post(adminRoutes.unblockPost,{postId:postId})
+        console.log("unblockresponse",response);
+        
+        return response
+    } catch (error) {
+      errorHandle(error)        
+    }
+  }
+

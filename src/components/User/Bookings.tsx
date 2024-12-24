@@ -16,7 +16,6 @@ const Bookings = () => {
   const [cageData, setCageData] = useState<Booking[]>([])
   const dispatch = useDispatch();
 
-console.log('cage',cageData);
 
 
   const bookings = async () => {

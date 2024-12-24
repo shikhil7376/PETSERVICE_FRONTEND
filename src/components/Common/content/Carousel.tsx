@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 type CarouselProps = {
-    children: React.ReactNode; // Update the type to React.ReactNode
+    children: React.ReactNode; 
   };
 
   const Carousel: React.FC<CarouselProps> = ({ children }) => {
-    
   const [curr,setCurr] = useState(0)
+  
   const prev = () => {
     setCurr((curr) => (curr === 0 ? React.Children.count(children) - 1 : curr - 1));
   };

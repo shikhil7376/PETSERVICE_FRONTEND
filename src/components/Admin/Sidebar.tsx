@@ -1,6 +1,7 @@
 import React from 'react'
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiChartPie, HiUser, HiLibrary  } from "react-icons/hi";
+import { MdReportProblem } from "react-icons/md";
 
 const AdminSidebar = () => {
   return (
@@ -19,6 +20,9 @@ const AdminSidebar = () => {
        </Sidebar.Item>
        <Sidebar.Item href="/admin/verifiedKennelOwner" icon={HiArrowSmRight}>
           <p className='text-small font-semibold'>Kennel Owners</p>
+       </Sidebar.Item>
+       <Sidebar.Item href="/admin/postreports" icon={ MdReportProblem }>
+          <p className='text-small font-semibold'>Post Reports</p>
        </Sidebar.Item>
      </Sidebar.ItemGroup>
    </Sidebar.Items>

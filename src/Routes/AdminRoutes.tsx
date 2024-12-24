@@ -8,6 +8,7 @@ const AdminDashboard = lazy(()=>import('../Pages/Admin/Dashboard'))
 const Users = lazy(()=>import('../Pages/Admin/Users'))
 const KennelApproval = lazy(()=>import('../Pages/Admin/KennelApproval'))
 const VerifiedKennelOwner = lazy(()=>import('../Pages/Admin/VerifiedKennelOwner'))
+const PostReport = lazy(()=>import('../Pages/Admin/PostReport'))
 
 const AdminRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AdminRoutes = () => {
          <Route path='/users' element={<Users/>}/>
          <Route path='/kennelapproval' element={<KennelApproval/>}/>
          <Route path='/verifiedKennelOwner' element={<VerifiedKennelOwner/>}/>
+         <Route path='/postreports' element={<PostReport/>}/>
         </Route>
         </Route>
       </Routes>

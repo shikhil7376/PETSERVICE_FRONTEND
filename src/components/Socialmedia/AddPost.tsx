@@ -22,20 +22,24 @@ const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
     const [description,setDescription] = useState<string>("")
     const [images, setImages] = useState<File[]>([]);
     const [errors, setErrors] = useState<PostError>({});
-
+    
     const userData = useSelector((state: RootState) => state.user.userdata)
 
    const validateForm = ()=>{
      const newError:PostError ={}
       if(!description.trim()){
         newError.description ="Description is required"
+      }else if(description.length>100){
+        newError.description = "Description exceeds the limit"
       }
       if(images.length<1){
         newError.images = "Images are required"
+      }else if(images.length>3){
+        newError.images = "only 3 images are permitted"
       }
+  
       setErrors(newError)
       return Object.keys(newError).length === 0;
-
    }
 
     const handleFileChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -118,6 +122,7 @@ const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
                           </div>
                         ))}
                       </div>
+                      {errors.images && <p className="font-roboto text-red-600 text-sm">{errors.images}</p>}
                     </div>
                     <ModalFooter>
                       <Button color="danger" variant="light" onPress={onClose}>

@@ -74,6 +74,7 @@ export interface profile extends Errors{
   wallet?:number,
   followers?:number,
   following?:number,
+  followerss?:string[]
   posts?: Post[];
 }
 
@@ -203,4 +204,23 @@ export interface chat{
       image:string,
     }
   }
+}
+
+export interface ReportedPost {
+  _id: string;
+  reason: string;
+  postId:string;
+  status: string;
+  createdAt: string;
+  postDetails: {
+    image: string[];
+    is_block:boolean
+  };
+  reporterDetails: {
+    name: string;
+  };
+  postUserDetails: {
+    name: string;
+  };
+  is_block:boolean
 }

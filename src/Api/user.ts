@@ -217,3 +217,21 @@ export const getFollowing = async(id:string)=>{
     errorHandle(error)
   }
 }
+
+export const reportPost = async(postId:string,userId:string,description:string)=>{
+  try {
+    const response = await api.post(userRoutes.reportPost,{postId:postId,userId:userId,description:description})
+    return response
+  } catch (error) {
+    errorHandle(error)
+  }
+} 
+
+export const checkReportStatus = async (postId:string,userId:string)=>{
+     try {     
+      const response = await api.get(`${userRoutes.checkReportStatus}/${postId}/${userId}`)      
+      return response
+     } catch (error) {
+      errorHandle(error)
+     }
+}

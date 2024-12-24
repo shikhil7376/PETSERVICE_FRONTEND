@@ -38,9 +38,9 @@ const Sidebar: React.FC<sidebarProps> = ({ fetchData, setSearchQuery  }) => {
             <div className="h-full flex flex-col items-center bg-contentgray  rounded-lg shadow-lg ">
             <div className='flex justify-center pt-2'>
         
-           <input className='bg-contentgray border-1 border-gray-500 rounded-full p-1  z-50 w-[80%] text-gray-500 text-sm'
+           <input className='bg-contentgray border-1 border-gray-500 rounded-full p-1 pl-3  z-50 w-[80%] text-gray-500 text-sm'
            
-            placeholder='search..'
+            placeholder='search...'
             onChange={handleSearch}
             value={query}
             />
@@ -62,12 +62,12 @@ const Sidebar: React.FC<sidebarProps> = ({ fetchData, setSearchQuery  }) => {
                                 <PiSquaresFourBold size={20} />
                             </div>
                         </ListboxItem>
-                        <ListboxItem key="new" className="text-gray-500" color="secondary">
+                        {/* <ListboxItem key="new" className="text-gray-500" color="secondary">
                             <div className="flex items-center">
                                 <p className="font-semibold font-roboto mr-2">Reels</p>
                                 <TfiVideoClapper size={20} />
                             </div>
-                        </ListboxItem>
+                        </ListboxItem> */}
                         <ListboxItem key="new" className="text-gray-500" color="secondary" onClick={() => navigate('/message')}>
                             <div className="flex items-center">
                                 <p className="font-semibold font-roboto mr-2">Message</p>

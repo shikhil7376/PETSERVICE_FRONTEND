@@ -8,8 +8,10 @@ const adminRoutes ={
     getVerifiedkennelOwner:'/admin/getVerifiedkennelOwner',
     blockkennelowner:'/admin/blockkennelowner',
     unblockkennelowner:'/admin/unblockkennelowner',
-    dashboard:'/admin/Dashboard'
-
+    dashboard:'/admin/Dashboard',
+    getReports:'/admin/get-reports',
+    blockPost:'/admin/blockPost',
+    unblockPost:'/admin/unblockPost'
 }
 
 export default adminRoutes
