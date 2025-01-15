@@ -76,7 +76,7 @@ const ResetPasswordOtp = () => {
                 if(response){
                     toast.success(response.data.message)
                     localStorage.removeItem('otpStartTime')
-                    navigate('/reset-password',{state:{email:data.email}})
+                    navigate('/new-password',{state:{email:data.email}})
                   }
             } catch (error) {
                 errorHandle(error)

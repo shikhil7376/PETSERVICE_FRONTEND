@@ -119,7 +119,7 @@ const Home = () => {
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, x: { type: "spring", stiffness: 60 }, opacity: { duration: 1 }, ease: "easeIn", duration: 1 }}
-            src='pics/fffff-min.jpg ' className='md:rounded-3xl w-[95%] sm:w-[90%] mx-auto' />
+            src='pics/fffff-min.jpg ' className='md:rounded-3xl w-[90%] sm:w-[90%] mx-auto' />
         </div>
       </div>
       <div ref={servicesRef} className='display mt-10'>
