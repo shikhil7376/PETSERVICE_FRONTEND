@@ -51,7 +51,7 @@ const Header = () => {
       <Toaster position='top-center'/>
       <nav className='navbar flex items-center '>
         <div className='logo w-1/6 flex items-center justify-center '>
-          <img src='pics/logo.jpg' onClick={()=>navigate('/')} className='w-10 h-10' alt='Logo' />
+          <img src='pics/logo.jpg' onClick={()=>navigate('/')} className='w-10 h-10'  />
         </div>
         <div className='section w-2/3  hidden sm:flex justify-evenly '>
           {/* <ul className='flex justify-evenly '> */}
@@ -68,7 +68,7 @@ const Header = () => {
         </div>
 
        
-        <div className='signup w-1/6 flex items-center justify-center mt-1'>
+        <div className='signup w-1/6 flex items-center justify-center mt-1 '>
    
           {userdata ? (
             <Dropdown isOpen={dropdownVisible} onClose={() => setDropdownVisible(false)} className=''>
@@ -80,18 +80,18 @@ const Header = () => {
                   className="cursor-pointer"
                 />
               </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem key="profile" onClick={()=>handleProfileView(userdata._id)} className='text-small font-bold '>
-                <p className='text-small font-semibold text-gray-500'>view profile</p>
+              <DropdownMenu className=''>
+                <DropdownItem key="profile" onClick={()=>handleProfileView(userdata._id)} className='text-small font-bold'>
+                <p className='text-small font-roboto text-gray-500'>view profile</p>
                 </DropdownItem>
-                <DropdownItem key="bookings" onClick={handleBookings}>
-                <p className='text-small font-semibold text-gray-500'>bookings</p>
+                <DropdownItem key="bookings" onClick={handleBookings} className='text-small font-bold  w-[100px] ' >
+                <p className='text-small font-roboto text-gray-500'>bookings</p>
                 </DropdownItem>
-                <DropdownItem key="bookings" >
-                <p className='text-small font-semibold text-gray-500'>Wallet: ${userdata.wallet}</p>
+                <DropdownItem key="bookings"  className='text-small font-bold  w-[100px] '>
+                <p className='text-small font-roboto text-gray-500'>Wallet: ${userdata.wallet}</p>
                 </DropdownItem>
-                <DropdownItem key="signout" onClick={handleSignOut}>
-                <p className='text-small font-semibold text-gray-500'>signout</p>
+                <DropdownItem key="signout" onClick={handleSignOut} className='text-small font-bold  w-[100px] '>
+                <p className='text-small font-roboto text-gray-500'>signout</p>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -108,7 +108,7 @@ const Header = () => {
       {menuOpen && (
   <div className="fixed top-0 left-0  w-full h-full bg-black bg-opacity-50 z-50 flex justify-end">
     <div
-      className="w-[150px] h-[250px] bg-white shadow-lg p-4 slide-in-right rounded-lg"
+      className="w-[150px] h-[250px] mt-10 bg-white shadow-lg p-4 slide-in-right rounded-lg"
     >
       <button
         className="text-white hover:text-gray-800 text-md mb-4 bg-red-500 p-1 rounded-md font-roboto "
@@ -118,21 +118,21 @@ const Header = () => {
       </button>
       <Link
         to={'/'}
-        className="block  font-roboto py-2 hover:text-purple-600 hover:underline cursor-pointer"
+        className="block  text-sm font-roboto py-2 hover:text-purple-600 hover:underline cursor-pointer"
         onClick={toggleMenu}
       >
         Home
       </Link>
       <Link
         to={'/#services'}
-        className="block  py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
+        className="block text-sm py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
         onClick={toggleMenu}
       >
         Services
       </Link>
       <Link
         to={'/#features'}
-        className="block text- py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
+        className="block text-sm py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
         onClick={toggleMenu}
       >
         Features

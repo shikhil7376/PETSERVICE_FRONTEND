@@ -137,22 +137,22 @@ const Profile = () => {
     return (
         <div className='h-auto'>
             <div className='display flex '>
-                <div className='w-1/3 bg-slate-3  flex justify-center  '>
+                <div className='p-2 sm:w-1/3 bg-slate-3  flex justify-center  '>
                     <div className='flex flex-col justify-center items-center gap-3'>
                         <Avatar isBordered color="default" src={profile?.image || ''}
                             style={{ width: "100px", height: "100px" }}
                         />
                         <FaUpload onClick={() => document.getElementById('fileInput')?.click()} />
                         <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
-                        <div className='display flex gap-2'>
+                        <div className='display flex gap-2 '>
                         <p className='text-sm  text-gray-500' onClick={() => toggleModal('followers')}>followers:{profile?.followers}</p>
                         <p className='text-sm  text-gray-500' onClick={() => toggleModal('following')}>following:{profile?.following}</p>
                         </div>
                     </div>
                     
                 </div>
-                <div className='w-2/3  flex flex-col justify-center'>
-                    <div className='sm:w-[35%] p-2 flex flex-col gap-3 '>
+                <div className='w-2/3  flex flex-col  items-end md:items-center'>
+                    <div className='  w-[190px] sm:w-[35%] p-2 flex flex-col  gap-3  '>
                         <input
                             type="text"
                             name="name"
