@@ -3,10 +3,9 @@ import { Table } from 'flowbite-react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { blockkennelowner,unblockkennelowner } from '../../Api/Admin';
 import { useState } from 'react';
 import { Avatar } from '@nextui-org/react';
-
+import { blockkennelowner,unblockkennelowner } from '../../Api/admin';
 
 interface KennelOwner{
   _id:string,

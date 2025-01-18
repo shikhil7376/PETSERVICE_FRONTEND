@@ -5,9 +5,7 @@ import { userData } from "../Interface/DatatypeInterface";
 
 export const signup = async (userData: userData) => {
   try {
-    const response = await api.post(userRoutes.signup, userData);
-    console.log(response);
-    
+    const response = await api.post(userRoutes.signup, userData);    
     return response;
   } catch (error) {
     const err: Error = error as Error;

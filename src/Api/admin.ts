@@ -106,9 +106,7 @@ export const getDashboard = async()=>{
 
 export const blockPost = async (postId:string)=>{
     try {
-      const response = await api.post(adminRoutes.blockPost,{postId:postId})
-      console.log('blockresonse',response);
-      
+      const response = await api.post(adminRoutes.blockPost,{postId:postId})      
       return response
     } catch (error) {
       errorHandle(error)
@@ -117,9 +115,7 @@ export const blockPost = async (postId:string)=>{
 
   export const unblockPost = async(postId:string)=>{
     try {
-        const response = await api.post(adminRoutes.unblockPost,{postId:postId})
-        console.log("unblockresponse",response);
-        
+        const response = await api.post(adminRoutes.unblockPost,{postId:postId})        
         return response
     } catch (error) {
       errorHandle(error)        

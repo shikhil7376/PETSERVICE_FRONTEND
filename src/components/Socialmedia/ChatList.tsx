@@ -6,9 +6,6 @@ import { useState } from 'react';
 import { getchatUser } from '../../Api/User';
 import { createChat,fetchChat } from '../../Api/chat';
 import { useEffect } from 'react';
-import { IoIosNotifications } from "react-icons/io";
-import NotificationBadge from "react-notification-badge";
-import { Effect } from "react-notification-badge";
 import errorHandle from '../../Api/Error';
 import { userData,chat } from '../../Interface/DatatypeInterface';
 

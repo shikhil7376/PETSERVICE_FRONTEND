@@ -8,11 +8,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/Store';
 import { likePost } from '../../../Api/User';
 import errorHandle from '../../../Api/Error';
-import { FaRegComment } from "react-icons/fa";
 import AddComment from '../../Socialmedia/AddComment';
 import { follow } from '../../../Api/User';
 import { useNavigate } from 'react-router-dom';
-import { MdReportProblem } from "react-icons/md";
 import ReportModal from '../../Socialmedia/ReportModal';
 import { checkReportStatus } from '../../../Api/User';
 
@@ -71,12 +69,7 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, fetchData, fetchNotFoll
       const response = await follow(userData?._id as string, post.user?.userid as string)
       if (response) {
         fetchData()
-        fetchNotFollowData(userData?._id as string)
-        // if(post.user?.followers.includes(userData?._id as string)) {
-        //   setIsFollowing(false)
-        // }else{
-        //   setIsFollowing(true)
-        // }      
+        fetchNotFollowData(userData?._id as string)     
       }
     } catch (error) {
       errorHandle(error)
@@ -126,12 +119,10 @@ const ContentCard: React.FC<ContentCardProps> = ({ post, fetchData, fetchNotFoll
           <p className=" text-gray-400 text-sm font-roboto">Likes</p>
         </div>
         <div className="flex gap-1">
-          {/* <FaRegComment className='text-default-400' size={20}/> */}
           <AddComment postId={post.id as string} />
           <p className="text-sm text-gray-400 font-roboto">Comment</p>
         </div>
         <div className='w-full flex justify-end'>
-          {/* <MdReportProblem color='red' size={17}/> */}
           <ReportModal postId={post.id as string} postUserId={post.user?.userid} reported={reported} fetchReports = {fetchData} setreport = {setReported}/>
         </div>
       </CardFooter>

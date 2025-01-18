@@ -34,11 +34,6 @@ export const sendMessage = async(data:FormData)=>{
     try {      
         const response = await api.post(chatRoutes.sendMessage,data)
         return response
-        
-        // const response = await api.post(chatRoutes.sendMessage,{userId: userId, content: content, chatId: chatId})
-        // return response
-
-        // const response = await api.post(chatRoutes.sendMessage,{data})
     } catch (error) {
       errorHandle(error)   
     }
