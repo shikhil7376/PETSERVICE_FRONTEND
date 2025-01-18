@@ -14,12 +14,16 @@ import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postdetails } from '../../Interface/DatatypeInterface';
+import AddPost from '../../components/Socialmedia/AddPost';
 
 const SocialmediaLayout = () => {
   const [posts, setPosts] = useState<postdetails[]>([]);
   const [data, setData] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState<postdetails[]>([]); // Posts filtered based on search
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
+   const [isOpen, setIsOpen] = useState(false);
+      const onOpen = () => setIsOpen(true);
+      const onClose = () => setIsOpen(false);
 
 const navigate = useNavigate()
   const userData = useSelector((state: RootState) => state.user.userdata);
@@ -61,7 +65,6 @@ const navigate = useNavigate()
 
   return (
     <div className="flex bg-black h-screen ">
-      
       <div className='h-screen p-5 md:w-1/5 hidden sm:block'>
         <Sidebar fetchData={fetchData} setSearchQuery={setSearchQuery}/>
       </div>
@@ -69,13 +72,17 @@ const navigate = useNavigate()
         <div className='flex items-center justify-between  rounded-md p-2'> 
           <IoMdHome size={20} className='text-gray-500'/>
           <IoSearchOutline size={20} className='text-gray-500' />
-          <PiSquaresFourBold size={20} className='text-gray-500'/>
+          <PiSquaresFourBold size={20} className='text-gray-500' onClick={onOpen}/>
           < LuMessagesSquare size={20} className='text-gray-500'  onClick={()=>navigate('/message')}/>
-          <FaUser size={20} className='text-gray-500'/>
+          <FaUser size={20} className='text-gray-500' onClick={ ()=>navigate(`/profile/${userData?._id}`)}/>
         </div>
       </div>
       <Content posts={filteredPosts} fetchData={fetchData} fetchNotFollowData={fetchNotFollowData}  />
-      <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} fetchData={fetchData} />    
+      <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} fetchData={fetchData} />  
+     
+      <AddPost fetchData={fetchData} isOpen={isOpen} onClose={onClose} />
+       
+ 
     </div>
   )
 }

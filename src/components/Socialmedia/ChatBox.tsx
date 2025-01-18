@@ -302,7 +302,8 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
               isOpen={isOpen}
               onOpenChange={onClose}  // Modal uses onOpenChange to handle closing
               classNames={{
-                backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
+                backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
+                 base: "mb-[390px]"
               }}
             >
               <ModalContent>
@@ -382,7 +383,7 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
           </div>
 
 
-          <div className='fixed mt-6 md:mt-0 md:w-[700px] ml-2 rounded-lg '>
+          <div className='fixed mt-6 md:mt-0 w-[390px] md:w-[700px] ml-2 rounded-lg '>
             <div className='flex gap-1 md:gap-2 items-center'>
               <button
                 type='button'

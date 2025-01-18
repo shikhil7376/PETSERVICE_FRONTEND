@@ -93,7 +93,8 @@ const AddPost: React.FC<addPostProps> = ({ isOpen, onClose,fetchData }) => {
           isOpen={isOpen}
           onOpenChange={onClose} 
           classNames={{
-            backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
+            backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20 ",
+            base: "mb-[390px]"
           }}
         >
           <ModalContent>

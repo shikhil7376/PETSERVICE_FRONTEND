@@ -40,7 +40,7 @@ const ChatPage = () => {
             >
                 < IoAppsOutline/>
             </button>
-        <ChatList setActiveChat={setActiveChat} notification ={notification} setNotification={setNotification} onlineUsers={onlineUsers} isOpen={isChatListOpen}  toggleOpen={() => setIsChatListOpen(!isChatListOpen)} fetchAgain={fetchAgain}/>
+        <ChatList setActiveChat={setActiveChat} notification ={notification} setNotification={setNotification} onlineUsers={onlineUsers} isOpen={isChatListOpen}  toggleOpen={() => setIsChatListOpen(!isChatListOpen)} fetchAgain={fetchAgain} />
       
       <ChatBox activeChat={activeChat} notification ={notification} setNotification={setNotification}  onlineUsers={onlineUsers}  setOnlineUsers={setOnlineUsers} setFetchAgain = {setFetchAgain} />
       </div>

@@ -108,7 +108,7 @@ const KennelList = () => {
 <div className="filter h-auto rounded-2xl flex flex-col w-[90%] sm:w-[68%]  p-2  gap-2">
 <div className=" items-center ">
     <Input
-      className="rounded-3xl w-full sm:w-auto"
+      className="rounded-3xl w-[300px] sm:w-auto"
       placeholder="Search"
       onChange={handleSearch}
       value={searchQuery}

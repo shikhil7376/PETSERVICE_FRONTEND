@@ -41,7 +41,7 @@ const Header = ({notification,setNotification,setActiveChat}) => {
   return (
     <div className='p-3 flex justify-end'>
       <div className='relative'>
-   <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer" />
+   <IoIosNotifications color='gray' size={20} onClick={toggleDropdown} className="cursor-pointer " />
     <NotificationBadge count={notification.length}  effect ={Effect.SCALE}/>
    {showDropdown && (
             <div className='absolute right-0 mt-6 w-64 bg-white rounded-md shadow-lg p-2 z-10'>
