@@ -32,7 +32,7 @@ interface Message {
   type?: 'text' | 'audio'
 }
 
-const ENDPOINT = "http://localhost:8000"
+const ENDPOINT = import.meta.env.VITE_BASE_URL 
 
 var socket, selectedChatCompare
 

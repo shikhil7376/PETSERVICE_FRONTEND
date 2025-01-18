@@ -1,4 +1,4 @@
-import api from "../Services/Axios";
+import api from "../Services/axios";
 import userRoutes from "../Services/Endpoint/userEndPoint";
 import errorHandle from "./Error";
 import { userData } from "../Interface/DatatypeInterface";
@@ -30,7 +30,7 @@ export const otpVerify = async (
 };
 
 export const login = async (userData: userData) => {
-  try {
+  try { 
     const response = await api.post(userRoutes.userLogin, userData);
     return response;
   } catch (error) {
