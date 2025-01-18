@@ -16,6 +16,9 @@ const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
+   console.log('menuopen',menuOpen);
+   
+
   const handleSignup = () => {
     navigate('/login');
   };
@@ -46,9 +49,9 @@ const Header = () => {
   return (
     <div className='p-2 '>
       <Toaster position='top-center'/>
-      <nav className='navbar flex justify-between items-center '>
-        <div className='logo w-1/6 flex items-center justify-center'>
-          <img src='pics/logo.jpg' className='w-10 h-10' alt='Logo' />
+      <nav className='navbar flex items-center '>
+        <div className='logo w-1/6 flex items-center justify-center '>
+          <img src='pics/logo.jpg' onClick={()=>navigate('/')} className='w-10 h-10' alt='Logo' />
         </div>
         <div className='section w-2/3  hidden sm:flex justify-evenly '>
           {/* <ul className='flex justify-evenly '> */}
@@ -60,25 +63,15 @@ const Header = () => {
             {/* <Link to={''} className='text-small font-semibold font-roboto hover:text-purple-600 hover:underline cursor-pointer transition duration-300'>Contact</Link> */}
           {/* </ul> */}
         </div>
-        <div className="sm:hidden flex-1 flex justify-end">
-          <HiMenu className="text-2xl cursor-pointer" onClick={toggleMenu} />
+        <div className="sm:hidden flex-1 flex justify-end mr-5 ">
+         <HiMenu className="text-2xl cursor-pointer" onClick={toggleMenu} />
         </div>
 
-        {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-lg sm:hidden">
-            <ul className="flex flex-col items-center space-y-2 py-4">
-              <Link to={'/'} className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>
-                Home
-              </Link>
-              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Services</li>
-              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Feaures</li>
-              <li className='text-small font-semibold font-roboto hover:text-purple-600 cursor-pointer transition duration-300'>Contact</li>
-            </ul>
-          </div>
-        )}
+       
         <div className='signup w-1/6 flex items-center justify-center mt-1'>
+   
           {userdata ? (
-            <Dropdown isOpen={dropdownVisible} onClose={() => setDropdownVisible(false)}>
+            <Dropdown isOpen={dropdownVisible} onClose={() => setDropdownVisible(false)} className=''>
               <DropdownTrigger>
                 <Avatar
                   isBordered
@@ -103,16 +96,50 @@ const Header = () => {
               </DropdownMenu>
             </Dropdown>
           ) : (
-            <Button
-              radius="full"
-              className="bg-gradient-to-tr from-[#B249F8] to-[#FF1CF7] text-white shadow-lg font-semibold"
+            <button
+              className="bg-gradient-to-tr p-2 rounded-md from-[#B249F8] to-[#FF1CF7] text-white shadow-lg font-roboto text-sm mr-4"
               onClick={handleSignup}
             >
               SignIn
-            </Button>
+            </button>
           )}
         </div>
       </nav>
+      {menuOpen && (
+  <div className="fixed top-0 left-0  w-full h-full bg-black bg-opacity-50 z-50 flex justify-end">
+    <div
+      className="w-[150px] h-[250px] bg-white shadow-lg p-4 slide-in-right rounded-lg"
+    >
+      <button
+        className="text-white hover:text-gray-800 text-md mb-4 bg-red-500 p-1 rounded-md font-roboto "
+        onClick={toggleMenu}
+      >
+        Close
+      </button>
+      <Link
+        to={'/'}
+        className="block  font-roboto py-2 hover:text-purple-600 hover:underline cursor-pointer"
+        onClick={toggleMenu}
+      >
+        Home
+      </Link>
+      <Link
+        to={'/#services'}
+        className="block  py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
+        onClick={toggleMenu}
+      >
+        Services
+      </Link>
+      <Link
+        to={'/#features'}
+        className="block text- py-2 font-roboto hover:text-purple-600 hover:underline cursor-pointer"
+        onClick={toggleMenu}
+      >
+        Features
+      </Link>
+    </div>
+  </div>
+)}
       <div
         className="navbar-line bg-slate-300"
         style={{
