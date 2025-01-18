@@ -1,6 +1,7 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+import React from 'react';
 import { Sidebar } from "flowbite-react";
-import { HiArrowSmRight, HiChartPie, HiUser, HiLibrary  } from "react-icons/hi";
+import { HiArrowSmRight, HiChartPie, HiUser, HiLibrary } from "react-icons/hi";
 import { MdReportProblem } from "react-icons/md";
 
 const AdminSidebar = () => {

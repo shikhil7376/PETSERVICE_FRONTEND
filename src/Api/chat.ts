@@ -3,6 +3,7 @@ import chatRoutes from "../Services/Endpoint/chatEndPoint";
 import errorHandle from "./Error";
 
 
+
 export const createChat = async(currentId:string,userId:string)=>{
     try {
         const response = await api.post(chatRoutes.getchatUser,{currentId:currentId,userId:userId})

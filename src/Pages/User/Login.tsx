@@ -16,7 +16,6 @@ import { RootState } from "../../Redux/Store";
 import { Errors } from "../../Interface/DatatypeInterface";
 import errorHandle from "../../Api/Error";
 
-
   
 const Login = () => {
   const navigate = useNavigate();

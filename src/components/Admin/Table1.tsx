@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 import { Avatar } from '@nextui-org/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
 import { blockUser,unBlockUser } from '../../Api/Admin';
+import { useState } from 'react';
 
 interface Userdata {
     _id: string;

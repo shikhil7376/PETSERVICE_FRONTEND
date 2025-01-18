@@ -14,6 +14,7 @@ import { IoAppsOutline } from "react-icons/io5";
 
 
 
+
 const Booking = () => {
   const { cageid, fromdate, todate } = useParams<{ cageid: string, fromdate: string, todate: string }>();
   const [details, setDetails] = useState<CageData>({});

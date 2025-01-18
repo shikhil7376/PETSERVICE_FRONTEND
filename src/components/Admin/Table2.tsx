@@ -3,8 +3,8 @@ import { Table } from 'flowbite-react';
 import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
 import { approveRequests,rejectRequests } from '../../Api/Admin';
+import { useState } from 'react';
 
 interface KennnelOwner{
     _id:string,

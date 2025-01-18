@@ -10,6 +10,7 @@ import EditPost from './EditPost';
 import { deletePost } from '../../Api/User';
 import { toast } from 'react-toastify';
 
+
 type Card = {
   _id:string;
   comments:number;
