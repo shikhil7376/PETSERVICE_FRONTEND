@@ -1,5 +1,5 @@
 import React from 'react'
-import { getMessages, sendMessage } from '../../Api/chat';
+import { getMessages, sendMessage } from '../../Api/Chat';
 import { useState, useEffect, useCallback } from 'react';
 import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
@@ -16,7 +16,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useNavigate } from 'react-router-dom';
 import { Input } from "../../components/ui/input";
 import { MdDelete } from "react-icons/md";
-import { deleteMessage } from '../../Api/chat';
+import { deleteMessage } from '../../Api/Chat';
 
 
 interface Message {

@@ -5,7 +5,7 @@ import { Avatar } from '@nextui-org/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import { blockUser,unBlockUser } from '../../Api/admin';
+import { blockUser,unBlockUser } from '../../Api/Admin';
 
 interface Userdata {
     _id: string;

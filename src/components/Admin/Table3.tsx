@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { Avatar } from '@nextui-org/react';
-import { blockkennelowner,unblockkennelowner } from '../../Api/admin';
+import { blockkennelowner,unblockkennelowner } from '../../Api/Admin';
 
 interface KennelOwner{
   _id:string,

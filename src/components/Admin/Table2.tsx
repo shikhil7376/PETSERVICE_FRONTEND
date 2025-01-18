@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import { approveRequests,rejectRequests } from '../../Api/admin';
+import { approveRequests,rejectRequests } from '../../Api/Admin';
 
 interface KennnelOwner{
     _id:string,
