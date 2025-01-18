@@ -41,7 +41,7 @@ const ViewDetails = () => {
     }, [cageid]);
     return (
         <div className=''>
-            <div className='flex flex-col sm:flex-row pl-1 gap-2'>
+            <div className='flex flex-col sm:flex-row items-center pl-1 gap-2 '>
                 <div className='image1 w-[308px] sm:w-[400px] sm:h-[412px] pl-2  overflow-hidden'>
                     {details.image && details.image[0] && (
                         <img src={details.image[0]} alt="Kennel Image 1" className='w-full h-full object-cover' />
@@ -96,7 +96,7 @@ const ViewDetails = () => {
                 </div>
                 <div className=' p-5 border-1 bg-white rounded-2xl  drop-shadow-xl'>
                     <h2 className=' font-semibold text-center '>Price:${details.pricepernight}/per night</h2>
-                    <div className='p-2'>
+                    <div className='p-2 flex flex-col gap-2'>
                     <p className='text-small text-gray-500 font-semibold flex items-center gap-1'>check in:  <CiCalendarDate size={20} /> {fromdate && fromdate !== 'undefined' ? fromdate : ''}</p>
                     <p className='text-small text-gray-500 font-semibold flex items-center gap-1' >check out:<CiCalendarDate size={20} /> {todate && todate !== 'undefined' ? todate : ''}</p>
                     </div>

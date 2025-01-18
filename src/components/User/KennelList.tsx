@@ -105,17 +105,24 @@ const KennelList = () => {
   return (
     <div className=' flex flex-col items-center  min-h-screen '>
 
-      <div className='filter w-[70%] h-[50px] rounded-2xl display flex '>
-        <DateRangePicker minValue={today('UTC')} onChange={filterByDate}
-          label="Stay duration"
-          className="w-[300px] drop-shadow-lg"
-        />
-        <div className='pl-5 items-center mt-2'>
-          <Input className='rounded-3xl' placeholder='search'  onChange={handleSearch}
-            value={searchQuery}/>
-        </div>
+<div className="filter h-auto rounded-2xl flex flex-col w-[90%] sm:w-[68%]  p-2  gap-2">
+<div className=" items-center ">
+    <Input
+      className="rounded-3xl w-full sm:w-auto"
+      placeholder="Search"
+      onChange={handleSearch}
+      value={searchQuery}
+    />
+  </div>
+  <DateRangePicker
+    minValue={today('UTC')}
+    onChange={filterByDate}
+    label="Stay duration"
+    className="w-[300px] drop-shadow-lg"
+  />
 
-      </div>
+</div>
+
       <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5  p-3'>
         {filteredPosts.map((cage, index) => (
           <div key={index}  onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}>

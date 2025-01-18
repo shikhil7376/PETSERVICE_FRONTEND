@@ -26,7 +26,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ latitude, longitude }) => {
   }, [latitude, longitude]);
 
   return (
-    <div className="pl-5">
+    <div className=" sm:w-[40%]  flex justify-center">
       <MapContainer center={markerPosition} zoom={13} style={{ height: "412px", width: "350px" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

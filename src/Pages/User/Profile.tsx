@@ -194,7 +194,7 @@ const Profile = () => {
   <button 
     onClick={handleChanges} 
     disabled={loading}  
-    className='bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] text-white font-semibold p-2 text-center rounded-full text-small'
+    className='text-white p-2 text-sm bg-button-gradient font-roboto rounded-lg'
   >
     {loading ? 'SAVING...' : 'SAVE CHANGES'}
   </button>
