@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import { createRoot } from 'react-dom/client'
 import {NextUIProvider} from '@nextui-org/react'
 import {ToastContainer} from 'react-toastify'
-import { store,persistor } from './Redux/Store.ts'
 import { Provider } from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css'
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -11,6 +10,7 @@ import Modal from 'react-modal';
 import { PersistGate } from 'redux-persist/integration/react'
 import App from './App.tsx'
 import './index.css'
+import { store,persistor } from './Redux/Store.ts'
 
 
 Modal.setAppElement('#root');
