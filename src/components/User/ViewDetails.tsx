@@ -1,7 +1,7 @@
 import React from 'react'
 import { viewDetails } from '../../Api/Kennel'
 import { useParams } from 'react-router-dom'
-import { toast } from 'react-toastify';
+import { toast,Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -12,18 +12,27 @@ import { IoMdHome } from "react-icons/io";
 import { CiCalendarDate } from "react-icons/ci";
 import errorHandle from '../../Api/Error';
 import LeafletMap from './LeafletMap';
+import { useSelector} from 'react-redux';
+import { RootState } from '../../Redux/Store';
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 const ViewDetails = () => {
     const { cageid, fromdate, todate } = useParams<{ cageid: string; fromdate: string; todate: string }>();
     const [details, setDetails] = useState<CageData>({});
+    const [loading,setLoading] = useState(false)
+    const userdata = useSelector((state:RootState) => state.user.userdata);
+
     const navigate = useNavigate()
     const fetchViewDetails = async () => {
+         setLoading(true)
         if (cageid) {
             try {
                 const response = await viewDetails(cageid);
                 setDetails(response?.data.message);
             } catch (error) {
                errorHandle(error)
+            }finally{
+                setLoading(false)
             }
         }
     };
@@ -31,8 +40,31 @@ const ViewDetails = () => {
     const handleButtonClick = () => {
         if (!fromdate || !todate || fromdate === 'undefined' || todate === 'undefined') {
             navigate('/get-kennels');
+            toast.error('Date okke shradikkande Ambanee..😁 !!', {
+                style: {
+                  fontFamily: 'Roboto, sans-serif',
+                  fontSize: '16px',
+                  color: 'white',
+                  backgroundColor: '#333',
+                  padding: '10px',
+                  borderRadius: '8px',
+                },
+              });
         } else {
-            navigate(`/booking/${cageid}/${fromdate}/${todate}`)
+            // navigate(`/booking/${cageid}/${fromdate}/${todate}`)
+            toast.error('Aadyam Login pinne Booking 😎!!', {
+                    style: {
+                      fontFamily: 'Roboto, sans-serif',
+                      fontSize: '16px',
+                      color: 'white',
+                      backgroundColor: '#333',
+                      padding: '10px',
+                      borderRadius: '8px',
+                    },
+                  });
+            setTimeout(() => {
+                navigate(`/booking/${cageid}/${fromdate}/${todate}`);
+            }, 1000);
         }
     };
 
@@ -40,8 +72,14 @@ const ViewDetails = () => {
         fetchViewDetails();
     }, [cageid]);
     return (
-        <div className=''>
-            <div className='flex flex-col sm:flex-row items-center pl-1 gap-2 '>
+        <div className={loading ? "min-h-screen" : "h-auto"}>
+            {
+                loading?(
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <PacmanLoader size={40} color="#ffffff" />
+                  </div>
+                ):(<>
+                 <div className='flex flex-col sm:flex-row items-center pl-1 gap-2 '>
                 <div className='image1 w-[308px] sm:w-[400px] sm:h-[412px] pl-2  overflow-hidden'>
                     {details.image && details.image[0] && (
                         <img src={details.image[0]} alt="Kennel Image 1" className='w-full h-full object-cover' />
@@ -106,6 +144,10 @@ const ViewDetails = () => {
                     </div>
                 </div>
             </div>
+                
+                </>)
+            }
+           
 
         </div>
     )

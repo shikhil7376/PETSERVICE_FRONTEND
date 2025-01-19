@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import React, { useEffect, } from 'react'
+import { useState,useRef } from 'react';
 import { Button, Avatar, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearUserdata } from '../../Redux/Slices/AuthSlice';
 import { toast,Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link,useLocation } from 'react-router-dom';
 import { RootState } from '../../Redux/Store';
 import { HiMenu } from 'react-icons/hi'; // Import the menu icon from react-icons
 
@@ -16,12 +16,30 @@ const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-   console.log('menuopen',menuOpen);
-   
-
+  
   const handleSignup = () => {
     navigate('/login');
   };
+
+  const location = useLocation();
+  const toastShown = useRef(false); // Track if toast has already been shown
+
+  useEffect(() => {
+    // Only show toast if it has not been shown already
+    if (location.state?.showToast && !toastShown.current) {
+      toast.error('SignIn cheyy Mwonoose 😉😉!!!', {
+        style: {
+          fontFamily: 'Roboto, sans-serif',
+          fontSize: '16px',
+          color: 'white',
+          backgroundColor: '#333',
+          padding: '10px',
+          borderRadius: '8px',
+        },
+      });
+      toastShown.current = true; // Set flag to true to prevent showing again
+    }
+  }, [location]);
 
   const handleSignOut = () => {
     localStorage.removeItem('token');

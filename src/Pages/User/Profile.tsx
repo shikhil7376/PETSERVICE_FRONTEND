@@ -165,13 +165,13 @@ const Profile = () => {
                   />
                   <div className="display flex gap-2">
                     <p
-                      className="text-sm text-gray-500"
+                      className="text-sm text-gray-500 text-center"
                       onClick={() => toggleModal("followers")}
                     >
                       followers: {profile?.followers}
                     </p>
                     <p
-                      className="text-sm text-gray-500"
+                      className="text-sm text-gray-500 text-center"
                       onClick={() => toggleModal("following")}
                     >
                       following: {profile?.following}

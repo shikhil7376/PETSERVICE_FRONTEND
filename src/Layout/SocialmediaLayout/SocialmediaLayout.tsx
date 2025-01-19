@@ -15,12 +15,16 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { postdetails } from '../../Interface/DatatypeInterface';
 import AddPost from '../../components/Socialmedia/AddPost';
+import PacmanLoader from "react-spinners/PacmanLoader";
+import errorHandle from '../../Api/Error';
 
 const SocialmediaLayout = () => {
   const [posts, setPosts] = useState<postdetails[]>([]);
   const [data, setData] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState<postdetails[]>([]); // Posts filtered based on search
   const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [loading,setLoading] = useState(false)
+
    const [isOpen, setIsOpen] = useState(false);
       const onOpen = () => setIsOpen(true);
       const onClose = () => setIsOpen(false);
@@ -36,11 +40,18 @@ const navigate = useNavigate()
   };
 
   const fetchData = async () => {
-    const response = await getPosts();
-    if (response) {
-      setPosts(response.data.data);
-      setFilteredPosts(response.data.data); 
-    }
+     try {
+      setLoading(true)
+      const response = await getPosts();
+      if (response) {
+        setPosts(response.data.data);
+        setFilteredPosts(response.data.data); 
+      }
+     } catch (error) {
+        errorHandle(error)
+     }finally{
+        setLoading(false)
+     }
   };
 
   useEffect(() => {
@@ -65,7 +76,14 @@ const navigate = useNavigate()
 
   return (
     <div className="flex bg-black h-screen ">
-      <div className='h-screen p-5 md:w-1/5 hidden sm:block'>
+       {
+        loading?(
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <PacmanLoader size={40} color="#ffffff" />
+        </div>
+        ):(
+         <>
+          <div className='h-screen p-5 md:w-1/5 hidden sm:block'>
         <Sidebar fetchData={fetchData} setSearchQuery={setSearchQuery}/>
       </div>
       <div className='fixed z-50 bottom-0 p-2 w-full md:hidden'>
@@ -81,6 +99,10 @@ const navigate = useNavigate()
       <ThirdSection fetchNotFollowData={fetchNotFollowData} data={data} fetchData={fetchData} />  
      
       <AddPost fetchData={fetchData} isOpen={isOpen} onClose={onClose} />
+         </>
+        )
+       }
+     
        
  
     </div>
