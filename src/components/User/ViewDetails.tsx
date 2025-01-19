@@ -50,8 +50,7 @@ const ViewDetails = () => {
                   borderRadius: '8px',
                 },
               });
-        } else {
-           
+        } else { 
                 navigate(`/booking/${cageid}/${fromdate}/${todate}`);
         }
     };
