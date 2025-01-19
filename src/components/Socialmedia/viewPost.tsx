@@ -59,7 +59,7 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
     <Modal  backdrop="blur" isOpen={isOpen} onClose={onClose} 
     classNames={{
       backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20 ",
-      base: "mb-[200px]"
+      // base: "mb-[200px]"
     }}
     >
       <ModalContent>
