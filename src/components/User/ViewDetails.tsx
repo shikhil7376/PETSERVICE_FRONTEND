@@ -52,7 +52,8 @@ const ViewDetails = () => {
               });
         } else {
             // navigate(`/booking/${cageid}/${fromdate}/${todate}`)
-            toast.error('Aadyam Login pinne Booking 😎!!', {
+            if(!userdata){
+                toast.error('Aadyam Login pinne Booking 😎!!', {
                     style: {
                       fontFamily: 'Roboto, sans-serif',
                       fontSize: '16px',
@@ -62,6 +63,7 @@ const ViewDetails = () => {
                       borderRadius: '8px',
                     },
                   });
+            }
             setTimeout(() => {
                 navigate(`/booking/${cageid}/${fromdate}/${todate}`);
             }, 1000);
