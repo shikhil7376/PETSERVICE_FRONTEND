@@ -15,7 +15,7 @@ export default defineConfig({
       proxy:{
         '/api':
         {
-          target:'https://quixx.shop',
+          target:'https://quiix.shop',
           secure:false
         }
       }
