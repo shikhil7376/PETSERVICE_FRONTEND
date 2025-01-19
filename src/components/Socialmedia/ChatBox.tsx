@@ -15,7 +15,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useNavigate } from 'react-router-dom';
 import { Input } from "../../components/ui/input";
 import { MdDelete } from "react-icons/md";
-import { getMessages,sendMessage,deleteMessage } from '../../Api/chat';
+import { getMessages,sendMessage,deleteMessage } from '../../Api/Chat';
 
 
 interface Message {

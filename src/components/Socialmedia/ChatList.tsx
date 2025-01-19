@@ -7,7 +7,7 @@ import { getchatUser } from '../../Api/User';
 import { useEffect } from 'react';
 import errorHandle from '../../Api/Error';
 import { userData,chat } from '../../Interface/DatatypeInterface';
-import { createChat,fetchChat } from '../../Api/chat';
+import { createChat,fetchChat } from '../../Api/Chat';
 
 
 
