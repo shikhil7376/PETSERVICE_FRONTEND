@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar } from "@nextui-org/react";
 import { useEffect, useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaUpload } from 'react-icons/fa';
 import { getProfile, editProfile } from '../../Api/User';
 import { toast } from 'react-toastify';
@@ -24,14 +24,14 @@ const Profile = () => {
     const [selectedFile, setSelectedFile] = useState<File>();
     const [loading, setLoading] = useState<boolean>(false);
     const userData = useSelector((state: RootState) => state.user.userdata)
-    const [postData,setPostData] = useState([])
-    const [openModal,setOpenModal] = useState<boolean>(false)
+    const [postData, setPostData] = useState([])
+    const [openModal, setOpenModal] = useState<boolean>(false)
     const [modalType, setModalType] = useState<string>('');
+    const [fetchLoading, setfetchLoading] = useState(false)
 
- 
-    
+
     const dispatch = useDispatch();
-  
+
 
     const validateForm = () => {
         const newErrors: Errors = {};
@@ -49,18 +49,18 @@ const Profile = () => {
 
     const fetchData = async () => {
         if (userId) {
-            setLoading(true);
+            setfetchLoading(true)
             try {
                 const response = await getProfile(userId);
-                if(response){
+                if (response) {
                     setProfile(response?.data.message);
                     setInitialData(response?.data.message);
                     setPostData(response?.data.message.posts)
                 }
             } catch (error) {
                 toast.error('Failed to fetch profile data');
-            }finally {
-                setLoading(false); // Stop loading
+            } finally {
+                setfetchLoading(false)
             }
         } else {
             toast.error('User data is not available');
@@ -126,99 +126,137 @@ const Profile = () => {
         setOpenModal(true); // Open modal
     };
 
-    const handleToggleFollow = async()=>{
+    const handleToggleFollow = async () => {
         try {
-           const response = await follow(userData?._id as string,userId as string)
-           if (response) {            
-           fetchData()   
-          }
+            const response = await follow(userData?._id as string, userId as string)
+            if (response) {
+                fetchData()
+            }
         } catch (error) {
-          errorHandle(error)
+            errorHandle(error)
         }
-   }
+    }
 
     return (
-        <div className='h-auto'>
-            <div className='display flex '>
-                <div className='p-2 sm:w-1/3 bg-slate-3  flex justify-center  '>
-                    <div className='flex flex-col justify-center items-center gap-3'>
-                        <Avatar isBordered color="default" src={profile?.image || ''}
-                            style={{ width: "100px", height: "100px" }}
-                        />
-                        <FaUpload onClick={() => document.getElementById('fileInput')?.click()} />
-                        <input id='fileInput' type='file' onChange={handleFileChange} style={{ display: 'none' }} />
-                        <div className='display flex gap-2 '>
-                        <p className='text-sm  text-gray-500' onClick={() => toggleModal('followers')}>followers:{profile?.followers}</p>
-                        <p className='text-sm  text-gray-500' onClick={() => toggleModal('following')}>following:{profile?.following}</p>
-                        </div>
-                    </div>
-                    
+        <div className={fetchLoading ? "min-h-screen" : "h-auto"}>
+        {fetchLoading ? (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <PacmanLoader size={40} color="#ffffff" />
+          </div>
+        ) : (
+          <>
+            <div className="display flex">
+              <div className="p-2 sm:w-1/3 bg-slate-3 flex justify-center">
+                <div className="flex flex-col justify-center items-center gap-3">
+                  <Avatar
+                    isBordered
+                    color="default"
+                    src={profile?.image || ""}
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                  <FaUpload
+                    onClick={() => document.getElementById("fileInput")?.click()}
+                  />
+                  <input
+                    id="fileInput"
+                    type="file"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                  />
+                  <div className="display flex gap-2">
+                    <p
+                      className="text-sm text-gray-500"
+                      onClick={() => toggleModal("followers")}
+                    >
+                      followers: {profile?.followers}
+                    </p>
+                    <p
+                      className="text-sm text-gray-500"
+                      onClick={() => toggleModal("following")}
+                    >
+                      following: {profile?.following}
+                    </p>
+                  </div>
                 </div>
-                <div className='w-2/3  flex flex-col  items-end md:items-center'>
-                    <div className='  w-[190px] sm:w-[35%] p-2 flex flex-col  gap-3  '>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            value={profile?.name}
-                            onChange={handleInputChange}
-                            className="shadow appearance-none  border-none  rounded-full text-gray-500 w-full py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
-                            placeholder="Enter your name"
-                        />
-                        <input
-                            type="text"
-                            name="email"
-                            id="email"
-                            value={profile?.email}
-                            readOnly
-                            className="shadow appearance-none  border-none rounded-full w-full text-gray-500 py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
-                            placeholder="Enter your email"
-                        />
-                        <input
-                            type="text"
-                            name="phone"
-                            id="phone"
-                            onChange={handleInputChange}
-                            value={profile?.phone}
-                            className="shadow appearance-none border-none text-gray-500 rounded-full w-full py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
-                            placeholder="Enter your phone"
-                        />
-                                  {errors.phone && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.phone}</p>}
-                                  {errors.name && <p className='mt-2 text-sm font-semibold text-red-600'>{errors.name}</p>}
-                                  {userId !== userData?._id ? (
-             <button 
-            className='text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg'
-            onClick={handleToggleFollow}
-              // Add the click event handler
-             >
-               {profile?.followerss?.includes(userData?._id as string) ? 'Unfollow' : 'Follow'}
-               </button>
-) : (
-  <button 
-    onClick={handleChanges} 
-    disabled={loading}  
-    className='text-white p-2 text-sm bg-button-gradient font-roboto rounded-lg'
-  >
-    {loading ? 'SAVING...' : 'SAVE CHANGES'}
-  </button>
-)}       
-
-                    </div>
-
+              </div>
+              <div className="w-2/3 flex flex-col items-end md:items-center">
+                <div className="w-[190px] sm:w-[35%] p-2 flex flex-col gap-3">
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={profile?.name}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border-none rounded-full text-gray-500 w-full py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
+                    placeholder="Enter your name"
+                  />
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    value={profile?.email}
+                    readOnly
+                    className="shadow appearance-none border-none rounded-full w-full text-gray-500 py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
+                    placeholder="Enter your email"
+                  />
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    onChange={handleInputChange}
+                    value={profile?.phone}
+                    className="shadow appearance-none border-none text-gray-500 rounded-full w-full py-2 px-6 leading-tight focus:outline-none focus:shadow-outline text-small backdrop-blur-sm bg-white/30 placeholder-black"
+                    placeholder="Enter your phone"
+                  />
+                  {errors.phone && (
+                    <p className="mt-2 text-sm font-semibold text-red-600">
+                      {errors.phone}
+                    </p>
+                  )}
+                  {errors.name && (
+                    <p className="mt-2 text-sm font-semibold text-red-600">
+                      {errors.name}
+                    </p>
+                  )}
+                  {userId !== userData?._id ? (
+                    <button
+                      className="text-white p-2 text-sm bg-button-gradient font-semibold rounded-lg"
+                      onClick={handleToggleFollow}
+                    >
+                      {profile?.followerss?.includes(userData?._id as string)
+                        ? "Unfollow"
+                        : "Follow"}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleChanges}
+                      disabled={loading}
+                      className="text-white p-2 text-sm bg-button-gradient font-roboto rounded-lg"
+                    >
+                      {loading ? "SAVING..." : "SAVE CHANGES"}
+                    </button>
+                  )}
                 </div>
+              </div>
             </div>
-
-            {loading && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <PacmanLoader size={40} color="#ffffff" />
-                </div>
-            )}
-            <div className='border-t border-gray-300 mt-10 '></div> {/* This is the line */}
-            <div className='mt-5 p-5'>
-                <FocusCardsDemo postData ={postData} userId={userId} setPostData={setPostData}/>
+            <div className="border-t border-gray-300 mt-10"></div>
+            <div className="mt-5 p-5">
+              <FocusCardsDemo
+                postData={postData}
+                userId={userId}
+                setPostData={setPostData}
+              />
             </div>
-            <FollowersList isOpen={openModal} onClose={() => setOpenModal(false)} modalType={modalType} id={userId}/>
-        </div>
+            <FollowersList
+              isOpen={openModal}
+              onClose={() => setOpenModal(false)}
+              modalType={modalType}
+              id={userId}
+            />
+          </>
+        )}
+      </div>
+      
     )
 }
 

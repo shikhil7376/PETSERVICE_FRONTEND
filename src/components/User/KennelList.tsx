@@ -11,7 +11,7 @@ import { CageData } from '../../Interface/DatatypeInterface';
 import { today } from '@internationalized/date';
 import { Input } from "../../components/ui/input";
 import errorHandle from '../../Api/Error';
-
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 const KennelList = () => {
   const navigate = useNavigate()
@@ -20,20 +20,23 @@ const KennelList = () => {
   const [todate, settodate] = useState<string | null>()
   const [duplicatecages, setduplicatecages] = useState<CageData[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredPosts, setFilteredPosts]= useState<CageData[]>([])
-
+  const [filteredPosts, setFilteredPosts] = useState<CageData[]>([])
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fetchCage = async () => {
     try {
+      setLoading(true)
       const response = await getCage()
       setCages(response?.data.data || [])
       setduplicatecages(response?.data.data || [])
     } catch (error) {
-     errorHandle(error)
+      errorHandle(error)
+    } finally {
+      setLoading(false)
     }
   }
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => { 
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value); // Update the search query in the parent component
   };
 
@@ -105,51 +108,62 @@ const KennelList = () => {
   return (
     <div className=' flex flex-col items-center  min-h-screen '>
 
-<div className="filter h-auto rounded-2xl flex flex-col w-[90%] sm:w-[68%]  p-2  gap-2">
-<div className=" items-center ">
-    <Input
-      className="rounded-3xl w-[300px] sm:w-auto"
-      placeholder="Search"
-      onChange={handleSearch}
-      value={searchQuery}
-    />
-  </div>
-  <DateRangePicker
-    minValue={today('UTC')}
-    onChange={filterByDate}
-    label="Stay duration"
-    className="w-[300px] drop-shadow-lg"
-  />
-
-</div>
-
-      <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5  p-3'>
-        {filteredPosts.map((cage, index) => (
-          <div key={index}  onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}>
-            <Image
-              isZoomed
-              alt="NextUI Fruit Image with Zoom"
-              src={cage.image?.[2]}
-              style={{ height: '235px', width: '200px' }}
-            />
-            <div className='display  justify-between p-1'>
-              <h2 className='font-roboto text-small'>{cage.kennelname}</h2>
-            </div>
-            <div className='display flex justify-between items-center'>
-              <p className='text-gray-500 font-roboto text-sm'>Price:${cage.pricepernight}</p>
-
-              <Button
-                radius="full"
-                className="bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] p-2 text-white shadow-lg font-semibold text-small"
-                onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}
-              >
-                View Details
-              </Button>
+      {
+        loading ? (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <PacmanLoader size={40} color="#ffffff" />
+        </div>
+        ) : (
+          <>
+            <div className="filter h-auto rounded-2xl flex flex-col w-[90%] sm:w-[68%]  p-2  gap-2">
+              <div className=" items-center ">
+                <Input
+                  className="rounded-3xl w-[300px] sm:w-auto"
+                  placeholder="Search"
+                  onChange={handleSearch}
+                  value={searchQuery}
+                />
+              </div>
+              <DateRangePicker
+                minValue={today('UTC')}
+                onChange={filterByDate}
+                label="Stay duration"
+                className="w-[300px] drop-shadow-lg"
+              />
 
             </div>
-          </div>
-        ))}
-      </div>
+
+            <div className=' grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-5  p-3'>
+              {filteredPosts.map((cage, index) => (
+                <div key={index} onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}>
+                  <Image
+                    isZoomed
+                    alt="NextUI Fruit Image with Zoom"
+                    src={cage.image?.[2]}
+                    style={{ height: '235px', width: '200px' }}
+                  />
+                  <div className='display  justify-between p-1'>
+                    <h2 className='font-roboto text-small'>{cage.kennelname}</h2>
+                  </div>
+                  <div className='display flex justify-between items-center'>
+                    <p className='text-gray-500 font-roboto text-sm'>Price:${cage.pricepernight}</p>
+
+                    <Button
+                      radius="full"
+                      className="bg-gradient-to-tr from-[#B249F8] to-[#5e1bac] p-2 text-white shadow-lg font-semibold text-small"
+                      onClick={() => navigate(`/view-details/${cage._id}/${fromdate}/${todate}`)}
+                    >
+                      View Details
+                    </Button>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+
+        )
+      }
     </div>
   )
 }
