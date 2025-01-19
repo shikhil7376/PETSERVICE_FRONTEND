@@ -51,22 +51,8 @@ const ViewDetails = () => {
                 },
               });
         } else {
-            // navigate(`/booking/${cageid}/${fromdate}/${todate}`)
-            if(!userdata){
-                toast.error('Aadyam Login pinne Booking 😎!!', {
-                    style: {
-                      fontFamily: 'Roboto, sans-serif',
-                      fontSize: '16px',
-                      color: 'white',
-                      backgroundColor: '#333',
-                      padding: '10px',
-                      borderRadius: '8px',
-                    },
-                  });
-            }
-            setTimeout(() => {
+           
                 navigate(`/booking/${cageid}/${fromdate}/${todate}`);
-            }, 1000);
         }
     };
 
