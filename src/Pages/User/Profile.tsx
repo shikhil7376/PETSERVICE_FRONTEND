@@ -49,6 +49,7 @@ const Profile = () => {
 
     const fetchData = async () => {
         if (userId) {
+            setLoading(true);
             try {
                 const response = await getProfile(userId);
                 if(response){
@@ -58,6 +59,8 @@ const Profile = () => {
                 }
             } catch (error) {
                 toast.error('Failed to fetch profile data');
+            }finally {
+                setLoading(false); // Stop loading
             }
         } else {
             toast.error('User data is not available');
