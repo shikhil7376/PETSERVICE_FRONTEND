@@ -4,6 +4,8 @@ import errorHandle from "../Api/Error";
 
 const BASE_URL ='https://quiix.shop/api'
 
+// const BASE_URL = 'http://localhost:8000/api'
+
 const api = axios.create({
   baseURL: BASE_URL, 
   withCredentials: true,

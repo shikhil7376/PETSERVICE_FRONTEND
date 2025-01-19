@@ -16,6 +16,7 @@ export default defineConfig({
         '/api':
         {
           target:'https://quiix.shop',
+          // target:'http://localhost:8000',
           changeOrigin: true, // Matches the Origin header
            secure: true,  
         }

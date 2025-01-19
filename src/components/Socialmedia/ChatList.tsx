@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/Store';
 import { useState } from 'react';
 import { getchatUser } from '../../Api/User';
-import { createChat,fetchChat } from '../../Api/Chat';
 import { useEffect } from 'react';
 import errorHandle from '../../Api/Error';
 import { userData,chat } from '../../Interface/DatatypeInterface';
+import { createChat,fetchChat } from '../../Api/chat';
 
 
 

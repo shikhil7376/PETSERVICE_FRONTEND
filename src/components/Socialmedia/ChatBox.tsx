@@ -1,5 +1,4 @@
 import React from 'react'
-import { getMessages, sendMessage } from '../../Api/Chat';
 import { useState, useEffect, useCallback } from 'react';
 import { RootState } from '../../Redux/Store';
 import { useSelector } from 'react-redux';
@@ -16,7 +15,7 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { useNavigate } from 'react-router-dom';
 import { Input } from "../../components/ui/input";
 import { MdDelete } from "react-icons/md";
-import { deleteMessage } from '../../Api/Chat';
+import { getMessages,sendMessage,deleteMessage } from '../../Api/chat';
 
 
 interface Message {
@@ -32,7 +31,7 @@ interface Message {
   type?: 'text' | 'audio'
 }
 
-const ENDPOINT = import.meta.env.VITE_BASE_URL 
+const ENDPOINT = 'https://quiix.shop/api'
 
 var socket, selectedChatCompare
 
@@ -383,8 +382,8 @@ const ChatBox = ({ activeChat, notification, setNotification, onlineUsers, setOn
           </div>
 
 
-          <div className='fixed mt-6 md:mt-0 w-[390px] md:w-[700px] ml-2 rounded-lg '>
-            <div className='flex gap-1 md:gap-2 items-center'>
+          <div className='fixed  md:mt-0 w-[350px] md:w-[700px] ml-2 rounded-lg'>
+            <div className='flex gap-1 md:gap-2 items-center '>
               <button
                 type='button'
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}

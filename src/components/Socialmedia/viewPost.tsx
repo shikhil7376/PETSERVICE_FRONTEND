@@ -59,7 +59,7 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
     <Modal  backdrop="blur" isOpen={isOpen} onClose={onClose} 
     classNames={{
       backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20 ",
-      base: "mb-[300px]"
+      base: "mb-[200px]"
     }}
     >
       <ModalContent>
@@ -83,9 +83,6 @@ const ViewPost = ({ isOpen, onClose, card,userId ,setSelectedCard,setPostData }:
                <ModalFooter className=' flex justify-between'>
                <button className='justify-start' onClick={editRender}><FaEdit /></button>
                <div>
-               <Button color="danger" variant="light" onPress={onClose}>
-                 Close
-               </Button>
                <Button color="primary" onPress={handleDelete}>
                  Delete Post
                </Button>

@@ -62,7 +62,6 @@ const AddComment = ({ postId }) => {
     try {
       const response = await commentPost(postId, userData?._id as string, comment);
       if (response) {
-        toast.success(response.data);
         getComments(); 
         setComment(''); 
       }
